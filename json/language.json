@@ -1,0 +1,13 @@
+{
+    "type": "Spanish",
+    "currentState": "BeginnerState",
+    "vocabularyList": [
+      {"text": "casa", "foreign": "house", "pronounce": "kasa", "genre": "noun"},
+      {"text": "perro", "foreign": "dog", "pronounce": "perro", "genre": "noun"}
+    ],
+    "grammarRules": [
+      "Subject-Verb-Object order",
+      "Adjectives come after nouns"
+    ]
+  }
+  

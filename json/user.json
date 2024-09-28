@@ -1,0 +1,29 @@
+{
+    "name": "JohnDoe",
+    "password": "password123",
+    "email": "johndoe@example.com",
+    "learningLanguage": {
+      "type": "Spanish",
+      "currentState": "BeginnerState",
+      "vocabularyList": [],
+      "grammarRules": []
+    },
+    "knownLanguage": {
+      "type": "English",
+      "currentState": "ExpertState",
+      "vocabularyList": [],
+      "grammarRules": []
+    },
+    "streak": 5,
+    "totalPoints": 150,
+    "currentState": "BeginnerState",
+    "beginnerState": {},
+    "intermediateState": {},
+    "expertState": {},
+    "progressTracker": {
+      "questionsCorrect": 10,
+      "lessonsCompleted": 3,
+      "xp": 300
+    }
+  }
+  

@@ -1,0 +1,23 @@
+{
+    "topic": "Basic Greetings",
+    "questions": [
+      {
+        "question": "How do you say 'hello' in Spanish?",
+        "answer": "Hola",
+        "answerOptions": ["Hola", "Adios", "Gracias"],
+        "difficulty": "BeginnerState",
+        "category": "Vocabulary",
+        "counter": 0
+      },
+      {
+        "question": "How do you say 'goodbye' in Spanish?",
+        "answer": "Adios",
+        "answerOptions": ["Adios", "Hola", "Gracias"],
+        "difficulty": "BeginnerState",
+        "category": "Vocabulary",
+        "counter": 0
+      }
+    ],
+    "lessonStatus": false
+  }
+  

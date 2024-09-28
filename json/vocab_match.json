@@ -1,0 +1,16 @@
+{
+    "baseQuestion": {
+      "question": "Match the word 'casa' with its meaning.",
+      "answer": "house",
+      "answerOptions": ["house", "car", "dog"],
+      "difficulty": "BeginnerState",
+      "category": "Vocabulary",
+      "counter": 0
+    },
+    "wordPairs": {
+      "casa": "house",
+      "perro": "dog",
+      "gato": "cat"
+    }
+  }
+  
