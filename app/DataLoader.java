@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * The DataLoader class is responsible for loading data related to users and languages
@@ -25,5 +28,9 @@ public class DataLoader {
     public ArrayList<Language> getLanguageList() {
         // TODO: Add logic to load languages from the data source (e.g., file, database)
         return null; // placeholder
+    }
+
+    public static void main(String[] args){
+        
     }
 }
