@@ -3,7 +3,6 @@ package data;
  * Data writer
  * @author by David Dinh
  */
-
 // import core.User;
 // import core.Lesson;
 
