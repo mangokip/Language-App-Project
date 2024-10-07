@@ -1,5 +1,3 @@
-package src;
-
 /**
  * The State interface defines the contract for all concrete state classes
  * in the CockySpeak application's state pattern implementation.
