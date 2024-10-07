@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+
+public class UserList {
+    // Attributes
+    private static UserList userList = null;
+    private ArrayList<User> users;
+
+    // Constructor (private to enforce singleton pattern)
+    private UserList() {
+        users = new ArrayList<>();
+    }
+
+    // Singleton Pattern - getInstance method
+    public static UserList getInstance() {
+        if (userList == null) {
+            userList = new UserList();
+        }
+        return userList;
+    }
+
+    // Add a user to the system
+    public void addUser(User user) {
+        users.add(user);
+    }
+
+    // Check if a user matches the
+}
