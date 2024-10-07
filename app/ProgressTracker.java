@@ -8,10 +8,13 @@ public class ProgressTracker {
     private State intermediateState;
     private State expertState;
 
+    /**
+     * Basic constructor
+     */
     public ProgressTracker() {
 
     }
-    
+    /*test line */
     public void updateProgress() {
 
     }
