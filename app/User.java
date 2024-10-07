@@ -92,8 +92,11 @@ public class User {
     }
 
     /**
-     * Grabs a ProgressTracker object to be linked to a user for each language they are learning
-     * @return - HashMap<Language (key of what the progressTracker will be assigned to), ProgressTracker (progress tracker object to be linked to language)>
+     * Grabs a ProgressTracker object to be linked to a user for each language
+     * they are learning
+     *
+     * @return -
+     * HashMap<Language (key of what the progressTracker will be assigned to), ProgressTracker (progress tracker object to be linked to language)>
      */
     public HashMap<Language, ProgressTracker> getProgressTracker() {
 

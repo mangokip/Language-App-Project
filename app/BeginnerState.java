@@ -1,4 +1,6 @@
+
 public class BeginnerState implements State {
+
     /**
      * Constructs a new BeginnerState object.
      */
