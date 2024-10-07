@@ -1,6 +1,7 @@
 
 import java.util.HashMap;
 
+
 /*
  * The User class holds all the info that will be registered and manipulated as a user profile
  * for those who will be using the CockySpeak application.
