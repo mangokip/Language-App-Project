@@ -34,11 +34,9 @@ public class User {
     /**
      * Method to register user given attributes
      *
-     * @param username - user's username to be passed
-     * @param password - user's password to be passed
-     * @param email - user's email to be passed
+     * @param user - user to be registered into list
      */
-    public void register(String username, String password, String email) {
+    public void register(User user) {
 
     }
 

@@ -1,4 +1,7 @@
 package com.app;
+
+import java.util.ArrayList;
+
 public class IntermediateState implements State {
     /**
      * Constructs a new IntermediateState object.
