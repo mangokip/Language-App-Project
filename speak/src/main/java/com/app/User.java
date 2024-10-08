@@ -1,6 +1,6 @@
 package com.app;
 import java.util.HashMap;
-
+import java.util.UUID;
 
 /*
  * The User class holds all the info that will be registered and manipulated as a user profile
@@ -8,6 +8,7 @@ import java.util.HashMap;
  */
 public class User {
 
+    private String uniqueID;
     private String username;
     private String password;
     private String email;
@@ -17,7 +18,10 @@ public class User {
      * Basic constructor
      */
     public User() {
-
+        username = null;
+        password = null;
+        email = null;
+        uniqueID = null;
     }
 
     /**
@@ -29,6 +33,10 @@ public class User {
      */
     public User(String username, String password, String email) {
 
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.uniqueID = UUID.randomUUID().toString();
     }
 
     /**
@@ -37,7 +45,7 @@ public class User {
      * @param user - user to be registered into list
      */
     public void register(User user) {
-
+        
     }
 
     /**
@@ -47,7 +55,7 @@ public class User {
      * @return - return boolean, true if match false if not
      */
     public boolean isMatch(String email) {
-
+        
     }
 
     /**
@@ -59,7 +67,7 @@ public class User {
      * @return - return boolean, true if match false if not
      */
     public boolean isMatch(String username, String password, String email) {
-
+        
     }
 
     /**
