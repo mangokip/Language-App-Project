@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class UserList {
     // Attributes
-    private static UserList userList = null;
+    private static UserList userList;
     private ArrayList<User> users;
 
     // Constructor (private to enforce singleton pattern)
