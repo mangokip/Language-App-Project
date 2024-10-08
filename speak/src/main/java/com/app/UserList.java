@@ -24,5 +24,9 @@ public class UserList {
         users.add(user);
     }
 
-   
+   public boolean isMatch(String email) {
+        for(User user : users) {
+            if(user.getEmail)
+        }
+   }
 }

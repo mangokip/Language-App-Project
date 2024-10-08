@@ -55,7 +55,7 @@ public class User {
      * @return - return boolean, true if match false if not
      */
     public boolean isMatch(String email) {
-        
+        return (email == null ? this.email == null : email.equals(this.email));
     }
 
     /**
@@ -86,6 +86,16 @@ public class User {
      */
     public User getUser() {
 
+    }
+    
+    public String getEmail() {
+        return this.email;
+    }
+    public String getUsername() {
+        return this.username;
+    }
+    public String getPassword() {
+        return this.password;
     }
 
     /**
