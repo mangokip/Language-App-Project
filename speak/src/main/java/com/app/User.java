@@ -36,7 +36,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.uniqueID = UUID.randomUUID().toString();
+        this.uniqueID = UUID.randomUUID().toString(); //should I keep this here or just change the parameters to include UUID and when someone makes a user, they enter user-pass-email but not UUID and it's just randomly generated and automatically applied for them?
     }
 
     /**
@@ -79,14 +79,6 @@ public class User {
 
     }
 
-    /**
-     * Grabs user object
-     *
-     * @return - User object
-     */
-    public User getUser() {
-
-    }
     
     public String getEmail() {
         return this.email;
