@@ -1,6 +1,8 @@
 package com.app;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.Scanner;
+
 
 /*
  * The User class holds all the info that will be registered and manipulated as a user profile
@@ -13,6 +15,7 @@ public class User {
     private String password;
     private String email;
     private HashMap<Language, ProgressTracker> progressTracker;
+    Scanner keyboard = new Scanner(System.in);
 
     /*
      * Basic constructor
@@ -45,7 +48,7 @@ public class User {
      * @param user - user to be registered into list
      */
     public void register(User user) {
-        
+        // is this method even needed if using userlist?
     }
 
     /**
@@ -67,7 +70,9 @@ public class User {
      * @return - return boolean, true if match false if not
      */
     public boolean isMatch(String username, String password, String email) {
-        
+        return ((username == null ? this.username == null : username.equals(this.username)) &&
+                (password == null ? this.password == null : password.equals(this.password)) &&
+                (email == null ? this.email == null : email.equals(this.email)));
     }
 
     /**
@@ -76,7 +81,12 @@ public class User {
      * @param email
      */
     public void resetPassword(String email) {
-
+        if(email.equals(this.email)) {
+            String newPassword = null;
+            System.out.println("Please enter your new password.");
+            newPassword = keyboard.nextLine();
+            this.password = newPassword;
+        }
     }
 
     
