@@ -56,12 +56,13 @@ public class DataLoader extends DataConstants {
 
             for (int i = 0; i < usersJSON.size(); i++) {
                 JSONObject userJSON = (JSONObject) usersJSON.get(i);
-                UUID uuid = UUID.fromString((String) userJSON.get(USER_ID));
+                //UUID uuid = UUID.fromString((String) userJSON.get(USER_ID));
                 String username = (String) userJSON.get(USER_NAME);
                 String password = (String) userJSON.get(PASSWORD);
                 String email = (String) userJSON.get(EMAIL);
 
                 users.add(new User(username, password, email));
+                
             }
             fileReader.close();
             return users;
@@ -81,6 +82,7 @@ public class DataLoader extends DataConstants {
     public static void main(String[] args) {
         DataLoader dataLoader = new DataLoader();
         dataLoader.loadLessons();
+        dataLoader.loadUsers();
 
     }
 }
