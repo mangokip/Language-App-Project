@@ -5,8 +5,12 @@ package com.app;
  */
 public class CockySpeak {
     private Language currentLanguage;
-    private UserList userList = UserList.getInstance();
+    private UserList userList;
     private User thisUser;
+
+    public CockySpeak() {
+        userList = UserList.getInstance();
+    }
 
     /**
      * Initializes the CockySpeak system with a default language.
