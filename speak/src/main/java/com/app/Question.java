@@ -38,4 +38,29 @@ public class Question {
     public int getCounter() {
         return 0;
     }
+
+    public Object getQuestionText() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getQuestionText'");
+    }
+
+    public Object getAnswer() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAnswer'");
+    }
+
+    public Object getAnswerOptions() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAnswerOptions'");
+    }
+
+    public Object getDifficulty() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDifficulty'");
+    }
+
+    public Object getCategory() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCategory'");
+    }
 }

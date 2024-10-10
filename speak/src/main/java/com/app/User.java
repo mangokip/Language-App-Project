@@ -82,6 +82,14 @@ public class User {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getLanguageProgress'");
     }
+    public Object getUUID() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUUID'");
+    }
+    public Object getUsername() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    }
 
 }
 

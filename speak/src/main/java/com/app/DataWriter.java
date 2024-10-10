@@ -85,6 +85,7 @@ public class DataWriter {
     /**
      * Loads existing users from the JSON file.
      *
+     * @author David Dinh
      * @return JSONArray of existing users
      */
     private JSONArray loadExistingUsers() {
@@ -101,6 +102,7 @@ public class DataWriter {
     /**
      * Checks if a user already exists in the list.
      *
+     * @author David Dinh
      * @param userList JSONArray of existing users
      * @param user User object to check
      * @return true if the user exists, false otherwise
@@ -122,6 +124,7 @@ public class DataWriter {
      *
      * @param lessons the ArrayList of Lesson objects to be saved
      */
+    @SuppressWarnings("unchecked")
     public void saveLessons(ArrayList<Lesson> lessons) {
         JSONArray lessonList = new JSONArray();
 
