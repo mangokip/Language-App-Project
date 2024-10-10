@@ -45,12 +45,7 @@ public class DataLoader extends DataConstants {
 
         return lessons; // Returning an empty list for now
     }
-    /**
-     * Load Users
-     * 
-     * @author Bryce Klein
-     * @return
-     */
+
     public static ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<User>();
     
