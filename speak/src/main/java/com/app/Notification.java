@@ -1,3 +1,4 @@
+package com.app;
 public class Notification {
     private String message;
     private User recipient;

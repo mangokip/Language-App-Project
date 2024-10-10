@@ -1,30 +1,18 @@
 {
-    "userID": "181d21a0-beb6-4ee0-bb66-f110473b6400",
-    "name": "JohnDoe",
-    "password": "password123",
-    "email": "johndoe@example.com",
-    "learningLanguage": {
-      "type": "Spanish",
-      "currentState": "BeginnerState",
-      "vocabularyList": [],
-      "grammarRules": []
+  "UUID": "6bb0d538-654c-4046-9fe0-a976aed1ce69",
+  "username": "JohnDoe",
+  "password": "password123",
+  "email": "john.doe@example.com",
+  "languageProgress": {
+    "Spanish": {
+      "completedLessons": 5,
+      "totalLessons": 10,
+      "progressPercentage": 50.0
     },
-    "knownLanguage": {
-      "type": "English",
-      "currentState": "ExpertState",
-      "vocabularyList": [],
-      "grammarRules": []
-    },
-    "streak": 5,
-    "totalPoints": 150,
-    "currentState": "BeginnerState",
-    "beginnerState": {},
-    "intermediateState": {},
-    "expertState": {},
-    "progressTracker": {
-      "questionsCorrect": 10,
-      "lessonsCompleted": 3,
-      "xp": 300
+    "French": {
+      "completedLessons": 7,
+      "totalLessons": 10,
+      "progressPercentage": 70.0
     }
   }
-  
+}
