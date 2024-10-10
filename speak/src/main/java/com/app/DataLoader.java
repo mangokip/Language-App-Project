@@ -53,28 +53,42 @@ public class DataLoader extends DataConstants {
      */
     public static ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<User>();
-
+    
         try {
-
-            FileReader fileReader = new FileReader(USER_FILE);
-            JSONArray usersJSON = (JSONArray) new JSONParser().parse(fileReader);
-
+            BufferedReader reader = new BufferedReader(new FileReader(USER_FILE));
+            StringBuilder content = new StringBuilder();
+            String line;
+    
+            // Read the entire file content into a StringBuilder
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+    
+            // Print the JSON content (without parsing)
+            System.out.println("JSON file content:");
+            System.out.println(content.toString());
+    
+            // Parse the content as a JSONArray
+            JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
+    
+            // Iterate through the JSONArray to extract user details
             for (int i = 0; i < usersJSON.size(); i++) {
                 JSONObject userJSON = (JSONObject) usersJSON.get(i);
-                UUID uuid = UUID.fromString((String) userJSON.get(USER_ID));
                 String username = (String) userJSON.get(USER_NAME);
                 String password = (String) userJSON.get(PASSWORD);
                 String email = (String) userJSON.get(EMAIL);
-
+    
                 users.add(new User(username, password, email));
             }
-            fileReader.close();
+    
+            reader.close();
             return users;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+    
 
     /**
      * Main method to test the DataLoader class. Loads lessons from the JSON
@@ -86,6 +100,7 @@ public class DataLoader extends DataConstants {
     public static void main(String[] args) {
         DataLoader dataLoader = new DataLoader();
         dataLoader.loadLessons();
+        dataLoader.loadUsers();
 
     }
 }
