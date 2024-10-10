@@ -49,7 +49,7 @@ public class DataWriter {
             e.printStackTrace();
         }
     }
-
+    
     /**
      * Saves the list of lessons to the data source.
      *
