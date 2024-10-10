@@ -5,6 +5,12 @@ package com.app;
  */
 public class CockySpeak {
     private Language currentLanguage;
+    private UserList userList;
+    private User thisUser;
+
+    public CockySpeak() {
+        userList = UserList.getInstance();
+    }
 
     /**
      * Initializes the CockySpeak system with a default language.
@@ -73,5 +79,17 @@ public class CockySpeak {
 
         // Demo for translating a phrase
         translatePhrase("good morning");
+    }
+
+    public void login(String username, String password){
+        if(userList.hasUser(username)){
+            User thisUser = userList.getUser(username);
+            if(password.equals(thisUser.getPassword())){
+
+            }else
+            System.out.println("Invalid password")
+        }else{
+            System.out.println("Username not found")
+        }
     }
 }
