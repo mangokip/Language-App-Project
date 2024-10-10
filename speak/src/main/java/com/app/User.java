@@ -1,4 +1,5 @@
 package com.app;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.Scanner;
@@ -117,6 +118,12 @@ public class User {
      * HashMap<Language (key of what the progressTracker will be assigned to), ProgressTracker (progress tracker object to be linked to language)>
      */
     public HashMap<Language, ProgressTracker> getProgressTracker() {
-
+        
     }
+
+    public ArrayList getLanguageProgress() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getLanguageProgress'");
+    }
+
 }
