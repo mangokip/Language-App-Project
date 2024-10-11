@@ -1,29 +1,27 @@
 package com.app;
 
 import java.util.UUID;
-import java.util.Scanner;
 
 public class CockySpeakUI {
 
-    Scanner keyboard = new Scanner(System.in);
-    CockySpeak cs = CockySpeak();
+    private CockySpeak 
     public static void main(String[] args) {
-        
+        String uniqueID = UUID.randomUUID().toString();
+        System.out.println(uniqueID);
+        //todo - add stub info in future
+
     }
 
-    private void login() {
+    public void login(String username, String password){
+        if(userList.hasUser(username)){
+            User thisUser = userList.getUser(username);
+            if(password.equals(thisUser.getPassword())){
 
-        String username = getField("Enter Username");
-        String password = getField("Enter Password");
-
-        if(cs.login(username, password)) {}
-        
-        
-    }
-
-    private String getField(String prompt) {
-        System.out.println(prompt + ": ");
-        return keyboard.nextLine();
+            }else
+            System.out.println("Invalid password")
+        }else{
+            System.out.println("Username not found")
+        }
     }
 
     
