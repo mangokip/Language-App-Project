@@ -18,7 +18,6 @@ import org.json.simple.parser.JSONParser;
  */
 public class DataLoader extends DataConstants {
 
-   
     /**
      * Loads lessons from a JSON file and returns them as a list of Lesson
      * objects. This version simply reads the file and returns an empty list,
@@ -53,38 +52,45 @@ public class DataLoader extends DataConstants {
             StringBuilder content = new StringBuilder();
             String line;
             
-            
+            // Read the entire file content into a StringBuilder
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
             
-            
+            // Print the JSON content (without parsing)
             System.out.println("JSON file content:");
             System.out.println(content.toString());
             
-            
+            // Parse the content as a JSONArray
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
             
-            
+            // Iterate through the JSONArray to extract user details
             for (int i = 0; i < usersJSON.size(); i++) {
                 JSONObject userJSON = (JSONObject) usersJSON.get(i);
                 
-                // Extract and validate each field
+                
                 String username = (String) userJSON.get(USER_NAME);
                 String password = (String) userJSON.get(PASSWORD);
                 String email = (String) userJSON.get(EMAIL);
                 
-                // Check if any of the fields are missing or invalid
+                
                 if (username == null || password == null || email == null) {
                     System.err.println("User data missing or invalid at index " + i);
                     continue; // Skip this user and continue with the next
                 }
                 
-                // Log details for debugging
-                System.out.println("Loading user: " + username + ", " + email);
                 
-                // Add the user to the list
-                users.add(new User(username, password, email));
+                User user = new User(username, password, email);
+                users.add(user);
+                System.out.println("Successfully loaded user: " + user.getUserName());
+            }
+            
+            System.out.println("Total users loaded: " + (users.size()));
+            
+           
+            for (int i = 0; i < users.size(); i++) {
+                User user = users.get(i);
+                System.out.println("User " + (i + 1) + ": " + user.getUserName() + ", Email: " + user.getEmail() + ", Password: " + user.getPassword());
             }
             
             return users;
@@ -93,9 +99,8 @@ public class DataLoader extends DataConstants {
             e.printStackTrace();
         }
         
-        return null;
+        return users; 
     }
-    
     
 
     /**
