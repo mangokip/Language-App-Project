@@ -49,6 +49,7 @@ public class DataLoader extends DataConstants {
         ArrayList<User> users = new ArrayList<>();
         
         try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
+            
             StringBuilder content = new StringBuilder();
             String line;
             
@@ -57,10 +58,10 @@ public class DataLoader extends DataConstants {
                 content.append(line).append("\n");
             }
             
-            
+            /* Debugging 
             System.out.println("JSON file content:");
             System.out.println(content.toString());
-            
+            */
             
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
             
@@ -87,12 +88,12 @@ public class DataLoader extends DataConstants {
             
             System.out.println("Total users loaded: " + (users.size()));
             
-           
+           /*  Debugging Print
             for (int i = 0; i < users.size(); i++) {
                 User user = users.get(i);
                 System.out.println("User " + (i + 1) + ": " + user.getUserName() + ", Email: " + user.getEmail() + ", Password: " + user.getPassword());
             }
-            
+            */
             return users;
         } catch (Exception e) {
             System.err.println("Error loading users: " + e.getMessage());

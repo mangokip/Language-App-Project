@@ -7,8 +7,7 @@ public class CockySpeakUI {
 
     public static void main(String[] args) {
         CockySpeakUI uI = new CockySpeakUI();
-        String uniqueID = UUID.randomUUID().toString();
-        System.out.println("Generated UUID: " + uniqueID);
+
 
         
         if (uI.login("JohnDoe", "password123")) {
