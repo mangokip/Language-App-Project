@@ -34,7 +34,7 @@ public class DataLoader extends DataConstants {
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
-            // Print the JSON content (without parsing)
+        
             System.out.println("JSON file content:");
             System.out.println(content.toString());
 
@@ -42,7 +42,7 @@ public class DataLoader extends DataConstants {
             e.printStackTrace();
         }
 
-        return lessons; // Returning an empty list for now
+        return lessons;
     }
 
     public static ArrayList<User> loadUsers() {
@@ -52,19 +52,19 @@ public class DataLoader extends DataConstants {
             StringBuilder content = new StringBuilder();
             String line;
             
-            // Read the entire file content into a StringBuilder
+
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
             
-            // Print the JSON content (without parsing)
+            
             System.out.println("JSON file content:");
             System.out.println(content.toString());
             
-            // Parse the content as a JSONArray
+            
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
             
-            // Iterate through the JSONArray to extract user details
+
             for (int i = 0; i < usersJSON.size(); i++) {
                 JSONObject userJSON = (JSONObject) usersJSON.get(i);
                 
