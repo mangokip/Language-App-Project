@@ -23,7 +23,7 @@ public class UserList {
 
     public User getUser(String username) {
         for (User user : users) {
-            if (user.getUsername().equals(username)) {
+            if (user.getUserName().equals(username)) {
                 return user;
             }
         }
@@ -32,7 +32,7 @@ public class UserList {
 
     public boolean hasUser(String username) {
         for (User user : users) {
-            if (user.getUsername().equals(username)) {
+            if (user.getUserName().equals(username)) {
                 return true;
             }
         }
