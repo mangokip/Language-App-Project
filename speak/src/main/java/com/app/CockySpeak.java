@@ -6,7 +6,7 @@ package com.app;
 public class CockySpeak {
     private Language currentLanguage;
     private UserList userList;
-    private User thisUser;
+    private User user;
 
     public CockySpeak() {
         userList = UserList.getInstance();
@@ -85,11 +85,12 @@ public class CockySpeak {
         if(userList.hasUser(username)){
             User thisUser = userList.getUser(username);
             if(password.equals(thisUser.getPassword())){
-
+                this.user = thisUser;
+                System.out.println("Welcome " + username);
             }else
-            System.out.println("Invalid password")
+            System.out.println("Invalid password");
         }else{
-            System.out.println("Username not found")
+            System.out.println("Username not found");
         }
     }
 }

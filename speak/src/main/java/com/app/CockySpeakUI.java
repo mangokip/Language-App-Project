@@ -3,27 +3,18 @@ package com.app;
 import java.util.UUID;
 
 public class CockySpeakUI {
-
-    private CockySpeak 
+    private CockySpeak cockySpeak = new CockySpeak();
     public static void main(String[] args) {
+        CockySpeakUI uI = new CockySpeakUI();
         String uniqueID = UUID.randomUUID().toString();
         System.out.println(uniqueID);
         //todo - add stub info in future
 
+        uI.login("mike", "abc");
+
     }
 
-    public void login(String username, String password){
-        if(userList.hasUser(username)){
-            User thisUser = userList.getUser(username);
-            if(password.equals(thisUser.getPassword())){
-
-            }else
-            System.out.println("Invalid password")
-        }else{
-            System.out.println("Username not found")
-        }
+    private void login(String userName, String password){
+        cockySpeak.login(userName, password);
     }
-
-    
-
 }
