@@ -47,42 +47,55 @@ public class DataLoader extends DataConstants {
     }
 
     public static ArrayList<User> loadUsers() {
-        ArrayList<User> users = new ArrayList<User>();
-    
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(USER_FILE));
+        ArrayList<User> users = new ArrayList<>();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
             StringBuilder content = new StringBuilder();
             String line;
-    
-            // Read the entire file content into a StringBuilder
+            
+            
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
-    
-            // Print the JSON content (without parsing)
+            
+            
             System.out.println("JSON file content:");
             System.out.println(content.toString());
-    
-            // Parse the content as a JSONArray
+            
+            
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
-    
-            // Iterate through the JSONArray to extract user details
+            
+            
             for (int i = 0; i < usersJSON.size(); i++) {
                 JSONObject userJSON = (JSONObject) usersJSON.get(i);
+                
+                // Extract and validate each field
                 String username = (String) userJSON.get(USER_NAME);
                 String password = (String) userJSON.get(PASSWORD);
                 String email = (String) userJSON.get(EMAIL);
-    
+                
+                // Check if any of the fields are missing or invalid
+                if (username == null || password == null || email == null) {
+                    System.err.println("User data missing or invalid at index " + i);
+                    continue; // Skip this user and continue with the next
+                }
+                
+                // Log details for debugging
+                System.out.println("Loading user: " + username + ", " + email);
+                
+                // Add the user to the list
                 users.add(new User(username, password, email));
             }
-    
-            reader.close();
+            
             return users;
         } catch (Exception e) {
+            System.err.println("Error loading users: " + e.getMessage());
             e.printStackTrace();
         }
+        
         return null;
     }
+    
     
 
     /**
