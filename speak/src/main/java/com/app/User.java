@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class User {
 
     private UUID id;
-    private String userName;
+    private String username;
     private String password;
     private String email; //what does type do 
     private HashMap<String, ProgressTracker> progressTrackers;
@@ -16,12 +16,16 @@ public class User {
     
     
 
-    public User(String userName, String password, String email, String type) {
+    public User(String username, String password, String email) {
+        setUserName(username);
+        setPassword(password);
+        setEmail(email);
+    }
+    public User(UUID uuid, String username, String password, String email) {
         this.id = UUID.randomUUID();
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.progressTrackers = new HashMap<>();
+        setUserName(username);
+        setPassword(password);
+        setEmail(email);
     }
     public UUID getId() {
         return id;
@@ -32,11 +36,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
