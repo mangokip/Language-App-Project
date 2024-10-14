@@ -23,4 +23,19 @@ public class Lesson {
     public void stopLesson(){
         
     }
+
+    public Object getTopic() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTopic'");
+    }
+
+    public Question[] getQuestions() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getQuestions'");
+    }
+
+    public Object isLessonStatus() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isLessonStatus'");
+    }
 }

@@ -4,19 +4,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- * The DataWriter class is responsible for saving data related to users and lessons
- * in the CockySpeak application. It provides methods to save users and lessons to a data source.
+ * The DataWriter class is responsible for saving data related to users
+ * in the CockySpeak application. It provides methods to save users to a data source.
  * @author David Dinh
  */
 public class DataWriter {
     private static final String USER_FILE = "user.json";
-    private static final String LESSON_FILE = "lesson.json";
 
     /**
      * Saves the list of users to the data source.
@@ -30,46 +31,16 @@ public class DataWriter {
             boolean updated = false;
             for (int i = 0; i < userList.size(); i++) {
                 JSONObject existingUser = (JSONObject) userList.get(i);
-                if (existingUser.get("UUID").equals(user.getUUID()) ||
-                    existingUser.get("username").equals(user.getUsername()) ||
-                    existingUser.get("email").equals(user.getEmail())) {
+                if (existingUser.get("UUID").equals(user.getUUID())) {
                     // Update existing user data
-                    existingUser.put("username", user.getUsername());
-                    existingUser.put("password", user.getPassword());
-                    existingUser.put("email", user.getEmail());
-
-                    JSONObject languageProgress = new JSONObject();
-                    user.getLanguageProgress().forEach((language, progress) -> {
-                        JSONObject progressDetails = new JSONObject();
-                        progressDetails.put("completedLessons", progress.getCompletedLessons());
-                        progressDetails.put("totalLessons", progress.getTotalLessons());
-                        progressDetails.put("progressPercentage", progress.getProgressPercentage());
-                        languageProgress.put(language, progressDetails);
-                    });
-                    existingUser.put("languageProgress", languageProgress);
-
+                    updateUserDetails(existingUser, user);
                     updated = true;
                     break;
                 }
             }
             if (!updated) {
                 // Add new user
-                JSONObject userDetails = new JSONObject();
-                userDetails.put("UUID", user.getUUID());
-                userDetails.put("username", user.getUsername());
-                userDetails.put("password", user.getPassword());
-                userDetails.put("email", user.getEmail());
-
-                JSONObject languageProgress = new JSONObject();
-                user.getLanguageProgress().forEach((language, progress) -> {
-                    JSONObject progressDetails = new JSONObject();
-                    progressDetails.put("completedLessons", progress.getCompletedLessons());
-                    progressDetails.put("totalLessons", progress.getTotalLessons());
-                    progressDetails.put("progressPercentage", progress.getProgressPercentage());
-                    languageProgress.put(language, progressDetails);
-                });
-                userDetails.put("languageProgress", languageProgress);
-
+                JSONObject userDetails = getUserDetails(user);
                 userList.add(userDetails);
             }
         }
@@ -99,58 +70,101 @@ public class DataWriter {
     }
 
     /**
-     * Checks if a user already exists in the list.
+     * Updates the details of an existing user.
      *
-     * @param userList JSONArray of existing users
-     * @param user User object to check
-     * @return true if the user exists, false otherwise
+     * @param existingUser JSONObject of the existing user
+     * @param user User object with updated details
      */
-    private boolean userExists(JSONArray userList, User user) {
-        for (Object obj : userList) {
-            JSONObject existingUser = (JSONObject) obj;
-            if (existingUser.get("UUID").equals(user.getUUID()) ||
-                existingUser.get("username").equals(user.getUsername()) ||
-                existingUser.get("email").equals(user.getEmail())) {
-                return true;
-            }
+    private void updateUserDetails(JSONObject existingUser, User user) {
+        existingUser.put("username", user.getUsername());
+        existingUser.put("password", user.getPassword());
+        existingUser.put("email", user.getEmail());
+
+        JSONObject languageProgress = new JSONObject();
+        for (LanguageProgress progress : user.getLanguageProgress()) {
+            JSONObject progressDetails = new JSONObject();
+            progressDetails.put("completedLessons", progress.getCompletedLessons());
+            progressDetails.put("totalLessons", progress.getTotalLessons());
+            progressDetails.put("progressPercentage", progress.getProgressPercentage());
+            languageProgress.put(progress.getLanguage(), progressDetails);
         }
-        return false;
+        existingUser.put("languageProgress", languageProgress);
     }
 
     /**
-     * Saves the list of lessons to the data source.
+     * Converts a User object to a JSONObject.
      *
-     * @param lessons the ArrayList of Lesson objects to be saved
+     * @param user User object to be converted
+     * @return JSONObject representing the user
      */
-    public void saveLessons(ArrayList<Lesson> lessons) {
-        JSONArray lessonList = new JSONArray();
+    private JSONObject getUserDetails(User user) {
+        JSONObject userDetails = new JSONObject();
+        userDetails.put("UUID", user.getUUID());
+        userDetails.put("username", user.getUsername());
+        userDetails.put("password", user.getPassword());
+        userDetails.put("email", user.getEmail());
 
-        for (Lesson lesson : lessons) {
-            JSONObject lessonDetails = new JSONObject();
-            lessonDetails.put("topic", lesson.getTopic());
-
-            JSONArray questionsArray = new JSONArray();
-            for (Question question : lesson.getQuestions()) {
-                JSONObject questionDetails = new JSONObject();
-                questionDetails.put("question", question.getQuestionText());
-                questionDetails.put("answer", question.getAnswer());
-                questionDetails.put("answerOptions", question.getAnswerOptions());
-                questionDetails.put("difficulty", question.getDifficulty());
-                questionDetails.put("category", question.getCategory());
-                questionDetails.put("counter", question.getCounter());
-                questionsArray.add(questionDetails);
-            }
-            lessonDetails.put("questions", questionsArray);
-            lessonDetails.put("lessonStatus", lesson.isLessonStatus());
-
-            lessonList.add(lessonDetails);
+        JSONObject languageProgress = new JSONObject();
+        for (LanguageProgress progress : user.getLanguageProgress()) {
+            JSONObject progressDetails = new JSONObject();
+            progressDetails.put("completedLessons", progress.getCompletedLessons());
+            progressDetails.put("totalLessons", progress.getTotalLessons());
+            progressDetails.put("progressPercentage", progress.getProgressPercentage());
+            languageProgress.put(progress.getLanguage(), progressDetails);
         }
+        userDetails.put("languageProgress", languageProgress);
 
-        try (FileWriter file = new FileWriter(LESSON_FILE)) {
-            file.write(lessonList.toJSONString());
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return userDetails;
+    }
+}
+
+class LanguageProgress {
+    private String language;
+    private int completedLessons;
+    private int totalLessons;
+    private double progressPercentage;
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public int getCompletedLessons() {
+        return completedLessons;
+    }
+
+    public int getTotalLessons() {
+        return totalLessons;
+    }
+
+    public double getProgressPercentage() {
+        return progressPercentage;
+    }
+}
+
+class User {
+    private String UUID;
+    private String username;
+    private String password;
+    private String email;
+    private List<LanguageProgress> languageProgress;
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public List<LanguageProgress> getLanguageProgress() {
+        return languageProgress;
     }
 }

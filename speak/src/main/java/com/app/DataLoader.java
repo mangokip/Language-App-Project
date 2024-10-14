@@ -34,7 +34,7 @@ public class DataLoader extends DataConstants {
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
-            // Print the JSON content (without parsing)
+        
             System.out.println("JSON file content:");
             System.out.println(content.toString());
 
@@ -42,29 +42,30 @@ public class DataLoader extends DataConstants {
             e.printStackTrace();
         }
 
-        return lessons; // Returning an empty list for now
+        return lessons;
     }
 
     public static ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<>();
         
         try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
+            
             StringBuilder content = new StringBuilder();
             String line;
             
-            // Read the entire file content into a StringBuilder
+
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
             
-            // Print the JSON content (without parsing)
+            /* Debugging 
             System.out.println("JSON file content:");
             System.out.println(content.toString());
+            */
             
-            // Parse the content as a JSONArray
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
             
-            // Iterate through the JSONArray to extract user details
+
             for (int i = 0; i < usersJSON.size(); i++) {
                 JSONObject userJSON = (JSONObject) usersJSON.get(i);
                 
@@ -87,12 +88,12 @@ public class DataLoader extends DataConstants {
             
             System.out.println("Total users loaded: " + (users.size()));
             
-           
+           /*  Debugging Print
             for (int i = 0; i < users.size(); i++) {
                 User user = users.get(i);
                 System.out.println("User " + (i + 1) + ": " + user.getUserName() + ", Email: " + user.getEmail() + ", Password: " + user.getPassword());
             }
-            
+            */
             return users;
         } catch (Exception e) {
             System.err.println("Error loading users: " + e.getMessage());
