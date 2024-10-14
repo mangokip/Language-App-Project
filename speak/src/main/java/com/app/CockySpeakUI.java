@@ -1,7 +1,5 @@
 package com.app;
 
-import java.util.UUID;
-
 public class CockySpeakUI {
     private CockySpeak cockySpeak = new CockySpeak(); // Initialize CockySpeak
 

@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -76,7 +75,7 @@ public class DataWriter {
      * @param user User object with updated details
      */
     private void updateUserDetails(JSONObject existingUser, User user) {
-        existingUser.put("username", user.getUsername());
+        existingUser.put("username", user.getUserName());
         existingUser.put("password", user.getPassword());
         existingUser.put("email", user.getEmail());
 
@@ -100,7 +99,7 @@ public class DataWriter {
     private JSONObject getUserDetails(User user) {
         JSONObject userDetails = new JSONObject();
         userDetails.put("UUID", user.getUUID());
-        userDetails.put("username", user.getUsername());
+        userDetails.put("username", user.getUserName());
         userDetails.put("password", user.getPassword());
         userDetails.put("email", user.getEmail());
 
@@ -141,7 +140,7 @@ class LanguageProgress {
     }
 }
 
-class User {
+/* class User {
     private String UUID;
     private String username;
     private String password;
@@ -166,5 +165,5 @@ class User {
 
     public List<LanguageProgress> getLanguageProgress() {
         return languageProgress;
-    }
-}
+    } 
+}  */

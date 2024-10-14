@@ -27,7 +27,7 @@ public class User {
         setPassword(password);
         setEmail(email);
     }
-    public UUID getId() {
+    public UUID getUUID() {
         return id;
     }
 
