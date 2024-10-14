@@ -56,6 +56,15 @@ public class CockySpeak {
         }
     }
 
+    public boolean register(String username, String password, String email) {
+        if (userList.hasUser(username)) {
+            System.out.println("Username already exists.");
+            return false; 
+        }
+        userList.addUser(username, password, email); 
+        return true; 
+    }
+
     /**
      * Gets the currently logged-in user.
      *
