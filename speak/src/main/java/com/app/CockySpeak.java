@@ -1,30 +1,34 @@
 package com.app;
 
-/*
- * LaMorra Strong
- */
 public class CockySpeak {
     private Language currentLanguage;
     private UserList userList;
     private User user;
 
     public CockySpeak() {
-        userList = UserList.getInstance();
+        userList = UserList.getInstance(); 
+        DataLoader loader = new DataLoader();
+
+    
+        for (User loadedUser : loader.loadUsers()) {
+            userList.addUser(loadedUser.getUserName(), loadedUser.getPassword(), loadedUser.getEmail());
+        }
     }
 
     /**
      * Initializes the CockySpeak system with a default language.
-     * 
+     *
      * @param languageCode the code for the default language (e.g., "en" for English)
      */
     public CockySpeak(String languageCode) {
+        this(); // Call the default constructor to load users
         this.currentLanguage = new Language(languageCode);
         currentLanguage.loadLanguage();
     }
 
     /**
      * Sets the active language for the CockySpeak system.
-     * 
+     *
      * @param languageCode the code for the language to switch to
      */
     public void setLanguage(String languageCode) {
@@ -33,64 +37,40 @@ public class CockySpeak {
     }
 
     /**
-     * Processes a single word by creating a Word object and analyzing it.
-     * 
-     * @param wordText the word to process
+     * Attempts to log in a user.
+     *
+     * @param username The username to log in with.
+     * @param password The password to log in with.
      */
-    public void processWord(String wordText) {
-        Word word = new Word(wordText);
-        word.analyze();
-        // TODO: Further processing logic for the word
-    }
-
-    /**
-     * Processes a phrase by creating a Phrase object and analyzing or translating it.
-     * 
-     * @param phraseText the phrase to process
-     */
-    public void processPhrase(String phraseText) {
-        Phrase phrase = new Phrase(phraseText);
-        phrase.analyzePhrase();
-        // TODO: Further processing logic for the phrase
-    }
-
-    /**
-     * Translates a given phrase based on the current language.
-     * 
-     * @param phraseText the phrase to translate
-     */
-    public void translatePhrase(String phraseText) {
-        Phrase phrase = new Phrase(phraseText);
-        phrase.translate();
-        // TODO: Implement further translation logic
-    }
-
-    /**
-     * Runs a demo of the CockySpeak system with sample word and phrase inputs.
-     * 
-     * TODO: Implement a full demo for testing.
-     */
-    public void demo() {
-        // Demo for processing a word
-        processWord("hello");
-
-        // Demo for processing a phrase
-        processPhrase("hello world");
-
-        // Demo for translating a phrase
-        translatePhrase("good morning");
-    }
-
-    public void login(String username, String password){
-        if(userList.hasUser(username)){
+    public void login(String username, String password) {
+        if (userList.hasUser(username)) {
             User thisUser = userList.getUser(username);
-            if(password.equals(thisUser.getPassword())){
+            if (password.equals(thisUser.getPassword())) {
                 this.user = thisUser;
                 System.out.println("Welcome " + username);
-            }else
-            System.out.println("Invalid password");
-        }else{
+            } else {
+                System.out.println("Invalid password");
+            }
+        } else {
             System.out.println("Username not found");
         }
+    }
+
+    public boolean register(String username, String password, String email) {
+        if (userList.hasUser(username)) {
+            System.out.println("Username already exists.");
+            return false; 
+        }
+        userList.addUser(username, password, email); 
+        return true; 
+    }
+
+    /**
+     * Gets the currently logged-in user.
+     *
+     * @return The currently logged-in user, or null if no user is logged in.
+     */
+    public User getCurrentUser() {
+        return user;
     }
 }
