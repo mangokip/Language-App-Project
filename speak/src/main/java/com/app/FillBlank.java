@@ -3,15 +3,12 @@ package com.app;
 
 import java.util.ArrayList;
 
-public class FillBlank {
-    private Question baseGame;
-    private ArrayList<String> sentences;
-    private ArrayList<String> correctAnswers;
+public class FillBlank extends Question {
+    private Phrase sentence;
+    private Word correctAnswer;
 
-    public FillBlank(Question baseGame, ArrayList<String> sentences, ArrayList<String> correctAnswers) {
-        this.baseGame = baseGame;
-        this.sentences = sentences;
-        this.correctAnswers = correctAnswers;
+    public FillBlank(int diff, String prompt, Word correctAnswer, Phrase sentence) {
+        this.setDifficulty(diff);
     }
 
     public void FillBlank(Question baseGame) {

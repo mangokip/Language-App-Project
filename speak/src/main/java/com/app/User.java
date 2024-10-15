@@ -80,6 +80,7 @@ public class User {
      * HashMap<Language (key of what the progressTracker will be assigned to), ProgressTracker (progress tracker object to be linked to language)>
      */
     public HashMap<Language, ProgressTracker> getProgressTracker() {
+        return null;
 
     }
 
