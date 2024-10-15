@@ -62,6 +62,8 @@ public class CockySpeak {
             return false; 
         }
         userList.addUser(username, password, email); 
+        DataWriter writer = new DataWriter();
+        writer.saveUsers(userList.getUsers());
         return true; 
     }
 
