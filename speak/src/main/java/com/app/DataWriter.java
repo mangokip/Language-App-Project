@@ -15,8 +15,8 @@ import org.json.simple.parser.ParseException;
  * in the CockySpeak application. It provides methods to save users to a data source.
  * @author David Dinh
  */
-public class DataWriter {
-    private static final String USER_FILE = "user.json";
+public class DataWriter extends DataConstants {
+    
 
     /**
      * Saves the list of users to the data source.
