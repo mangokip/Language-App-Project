@@ -1,25 +1,37 @@
-
-[ {
-  "UUID": "6bb0d538-654c-4046-9fe0-a976aed1ce69",
-  "username": "JohnDoe",
-  "password": "password123",
-  "email": "john.doe@example.com",
-  "languageProgress": {
-    "Spanish": {
-      "completedLessons": 5,
-      "totalLessons": 10,
-      "progressPercentage": 50.0
-    },
-    "French": {
-      "completedLessons": 7,
-      "totalLessons": 10,
-      "progressPercentage": 70.0
+[
+  {
+    "UUID": "6bb0d538-654c-4046-9fe0-a976aed1ce69",
+    "username": "JohnDoe",
+    "password": "password123",
+    "email": "john.doe@example.com",
+    "progressTrackers": {
+      "Spanish": {
+        "questionsCompleted": 0,
+        "lessonsCompleted": 0,
+        "xp": 0,
+        "streak": 0,
+        "completedLessons": 5,
+        "totalLessons": 10,
+        "progressPercentage": 50,
+        "currentState": null
+      },
+      "French": {
+        "questionsCompleted": 0,
+        "lessonsCompleted": 0,
+        "xp": 0,
+        "streak": 0,
+        "completedLessons": 7,
+        "totalLessons": 10,
+        "progressPercentage": 70,
+        "currentState": null
+      }
     }
+  },
+  {
+    "UUID": "3c28d853-f504-41da-8822-31fea6fc4999",
+    "username": "BryceKlein",
+    "password": "password231",
+    "email": "biklein@example.com",
+    "progressTrackers": {}
   }
-} 
-{
-  "UUID": "3c28d853-f504-41da-8822-31fea6fc4999",
-  "username": "BryceKlein",
-  "password": "password231",
-  "email": "biklein@example.com"
-}]
+]
