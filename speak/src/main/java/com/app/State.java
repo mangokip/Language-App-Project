@@ -1,4 +1,7 @@
 package com.app;
+
+import java.util.ArrayList;
+
 /**
  * The State interface defines the contract for all concrete state classes
  * in the CockySpeak application's state pattern implementation.
