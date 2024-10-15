@@ -1,44 +1,96 @@
 package com.app;
+import java.util.ArrayList;
+
 /*
  * LaMorra Strong
  */
+/**
+ * The Language class represents a language with a list of vocabulary words,
+ * phrases, and grammar rules.
+ */
 public class Language {
-    private String languageCode;
+
+    // The type/name of the language (e.g., Spanish).
+    private String type;
+
+    // A list of vocabulary words in the language.
+    private ArrayList<Word> vocabularyList;
+
+    // A list of grammar rules for the language.
+    private ArrayList<String> grammarRules;
 
     /**
-     * Constructs a Language object with the specified language code.
+     * Constructor to create a new Language object with a specified name.
      * 
-     * @param languageCode the code representing the language (e.g., "en" for English)
+     * @param name The name/type of the language.
      */
-    public Language(String languageCode) {
-        this.languageCode = languageCode;
+    public Language(String name) {
+        this.type = name;
+        this.vocabularyList = new ArrayList<>();
+        this.grammarRules = new ArrayList<>();
     }
 
     /**
-     * Gets the language code.
+     * Adds a new vocabulary word to the language's vocabulary list.
      * 
-     * @return the language code as a String
+     * @param word The word to add.
      */
-    public String getLanguageCode() {
-        return languageCode;
+    public void addVocabulary(Word word) {
+        vocabularyList.add(word);
     }
 
     /**
-     * Sets the language code.
+     * Adds a new phrase to the language's vocabulary list.
      * 
-     * @param languageCode the new language code
+     * @param phrase The phrase to add as a Word object.
      */
-    public void setLanguageCode(String languageCode) {
-        this.languageCode = languageCode;
+    public void addPhrase(String phrase) {
+        // Assuming that a phrase can be treated as a Word with empty pronunciation and genre.
+        Word phraseWord = new Word(phrase, "", "", null); // Phrase has no foreign translation or genre
+        vocabularyList.add(phraseWord);
     }
 
     /**
-     * Loads the language settings based on the language code.
+     * Adds a new grammar rule to the list of grammar rules.
      * 
-     * TODO: Implement the logic for loading the language-specific settings.
+     * @param rule The grammar rule to add.
      */
-    public void loadLanguage() {
-        // TODO: Load language settings based on languageCode
-        System.out.println("Loading language: " + languageCode);
+    public void addGrammarRule(String rule) {
+        grammarRules.add(rule);
+    }
+
+    /**
+     * Displays the language's vocabulary and grammar rules.
+     */
+    public void displayContent() {
+        System.out.println("Language: " + type);
+        System.out.println("Vocabulary:");
+        for (Word word : vocabularyList) {
+            System.out.println(word.getText() + " - " + word.getForeign() + " (" + word.getPronounce() + ")");
+        }
+        System.out.println("Grammar Rules:");
+        for (String rule : grammarRules) {
+            System.out.println(rule);
+        }
+    }
+
+    // Getter for language type
+    public String getType() {
+        return type;
+    }
+
+    // Setter for language type
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    // Getter for vocabulary list
+    public ArrayList<Word> getVocabularyList() {
+        return vocabularyList;
+    }
+
+    // Getter for grammar rules
+    public ArrayList<String> getGrammarRules() {
+        return grammarRules;
     }
 }
