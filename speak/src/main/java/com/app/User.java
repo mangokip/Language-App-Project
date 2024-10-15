@@ -27,7 +27,7 @@ public class User {
         setPassword(password);
         setEmail(email);
     }
-    public UUID getId() {
+    public UUID getUUID() {
         return id;
     }
 
@@ -84,18 +84,7 @@ public class User {
 
     }
 
-    public ArrayList getLanguageProgress() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getLanguageProgress'");
-    }
-    public Object getUUID() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUUID'");
-    }
-    public Object getUsername() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
-    }
+   
 
 }
 
