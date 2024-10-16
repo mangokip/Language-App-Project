@@ -24,7 +24,7 @@ public class DataWriter extends DataConstants {
      *
      * @param users the ArrayList of User objects to be saved
      */
-    public void saveUsers(ArrayList<User> users) {
+    /*public void saveUsers(ArrayList<User> users) {
         JSONArray userList = loadExistingUsers();
     
         for (User user : users) {
@@ -53,8 +53,23 @@ public class DataWriter extends DataConstants {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }*/
+
+    public static void saveUsers(ArrayList<User> users) {
+        JSONArray jsonUsers = new JSONArray();
+
+        for (int i = 0; i < users.size(); i++) {
+            jsonUsers.add(getUserDetails(users.get(i)));
+        }
+
+        try (FileWriter file = new FileWriter(USER_FILE)) {
+            file.write(jsonUsers.toJSONString());
+            file.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
+
 
     /**
      * Loads existing users from the JSON file.
@@ -111,7 +126,7 @@ public class DataWriter extends DataConstants {
      * @param user User object to be converted
      * @return JSONObject representing the user
      */
-    private JSONObject getUserDetails(User user) {
+    private static JSONObject getUserDetails(User user) {
         JSONObject userDetails = new JSONObject();
         userDetails.put("UUID", user.getUUID().toString());
         userDetails.put("username", user.getUserName());
@@ -142,54 +157,3 @@ public class DataWriter extends DataConstants {
     }
     
 }
-/* 
-class LanguageProgress {
-    private String language;
-    private int completedLessons;
-    private int totalLessons;
-    private double progressPercentage;
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public int getCompletedLessons() {
-        return completedLessons;
-    }
-
-    public int getTotalLessons() {
-        return totalLessons;
-    }
-
-    public double getProgressPercentage() {
-        return progressPercentage;
-    }
-}
-
-/* class User {
-    private String UUID;
-    private String username;
-    private String password;
-    private String email;
-    private List<LanguageProgress> languageProgress;
-
-    public String getUUID() {
-        return UUID;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public List<LanguageProgress> getLanguageProgress() {
-        return languageProgress;
-    } 
-}  */
