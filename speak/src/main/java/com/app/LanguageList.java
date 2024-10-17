@@ -4,26 +4,21 @@ import java.util.ArrayList;
 /**
  * Singleton class that manages a list of languages in the CockySpeak application.
  * It allows adding, removing, and managing the current language.
- * @author David Dinh
+ * @author Bryce Klein
  */
 public class LanguageList {
-    // Attributes
-    private static LanguageList languageList = null; // Singleton instance
-    private ArrayList<Language> languages; // List of available languages
+    private static LanguageList languageList = null;
+    private ArrayList<Language> languages;
 
-    /**
-     * Private constructor to enforce singleton pattern.
-     * Initializes the list of languages.
+    /*
+     * Basic constructor for singleton
      */
     private LanguageList() {
         languages = new ArrayList<>();
     }
 
-    /**
-     * Returns the singleton instance of LanguageList.
-     * If the instance doesn't exist, it creates one.
-     * 
-     * @return the singleton instance of LanguageList
+    /*
+     * Returns the instance of the LanguageList singleton.
      */
     public static LanguageList getInstance() {
         if (languageList == null) {
@@ -32,72 +27,59 @@ public class LanguageList {
         return languageList;
     }
 
-    /**
-     * Adds a language to the list of languages.
-     * 
-     * @param language the Language object to be added to the list
+    /*
+     * Gets the language with the specified name.
      */
-    public void addLanguage(Language language) {
-        // TODO: Add logic to add language
+    public Language getLanguage(String name) {
+        for (Language language : languages) {
+            if (language.getLanguageCode().equalsIgnoreCase(name)) {
+                return language;
+            }
+        }
+        return null;
     }
 
-    /**
-     * Removes a language from the list of languages.
-     * 
-     * @param language the Language object to be removed from the list
+    /*
+     * Checks if a language exists with the specified name.
      */
-    public void removeLanguage(Language language) {
-        // TODO: Add logic to remove language
+    public boolean hasLanguage(String name) {
+        for (Language language : languages) {
+            if (language.getLanguageCode().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    /**
-     * Sets the current language in the application.
-     * 
-     * @param language the Language object to set as the current language
+    /*
+     * Adds a new language to the list.
      */
-    public void setCurrentLanguage(Language language) {
-        // TODO: Add logic to set the current language
+    public boolean addLanguage(String name) {
+        if (hasLanguage(name)) {
+            System.out.println("Language already exists with name: " + name);
+            return false;
+        }
+        languages.add(new Language(name));
+        return true;
     }
 
-    /**
-     * Gets the current language set in the application.
-     * 
-     * @return the current Language object
+    /*
+     * Removes a language from the list.
      */
-    public Language getCurrentLanguage() {
-        // TODO: Return the current language
-        return null; // placeholder
+    public boolean removeLanguage(String name) {
+        Language language = getLanguage(name);
+        if (language != null) {
+            languages.remove(language);
+            return true;
+        }
+        System.out.println("Language not found with name: " + name);
+        return false;
     }
 
-    /**
-     * Gets a list of all available languages in the system.
-     * 
-     * @return an ArrayList of Language objects available in the system
+    /*
+     *  Returns the list of languages.
      */
-    public ArrayList<Language> getAvailableLanguages() {
-        // TODO: Return a list of available languages
-        return null; // placeholder
-    }
-
-    /**
-     * Checks if a specific language by name exists in the list.
-     * 
-     * @param name the name of the language to search for
-     * @return the Language object if found, otherwise null
-     */
-    public Language containsLang(String name) {
-        // TODO: Add logic to check if a language is in the list
-        return null; // placeholder
-    }
-
-    /**
-     * Retrieves a specific language from the list.
-     * 
-     * @param language the Language object to search for
-     * @return the matching Language object if found, otherwise null
-     */
-    public Language getLanguage(Language language) {
-        // TODO: Return the language object if it exists
-        return null; // placeholder
+    public ArrayList<Language> getLanguages() {
+        return languages;
     }
 }
