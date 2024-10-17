@@ -20,7 +20,7 @@ public class Notification {
         this.type = "";
     }
     
-    /* Parametized Constructor
+    /** Parametized Constructor
      * @param message The message to send in the notification
      * @param recipient The user to send the notification to
      * @param type The type of notification to send

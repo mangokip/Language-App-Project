@@ -17,8 +17,9 @@ public class LanguageList {
         languages = new ArrayList<>();
     }
 
-    /*
-     * Returns the instance of the LanguageList singleton.
+    /**
+     * Singleton pattern - getInstance method
+     * @return The instance of the LanguageList
      */
     public static LanguageList getInstance() {
         if (languageList == null) {
@@ -27,8 +28,10 @@ public class LanguageList {
         return languageList;
     }
 
-    /*
-     * Gets the language with the specified name.
+    /**
+     * Gets the current language
+     * @param name The name of the language to get
+     * @return The language object if found, null otherwise
      */
     public Language getLanguage(String name) {
         for (Language language : languages) {
@@ -39,8 +42,10 @@ public class LanguageList {
         return null;
     }
 
-    /*
-     * Checks if a language exists with the specified name.
+    /**
+     * Checks if a language exists with the given name
+     * @param name The name of the language to check
+     * @return  true if the language exists, false otherwise
      */
     public boolean hasLanguage(String name) {
         for (Language language : languages) {
@@ -51,8 +56,10 @@ public class LanguageList {
         return false;
     }
 
-    /*
-     * Adds a new language to the list.
+    /**
+     * Adds a new language to the list
+     * @param name The name of the language to add
+     * @return true if the language was added successfully, false otherwise
      */
     public boolean addLanguage(String name) {
         if (hasLanguage(name)) {
@@ -63,8 +70,10 @@ public class LanguageList {
         return true;
     }
 
-    /*
-     * Removes a language from the list.
+    /**
+     * Removes a language from the list
+     * @param name The name of the language to remove
+     * @return true if the language was removed successfully, false otherwise
      */
     public boolean removeLanguage(String name) {
         Language language = getLanguage(name);
@@ -76,9 +85,6 @@ public class LanguageList {
         return false;
     }
 
-    /*
-     *  Returns the list of languages.
-     */
     public ArrayList<Language> getLanguages() {
         return languages;
     }
