@@ -14,16 +14,22 @@ import org.json.simple.parser.ParseException;
 /**
  * The DataWriter class is responsible for saving data related to users
  * in the CockySpeak application. It provides methods to save users to a data source.
+<<<<<<< HEAD
  * @author David Dinh, Bryce Klein
  */
 public class DataWriter extends DataConstants {
     
+=======
+ */
+public class DataWriter extends DataConstants {
+>>>>>>> main
 
     /**
      * Saves the list of users to the data source.
      *
      * @param users the ArrayList of User objects to be saved
      */
+<<<<<<< HEAD
     public void saveUsers(ArrayList<User> users) {
         JSONArray userList = loadExistingUsers();
     
@@ -44,13 +50,20 @@ public class DataWriter extends DataConstants {
                 JSONObject userDetails = getUserDetails(user);
                 userList.add(userDetails);
             }
+=======
+    public static void saveUsers(ArrayList<User> users) {
+        JSONArray jsonUsers = new JSONArray();
+
+        for (int i = 0; i < users.size(); i++) {
+            jsonUsers.add(getUserDetails(users.get(i)));
+>>>>>>> main
         }
     
         // Write updated data back to the file
         try (FileWriter file = new FileWriter(USER_FILE)) {
-            file.write(userList.toJSONString());
+            file.write(jsonUsers.toJSONString());
             file.flush();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -79,14 +92,22 @@ public class DataWriter extends DataConstants {
      * @param user User object with updated details
      */
     private void updateUserDetails(JSONObject existingUser, User user) {
+<<<<<<< HEAD
         existingUser.put("username", user.getUserName());
         existingUser.put("password", user.getPassword());
         existingUser.put("email", user.getEmail());
     
+=======
+        existingUser.put(USER_NAME, user.getUserName());
+        existingUser.put(PASSWORD, user.getPassword());
+        existingUser.put(EMAIL, user.getEmail());
+
+>>>>>>> main
         JSONObject languageProgress = new JSONObject();
         for (Map.Entry<Language, ProgressTracker> entry : user.getProgressTracker().entrySet()) {
             Language language = entry.getKey();
             ProgressTracker progress = entry.getValue();
+<<<<<<< HEAD
     
             JSONObject progressDetails = new JSONObject();
             progressDetails.put("questionsCompleted", progress.getQuestionsCompleted());
@@ -102,6 +123,23 @@ public class DataWriter extends DataConstants {
         }
     
         existingUser.put("progressTrackers", languageProgress); // match the JSON structure
+=======
+
+            JSONObject progressDetails = new JSONObject();
+            progressDetails.put(QUESTIONS_COMPLETED, progress.getQuestionsCompleted());
+            progressDetails.put(LESSONS_COMPLETED, progress.getLessonsCompleted());
+            progressDetails.put(XP, progress.getXP());
+            progressDetails.put(STREAK, progress.getStreak());
+            progressDetails.put(COMPLETED_LESSONS, progress.getCompletedLessons());
+            progressDetails.put(TOTAL_LESSONS, progress.getTotalLessons());
+            progressDetails.put(PROGRESS_PERCENTAGE, progress.getProgressPercentage());
+            progressDetails.put(CURRENT_STATE, progress.getState() == null ? null : progress.getState().toString());
+
+            languageProgress.put(language.getLanguageCode(), progressDetails);
+        }
+
+        existingUser.put(PROGRESS_TRACKERS, languageProgress); // match the JSON structure
+>>>>>>> main
     }
     
 
@@ -111,17 +149,26 @@ public class DataWriter extends DataConstants {
      * @param user User object to be converted
      * @return JSONObject representing the user
      */
-    private JSONObject getUserDetails(User user) {
+    private static JSONObject getUserDetails(User user) {
         JSONObject userDetails = new JSONObject();
+<<<<<<< HEAD
         userDetails.put("UUID", user.getUUID().toString());
         userDetails.put("username", user.getUserName());
         userDetails.put("password", user.getPassword());
         userDetails.put("email", user.getEmail());
     
+=======
+        userDetails.put(USER_ID, user.getUUID().toString());
+        userDetails.put(USER_NAME, user.getUserName());
+        userDetails.put(PASSWORD, user.getPassword());
+        userDetails.put(EMAIL, user.getEmail());
+
+>>>>>>> main
         JSONObject languageProgress = new JSONObject();
         for (Map.Entry<Language, ProgressTracker> entry : user.getProgressTracker().entrySet()) {
             Language language = entry.getKey();
             ProgressTracker progress = entry.getValue();
+<<<<<<< HEAD
     
             JSONObject progressDetails = new JSONObject();
             progressDetails.put("questionsCompleted", progress.getQuestionsCompleted());
@@ -193,3 +240,24 @@ class LanguageProgress {
         return languageProgress;
     } 
 }  */
+=======
+
+            JSONObject progressDetails = new JSONObject();
+            progressDetails.put(QUESTIONS_COMPLETED, progress.getQuestionsCompleted());
+            progressDetails.put(LESSONS_COMPLETED, progress.getLessonsCompleted());
+            progressDetails.put(XP, progress.getXP());
+            progressDetails.put(STREAK, progress.getStreak());
+            progressDetails.put(COMPLETED_LESSONS, progress.getCompletedLessons());
+            progressDetails.put(TOTAL_LESSONS, progress.getTotalLessons());
+            progressDetails.put(PROGRESS_PERCENTAGE, progress.getProgressPercentage());
+            progressDetails.put(CURRENT_STATE, progress.getState() == null ? null : progress.getState().toString());
+
+            languageProgress.put(language.getLanguageCode(), progressDetails);
+        }
+
+        userDetails.put(PROGRESS_TRACKERS, languageProgress); // match the JSON structure
+
+        return userDetails;
+    }
+}
+>>>>>>> main
