@@ -70,4 +70,6 @@ public class CockySpeakUI {
         cockySpeak.login(userName, password);
         return cockySpeak.getCurrentUser() != null;
     }
+
+
 }
