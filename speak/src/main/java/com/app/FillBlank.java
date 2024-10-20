@@ -22,7 +22,7 @@ public class FillBlank extends Question {
         ArrayList<Word> genreWords = wordList.getWordsGenre(wordGenre);
         answers[0] = correctAnswer;
         for(int i = 1; i < answers.length; i++){
-            Word tempWord = genreWords.get(rand.nextInt(genreWords.size()))
+            Word tempWord = genreWords.get(rand.nextInt(genreWords.size()));
             if(!Arrays.asList(answers).contains(tempWord)){ //makes sure the random word isnt already in the list
                 answers[i] = tempWord;
             }
@@ -30,6 +30,10 @@ public class FillBlank extends Question {
                 i--;
             }
         }
+    }
+
+    public boolean checkAnswer(Word userAnswer){
+        return(userAnswer == correctAnswer);
     }
 
 }
