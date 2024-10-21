@@ -113,7 +113,7 @@ public class DataWriter extends DataConstants {
             progressDetails.put(PROGRESS_PERCENTAGE, progress.getProgressPercentage());
             progressDetails.put(CURRENT_STATE, progress.getState() == null ? null : progress.getState().toString());
 
-            languageProgress.put(language.getLanguageCode(), progressDetails);
+           languageProgress.put(language.getLanguageCode(), progressDetails);
         }
 
         userDetails.put(PROGRESS_TRACKERS, languageProgress); // match the JSON structure

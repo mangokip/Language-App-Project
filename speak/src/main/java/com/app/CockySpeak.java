@@ -66,6 +66,7 @@ public class CockySpeak {
         writer.saveUsers(userList.getUsers());
         return true; 
     }
+    
 
     /**
      * Gets the currently logged-in user.
