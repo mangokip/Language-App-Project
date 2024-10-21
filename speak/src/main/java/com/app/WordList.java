@@ -1,27 +1,21 @@
 package com.app;
 
-import java.util.ArrayList;
-import java.util.random.*;
+import java.util.List;
+import java.util.Random;
 
 public class WordList {
-    private static WordList wordList;
-    private ArrayList<Word> words;
+    private List<Word> words;
 
-
-    public static WordList getInstance() {
-        if (wordList == null) {
-            wordList = new WordList();
-        }
-        return wordList;
+    public WordList(String filePath) {
+        this.words = DataLoader.loadWords(filePath);
     }
 
-    public ArrayList<Word> getWordsGenre(Genre genre){
-        ArrayList<Word> wordsWithGenre = new ArrayList<>();
-        for(Word word: words){
-            if(word.getGenre() == genre){
-                wordsWithGenre.add(word);
-            }
-        }
-        return wordsWithGenre;
+    public Word getRandomWord() {
+        Random rand = new Random();
+        return words.get(rand.nextInt(words.size()));
+    }
+
+    public List<Word> getWordsByGenre(Genre genre) {
+        return words.stream().filter(word -> word.getGenre() == genre).toList();
     }
 }
