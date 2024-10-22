@@ -1,42 +1,38 @@
 package com.app;
-public class ExpertState implements State {
-    /**
-     * Constructs a new ExpertState object.
-     */
-    public ExpertState() {
-        // Constructor implementation
-    }
 
-    /**
-     * {@inheritDoc}
-     */
+import java.util.ArrayList;
+
+/**
+ * Expert state
+ * @author David Dinh
+ */
+class ExpertState implements State {
+
     @Override
     public void increaseLevel() {
-        // Implementation for increasing level
+        System.out.println("You're already at the highest level: Expert.");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void decreaseLevel() {
-        // Implementation for decreasing level
+        System.out.println("Level decreased! You're now at the Intermediate level.");
+        // Logic to transition to IntermediateState can be implemented here.
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ArrayList<Question> getQuestionPool() {
-        // Implementation to get question pool for expert level
-        return new ArrayList<>();
+        ArrayList<Question> questions = new ArrayList<>();
+        // Adding expert-level questions
+        questions.add(new Question("What is the subjunctive form of 'to be' in Spanish?", 3));
+        questions.add(new Question("Translate 'philosophy' to Spanish.", 3));
+        return questions;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void loadContent(Language language) {
-        // Implementation to load expert content for the given language
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'loadContent'");
     }
+
+    
 }
