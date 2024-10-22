@@ -1,0 +1,18 @@
+{
+    "Spanish": [
+        {
+            "text": "perro",
+            "foreign": "dog",
+            "pronounce": "peh-roh",
+            "genre": "NOUN",
+            "difficulty": 1
+        },
+        {
+            "text": "correr",
+            "foreign": "run",
+            "pronounce": "ko-rehr",
+            "genre": "VERB",
+            "difficulty": 2
+        }
+    ]
+}

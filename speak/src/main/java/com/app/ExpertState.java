@@ -1,42 +1,50 @@
 package com.app;
-public class ExpertState implements State {
-    /**
-     * Constructs a new ExpertState object.
-     */
-    public ExpertState() {
-        // Constructor implementation
-    }
 
-    /**
-     * {@inheritDoc}
-     */
+import java.util.ArrayList;
+
+/**
+ * Expert state
+ * @author David Dinh
+ */
+class ExpertState implements State {
+
     @Override
     public void increaseLevel() {
-        // Implementation for increasing level
+        System.out.println("You're already at the highest level: Expert.");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void decreaseLevel() {
-        // Implementation for decreasing level
+        System.out.println("Level decreased! You're now at the Intermediate level.");
+        // Logic to transition to IntermediateState can be implemented here.
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ArrayList<Question> getQuestionPool() {
-        // Implementation to get question pool for expert level
-        return new ArrayList<>();
+        ArrayList<Question> questions = new ArrayList<>();
+        // Adding expert-level questions
+        questions.add(new Question("What is the subjunctive form of 'to be' in Spanish?", 3));
+        questions.add(new Question("Translate 'philosophy' to Spanish.", 3));
+        return questions;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    //TODO fix Loadcontent
     @Override
     public void loadContent(Language language) {
-        // Implementation to load expert content for the given language
+        /* 
+        System.out.println("Loading expert content for language: " + language.getCode());
+        language.addVocabulary(new Word("to be (subjunctive)", "sea", "seh-ah", Genre.VERB, 3, false));
+        language.addVocabulary(new Word("philosophy", "filosofía", "fee-loh-soh-fee-ah", Genre.NOUN, 3, false));
+        language.addGrammarRule("Use 'sea' for subjunctive form of 'to be' in Spanish.");
+        */
+    }
+
+    @Override
+    public void evaluatePerformance(int correctAnswers) {
+        if (correctAnswers >= 7) {
+            System.out.println("Congratulations! You've mastered the Expert level!");
+        } else {
+            System.out.println("Keep practicing to master the Expert level!");
+        }
     }
 }

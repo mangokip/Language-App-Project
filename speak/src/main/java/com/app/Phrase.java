@@ -26,6 +26,22 @@ public class Phrase {
         this.meaning = meaning;
     }
 
+    public ArrayList<String> getEnglishPhrase(){
+        ArrayList<String> englishWords = new ArrayList<String>();
+        for(Word word : words){
+            englishWords.add(word.getText());
+        }
+        return englishWords;
+    }
+    public ArrayList<String> getForeignPhrase(){
+        ArrayList<String> foreignWords = new ArrayList<String>();
+        for(Word word: words){
+            foreignWords.add(word.getForeign());
+        }
+        return foreignWords;
+    }
+    
+
     /**
      * Gets the words in the phrase.
      * 

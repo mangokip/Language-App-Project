@@ -2,48 +2,49 @@ package com.app;
 
 import java.util.ArrayList;
 
-public class IntermediateState implements State {
-    /**
-     * Constructs a new IntermediateState object.
-     */
-    public IntermediateState() {
-        // Constructor implementation
-    }
+/**
+ * intermediate State
+ * @author David Dinh
+ */
+class IntermediateState implements State {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void increaseLevel() {
-        // Implementation for increasing level
+        System.out.println("Level increased! You're now at the Expert level.");
+        // Logic to transition to ExpertState can be implemented here.
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void decreaseLevel() {
-        // Implementation for decreasing level
+        System.out.println("Level decreased! You're now at the Beginner level.");
+        // Logic to transition to BeginnerState can be implemented here.
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ArrayList<Question> getQuestionPool() {
-        // Implementation to get question pool for intermediate level
-        return new ArrayList<>();
+        ArrayList<Question> questions = new ArrayList<>();
+        // Adding intermediate-level questions
+        questions.add(new Question("Conjugate the verb 'to eat' in the past tense in Spanish.", 2));
+        questions.add(new Question("What is the plural form of 'child' in Spanish?", 2));
+        return questions;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    //TODO Fix Load content
     @Override
     public void loadContent(Language language) {
-        // Implementation to load intermediate content for the given language
+        /* System.out.println("Loading intermediate content for language: " + language.getCode());
+        language.addVocabulary(new Word("ate", "comí", "koh-mee", Genre.VERB, 2, false));
+        language.addVocabulary(new Word("children", "niños", "nee-nyos", Genre.NOUN, 2, false));
+        language.addGrammarRule("Use 'comí' for 'I ate' in past tense.");
+        */
+    }
+
+    @Override
+    public void evaluatePerformance(int correctAnswers) {
+        if (correctAnswers >= 7) {
+            increaseLevel();
+        } else {
+            System.out.println("Keep practicing to advance to the next level!");
+        }
     }
 }
-
-/**
- * Represents the expert level state in the CockySpeak application.
- */
