@@ -1,6 +1,6 @@
 package com.app;
 /*
- * LaMorra Strong
+ * LaMorra Strong, Bryce Klein
  */
 public class Word {
     private String text;
@@ -75,19 +75,4 @@ public class Word {
     }
 }
 
-enum Genre {
-    NOUN, VERB, ADJECTIVE, ADVERB, PREPOSITION, CONJUNCTION, INTERJECTION
-
-
-    /**
-    //  * Analyzes the word to extract linguistic information such as part of speech.
-    //  * 
-    //  * TODO: Implement the logic for word analysis.
-    //  */
-    // public void analyze() {
-    //     // TODO: Implement logic to analyze the word (e.g., part of speech, meaning)
-    //     System.out.println("Analyzing word: " + text);
-    // }
-
-}
 
