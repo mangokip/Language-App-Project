@@ -3,15 +3,22 @@ package com.app;
 public class CockySpeak {
     private Language currentLanguage;
     private UserList userList;
+    private WordList wordList;
     private User user;
 
     public CockySpeak() {
         userList = UserList.getInstance(); 
+        wordList = WordList.getInstance();
         DataLoader loader = new DataLoader();
+
 
     
         for (User loadedUser : loader.loadUsers()) {
             userList.addUser(loadedUser.getUserName(), loadedUser.getPassword(), loadedUser.getEmail());
+        }
+
+        for (Word loadedWord : loader.loadWords()) {
+            wor
         }
     }
 
