@@ -60,8 +60,23 @@ public class ExpertState implements State {
         // Implementation to load expert content for the given language
     }
 
+    //TODO fix Loadcontent
     @Override
-    public String toString() {
-        return "EXPERT";
+    public void loadContent(Language language) {
+        /* 
+        System.out.println("Loading expert content for language: " + language.getCode());
+        language.addVocabulary(new Word("to be (subjunctive)", "sea", "seh-ah", Genre.VERB, 3, false));
+        language.addVocabulary(new Word("philosophy", "filosofía", "fee-loh-soh-fee-ah", Genre.NOUN, 3, false));
+        language.addGrammarRule("Use 'sea' for subjunctive form of 'to be' in Spanish.");
+        */
+    }
+
+    @Override
+    public void evaluatePerformance(int correctAnswers) {
+        if (correctAnswers >= 7) {
+            System.out.println("Congratulations! You've mastered the Expert level!g");
+        } else {
+            System.out.println("Keep practicing to master the Expert level!");
+        }
     }
 }
