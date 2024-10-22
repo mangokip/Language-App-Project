@@ -19,7 +19,7 @@ public class FillBlank extends Question {
         Random rand = new Random();
         Genre wordGenre = correctAnswer.getGenre();
         WordList wordList = WordList.getInstance();
-        ArrayList<Word> genreWords = wordList.getWordsGenre(wordGenre);
+        ArrayList<Word> genreWords = wordList.getWordsByGenre(wordGenre);
         answers[rand.nextInt(4)] = correctAnswer;
         for(int i = 0; i < answers.length; i++){
             Word tempWord = genreWords.get(rand.nextInt(genreWords.size()));
