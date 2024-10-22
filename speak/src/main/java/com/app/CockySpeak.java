@@ -8,11 +8,12 @@ public class CockySpeak {
     private UserList userList;
     private WordList wordList;
     private User user;
+    private DataLoader loader = new DataLoader();
+    private DataWriter writer = new DataWriter();
 
     public CockySpeak() {
         userList = UserList.getInstance();
         wordList = WordList.getInstance();
-        DataLoader loader = new DataLoader();
 
         for (User loadedUser : loader.loadUsers()) {
             userList.addUser(loadedUser.getUserName(), loadedUser.getPassword(), loadedUser.getEmail());
@@ -31,20 +32,21 @@ public class CockySpeak {
         }
         this.currentLanguage = language;
         user.createLanguageProgress(language);
+        writer.saveUsers(userList.getUsers());
         System.out.println("Language set to: " + language.getLanguageCode());
     }
-    
 
     /**
      * Prompts the user to select a language.
-     * @return 
+     *
+     * @return
      */
     public Language promptLanguageSelection() {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Available languages: Spanish");
         System.out.print("Please select a language: ");
         String selectedLanguageCode = keyboard.nextLine().trim();
-    
+
         // Ensure a valid Language object is returned
         if (selectedLanguageCode.isEmpty()) {
             System.out.println("Invalid input. Defaulting to Spanish.");
@@ -52,7 +54,6 @@ public class CockySpeak {
         }
         return new Language(selectedLanguageCode);
     }
-    
 
     public void promptDifficultySelection(Language language) {
         Scanner keyboard = new Scanner(System.in);
@@ -120,6 +121,7 @@ public class CockySpeak {
     public User getCurrentUser() {
         return user;
     }
+
     public Language getCurrentLanguage() {
         return currentLanguage;
     }

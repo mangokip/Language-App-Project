@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Beginner State
+ *
  * @author David Dinh
  */
 class BeginnerState implements State {
@@ -34,7 +35,7 @@ class BeginnerState implements State {
         /*System.out.println("Loading beginner content for language: " + language.getCode());
         language.addVocabulary(new Word("apple", "manzana", "mah-nzah-nah", Genre.NOUN, 1, false));
         language.addVocabulary(new Word("hello", "hola", "oh-lah", Genre.INTERJECTION, 1, false));
-        */
+         */
     }
 
     @Override
