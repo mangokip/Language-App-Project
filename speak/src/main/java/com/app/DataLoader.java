@@ -90,9 +90,7 @@ public class DataLoader extends DataConstants {
      *
      * @return a List of Word objects
      */
-    public static ArrayList<Word> loadWords() {
-        ArrayList<Word> words = new ArrayList<>();
-
+    public static void loadWords(Language language) {
         try (BufferedReader reader = new BufferedReader(new FileReader(WORD_FILE))) {
             StringBuilder content = new StringBuilder();
             String line;
@@ -110,8 +108,9 @@ public class DataLoader extends DataConstants {
                 String foreign = (String) wordJSON.get(FOREIGN);
                 String pronounce = (String) wordJSON.get(PRONOUNCE);
                 String genreString = (String) wordJSON.get(GENRE);
+                Long difficultyLong = (Long) wordJSON.get("difficulty");
 
-                if (text == null || foreign == null || pronounce == null || genreString == null) {
+                if (text == null || foreign == null || pronounce == null || genreString == null || difficultyLong == null) {
                     System.err.println("Word data missing or invalid at index " + i);
                     continue;
                 }
@@ -124,19 +123,16 @@ public class DataLoader extends DataConstants {
                     continue;
                 }
 
-                Word word = new Word(text, foreign, pronounce, genre);
-                words.add(word);
-                System.out.println("Successfully loaded word: " + word.getText());
+                int difficulty = difficultyLong.intValue();
+                language.addVocabulary(text, foreign, pronounce, genre, difficulty);
+                System.out.println("Successfully loaded word: " + text);
             }
 
-            System.out.println("Total words loaded: " + words.size());
-            return words;
+            System.out.println("Total words loaded for language " + language.getLanguageCode() + ": " + language.getVocabularyList().size());
         } catch (IOException | ParseException e) {
             System.err.println("Error loading words: " + e.getMessage());
             e.printStackTrace();
         }
-
-        return words;
     }
 
     /**
@@ -150,6 +146,5 @@ public class DataLoader extends DataConstants {
         DataLoader dataLoader = new DataLoader();
         dataLoader.loadLessons();
         loadUsers();
-        loadWords();
     }
 }

@@ -6,51 +6,35 @@ import java.util.ArrayList;
  * Beginner State
  * @author David Dinh
  */
-public class BeginnerState implements State {
+class BeginnerState implements State {
 
-    /**
-     * Constructs a new BeginnerState object.
-     */
-    public BeginnerState() {
-        // Constructor implementation
-        
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void increaseLevel() {
-        // Implementation for increasing level
+        System.out.println("Level increased! You're now at the Intermediate level.");
+        // Logic to transition to IntermediateState can be implemented here.
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void decreaseLevel() {
-        // Implementation for decreasing level
-    
+        System.out.println("You're already at the Beginner level.");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ArrayList<Question> getQuestionPool() {
-        // Implementation to get question pool for beginner level
-        return new ArrayList<>();
+        ArrayList<Question> questions = new ArrayList<>();
+        // Adding beginner-level questions Example
+        questions.add(new Question("Translate 'apple' to Spanish.", 1));
+        questions.add(new Question("Translate 'hello' to Spanish.", 1));
+
+        return questions;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void loadContent(Language language) {
-        // Implementation to load beginner content for the given language
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'loadContent'");
     }
-}
 
-/**
- * Represents the intermediate level state in the CockySpeak application.
- */
+   // @Override
+   // public void loadContent(Language language);
+}
