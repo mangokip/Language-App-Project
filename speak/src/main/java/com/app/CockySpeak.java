@@ -18,7 +18,7 @@ public class CockySpeak {
         }
 
         for (Word loadedWord : loader.loadWords()) {
-            wor
+            wordList.addWord(loadedWord.getText(), loadedWord.getForeign(), loadedWord.getPronounce(), loadedWord.getGenre());
         }
     }
 
