@@ -29,11 +29,22 @@ class IntermediateState implements State {
         return questions;
     }
 
+    //TODO Fix Load content
     @Override
     public void loadContent(Language language) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadContent'");
+        /* System.out.println("Loading intermediate content for language: " + language.getCode());
+        language.addVocabulary(new Word("ate", "comí", "koh-mee", Genre.VERB, 2, false));
+        language.addVocabulary(new Word("children", "niños", "nee-nyos", Genre.NOUN, 2, false));
+        language.addGrammarRule("Use 'comí' for 'I ate' in past tense.");
+        */
     }
 
-    
+    @Override
+    public void evaluatePerformance(int correctAnswers) {
+        if (correctAnswers >= 7) {
+            increaseLevel();
+        } else {
+            System.out.println("Keep practicing to advance to the next level!");
+        }
+    }
 }
