@@ -17,9 +17,9 @@ public class CockySpeak {
             userList.addUser(loadedUser.getUserName(), loadedUser.getPassword(), loadedUser.getEmail());
         }
 
-        for (Word loadedWord : loader.loadWords()) {
+        /*for (Word loadedWord : loader.loadWords()) {
             wordList.addWord(loadedWord.getText(), loadedWord.getForeign(), loadedWord.getPronounce(), loadedWord.getGenre());
-        }
+        }*/
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.app;
 /*
- * LaMorra Strong
+ * LaMorra Strong, Bryce Klein
  */
 public class Word {
     private String text;
@@ -89,4 +89,5 @@ public class Word {
                '}';
     }
 }
+
 

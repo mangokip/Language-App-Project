@@ -1,49 +1,49 @@
 package com.app;
 
-
-public class BeginnerState implements State {
-
-    /**
-     * Constructs a new BeginnerState object.
-     */
-    public BeginnerState() {
-        // Constructor implementation
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void increaseLevel() {
-        // Implementation for increasing level
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void decreaseLevel() {
-        // Implementation for decreasing level
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ArrayList<Question> getQuestionPool() {
-        // Implementation to get question pool for beginner level
-        return new ArrayList<>();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void loadContent(Language language) {
-        // Implementation to load beginner content for the given language
-    }
-}
+import java.util.ArrayList;
 
 /**
- * Represents the intermediate level state in the CockySpeak application.
+ * Beginner State
+ * @author David Dinh
  */
+class BeginnerState implements State {
+
+    @Override
+    public void increaseLevel() {
+        System.out.println("Level increased! You're now at the Intermediate level.");
+        // Logic to transition to IntermediateState can be implemented here.
+    }
+
+    @Override
+    public void decreaseLevel() {
+        System.out.println("You're already at the Beginner level.");
+    }
+
+    @Override
+    public ArrayList<Question> getQuestionPool() {
+        ArrayList<Question> questions = new ArrayList<>();
+        // Adding beginner-level questions
+        questions.add(new Question("Translate 'apple' to Spanish.", 1));
+        questions.add(new Question("Translate 'hello' to Spanish.", 1));
+        return questions;
+    }
+
+    //TODO fix this, I have no clue what to do here
+    @Override
+    public void loadContent(Language language) {
+        /*System.out.println("Loading beginner content for language: " + language.getCode());
+        language.addVocabulary(new Word("apple", "manzana", "mah-nzah-nah", Genre.NOUN, 1, false));
+        language.addVocabulary(new Word("hello", "hola", "oh-lah", Genre.INTERJECTION, 1, false));
+        */
+    }
+
+    @Override
+    public void evaluatePerformance(int correctAnswers) {
+        if (correctAnswers >= 7) {
+            increaseLevel();
+        } else {
+            decreaseLevel();
+            System.out.println("Keep practicing to advance to the next level!");
+        }
+    }
+}
