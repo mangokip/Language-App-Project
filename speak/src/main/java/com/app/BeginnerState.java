@@ -22,19 +22,28 @@ class BeginnerState implements State {
     @Override
     public ArrayList<Question> getQuestionPool() {
         ArrayList<Question> questions = new ArrayList<>();
-        // Adding beginner-level questions Example
+        // Adding beginner-level questions
         questions.add(new Question("Translate 'apple' to Spanish.", 1));
         questions.add(new Question("Translate 'hello' to Spanish.", 1));
-
         return questions;
     }
 
+    //TODO fix this, I have no clue what to do here
     @Override
     public void loadContent(Language language) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadContent'");
+        /*System.out.println("Loading beginner content for language: " + language.getCode());
+        language.addVocabulary(new Word("apple", "manzana", "mah-nzah-nah", Genre.NOUN, 1, false));
+        language.addVocabulary(new Word("hello", "hola", "oh-lah", Genre.INTERJECTION, 1, false));
+        */
     }
 
-   // @Override
-   // public void loadContent(Language language);
+    @Override
+    public void evaluatePerformance(int correctAnswers) {
+        if (correctAnswers >= 7) {
+            increaseLevel();
+        } else {
+            decreaseLevel();
+            System.out.println("Keep practicing to advance to the next level!");
+        }
+    }
 }
