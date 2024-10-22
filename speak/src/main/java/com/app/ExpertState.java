@@ -28,11 +28,23 @@ class ExpertState implements State {
         return questions;
     }
 
+    //TODO fix Loadcontent
     @Override
     public void loadContent(Language language) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadContent'");
+        /* 
+        System.out.println("Loading expert content for language: " + language.getCode());
+        language.addVocabulary(new Word("to be (subjunctive)", "sea", "seh-ah", Genre.VERB, 3, false));
+        language.addVocabulary(new Word("philosophy", "filosofía", "fee-loh-soh-fee-ah", Genre.NOUN, 3, false));
+        language.addGrammarRule("Use 'sea' for subjunctive form of 'to be' in Spanish.");
+        */
     }
 
-    
+    @Override
+    public void evaluatePerformance(int correctAnswers) {
+        if (correctAnswers >= 7) {
+            System.out.println("Congratulations! You've mastered the Expert level!");
+        } else {
+            System.out.println("Keep practicing to master the Expert level!");
+        }
+    }
 }
