@@ -24,7 +24,7 @@ public class WordList {
     }
 
     public Word addWord(Language language, String text, String translation, String pronounce, Genre genre, int difficulty) {
-        Word word = new Word(text, translation, pronounce, genre);
+        Word word = new Word(text, translation, pronounce, genre, difficulty, false);
         languageWords.computeIfAbsent(language, k -> new ArrayList<>()).add(word);
         wordDifficulty.put(word, difficulty);
         return word;

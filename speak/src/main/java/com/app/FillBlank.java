@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
+import java.util.List;
 
 public class FillBlank extends Question {
     private Phrase sentence;
@@ -19,7 +20,7 @@ public class FillBlank extends Question {
         Random rand = new Random();
         Genre wordGenre = correctAnswer.getGenre();
         WordList wordList = WordList.getInstance();
-        ArrayList<Word> genreWords = wordList.getWordsByGenre(wordGenre);
+        List<Word> genreWords = wordList.getWordsByGenre(wordGenre);
         answers[rand.nextInt(4)] = correctAnswer;
         for(int i = 0; i < answers.length; i++){
             Word tempWord = genreWords.get(rand.nextInt(genreWords.size()));
@@ -33,6 +34,7 @@ public class FillBlank extends Question {
                 i--;
             }
         }
+        
     }
 
     public boolean checkAnswer(Word userAnswer){
