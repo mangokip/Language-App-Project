@@ -1,0 +1,15 @@
+[
+    {
+      "text": "perro",
+      "foreign": "dog",
+      "pronounce": "peh-roh",
+      "genre": "NOUN"
+    },
+    {
+      "text": "correr",
+      "foreign": "run",
+      "pronounce": "ko-rehr",
+      "genre": "VERB"
+    }
+  ]
+  

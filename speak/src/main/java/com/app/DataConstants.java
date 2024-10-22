@@ -18,4 +18,11 @@ public abstract class DataConstants {
     protected static final String TOTAL_LESSONS = "totalLessons";
     protected static final String PROGRESS_PERCENTAGE = "progressPercentage";
     protected static final String CURRENT_STATE = "currentState";
+
+    // Words
+    protected static final String WORD_FILE = "json/words.json";
+    protected static final String TEXT = "text";
+    protected static final String FOREIGN = "foreign";
+    protected static final String PRONOUNCE = "pronounce";
+    protected static final String GENRE = "genre";
 }
