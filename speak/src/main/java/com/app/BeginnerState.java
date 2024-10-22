@@ -1,6 +1,11 @@
 package com.app;
 
+import java.util.ArrayList;
 
+/**
+ * Beginner State
+ * @author David Dinh
+ */
 public class BeginnerState implements State {
 
     /**
@@ -8,6 +13,7 @@ public class BeginnerState implements State {
      */
     public BeginnerState() {
         // Constructor implementation
+        
     }
 
     /**
@@ -24,6 +30,7 @@ public class BeginnerState implements State {
     @Override
     public void decreaseLevel() {
         // Implementation for decreasing level
+    
     }
 
     /**
