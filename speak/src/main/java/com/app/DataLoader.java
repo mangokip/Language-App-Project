@@ -90,7 +90,7 @@ public class DataLoader extends DataConstants {
      *
      * @return a List of Word objects
      */
-    public static void loadWords(Language language) {
+    public static void loadWords() {
         try (BufferedReader reader = new BufferedReader(new FileReader(WORD_FILE))) {
             StringBuilder content = new StringBuilder();
             String line;
@@ -99,36 +99,44 @@ public class DataLoader extends DataConstants {
                 content.append(line).append("\n");
             }
 
-            JSONArray wordsJSON = (JSONArray) new JSONParser().parse(content.toString());
+            JSONObject wordsJSON = (JSONObject) new JSONParser().parse(content.toString());
 
-            for (int i = 0; i < wordsJSON.size(); i++) {
-                JSONObject wordJSON = (JSONObject) wordsJSON.get(i);
+            for (Object key : wordsJSON.keySet()) {
+                String languageCode = (String) key;
+                JSONArray wordsArray = (JSONArray) wordsJSON.get(languageCode);
+                Language language = new Language(languageCode);
 
-                String text = (String) wordJSON.get(TEXT);
-                String foreign = (String) wordJSON.get(FOREIGN);
-                String pronounce = (String) wordJSON.get(PRONOUNCE);
-                String genreString = (String) wordJSON.get(GENRE);
-                Long difficultyLong = (Long) wordJSON.get("difficulty");
+                for (Object obj : wordsArray) {
+                    JSONObject wordJSON = (JSONObject) obj;
 
-                if (text == null || foreign == null || pronounce == null || genreString == null || difficultyLong == null) {
-                    System.err.println("Word data missing or invalid at index " + i);
-                    continue;
+                    String text = (String) wordJSON.get(TEXT);
+                    String foreign = (String) wordJSON.get(FOREIGN);
+                    String pronounce = (String) wordJSON.get(PRONOUNCE);
+                    String genreString = (String) wordJSON.get(GENRE);
+                    Long difficultyLong = (Long) wordJSON.get("difficulty");
+
+                    if (text == null || foreign == null || pronounce == null || genreString == null || difficultyLong == null) {
+                        System.err.println("Word data missing or invalid for language " + languageCode);
+                        continue;
+                    }
+
+                    Genre genre;
+                    try {
+                        genre = Genre.valueOf(genreString.toUpperCase());
+                    } catch (IllegalArgumentException e) {
+                        System.err.println("Invalid genre for language " + languageCode + ": " + genreString);
+                        continue;
+                    }
+
+                    int difficulty = difficultyLong.intValue();
+                    language.addVocabulary(text, foreign, pronounce, genre, difficulty);
+                    System.out.println("Successfully loaded word: " + text + " for language " + languageCode);
                 }
 
-                Genre genre;
-                try {
-                    genre = Genre.valueOf(genreString.toUpperCase());
-                } catch (IllegalArgumentException e) {
-                    System.err.println("Invalid genre at index " + i + ": " + genreString);
-                    continue;
-                }
-
-                int difficulty = difficultyLong.intValue();
-                language.addVocabulary(text, foreign, pronounce, genre, difficulty);
-                System.out.println("Successfully loaded word: " + text);
+                System.out.println("Total words loaded for language " + language.getLanguageCode() + ": " + language.getVocabularyList().size());
             }
 
-            System.out.println("Total words loaded for language " + language.getLanguageCode() + ": " + language.getVocabularyList().size());
+            System.out.println("Total words loaded.");
         } catch (IOException | ParseException e) {
             System.err.println("Error loading words: " + e.getMessage());
             e.printStackTrace();
@@ -146,5 +154,6 @@ public class DataLoader extends DataConstants {
         DataLoader dataLoader = new DataLoader();
         dataLoader.loadLessons();
         loadUsers();
+        loadWords();
     }
 }
