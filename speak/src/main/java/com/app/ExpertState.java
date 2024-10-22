@@ -47,4 +47,8 @@ class ExpertState implements State {
             System.out.println("Keep practicing to master the Expert level!");
         }
     }
+    @Override
+    public String toString() {
+        return "EXPERT";
+    }
 }

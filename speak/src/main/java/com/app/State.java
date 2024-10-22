@@ -39,4 +39,7 @@ public interface State {
      * @param correctAnswers The number of correct answers given by the user.
      */
     void evaluatePerformance(int correctAnswers);
+
+    @Override
+    public String toString();
 }
