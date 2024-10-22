@@ -2,75 +2,48 @@ package com.app;
 
 import java.util.ArrayList;
 
-public class BeginnerState implements State {
-    private ArrayList<Question> questionPool;
-    private Language currentLanguage;
+/**
+ * Beginner State
+ * @author David Dinh
+ */
+class BeginnerState implements State {
 
-    /**
-     * Constructs a new BeginnerState object.
-     */
-    public BeginnerState() {
-        this.questionPool = new ArrayList<>();
-        this.currentLanguage = null;
-        // Constructor implementation
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void increaseLevel() {
-        // Implementation for increasing level
-        questionPool.clear();
-        System.out.println("Progressing to Intermediate level");
+        System.out.println("Level increased! You're now at the Intermediate level.");
+        // Logic to transition to IntermediateState can be implemented here.
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void decreaseLevel() {
-        // Implementation for decreasing level
-        System.out.println("Already at Beginner level - cannot decrease further");
+        System.out.println("You're already at the Beginner level.");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ArrayList<Question> getQuestionPool() {
-        // Implementation to get question pool for beginner level
-        if (questionPool.isEmpty() && currentLanguage != null) {
-            loadContent(currentLanguage);
-        }
-        return new ArrayList<>(questionPool);
+        ArrayList<Question> questions = new ArrayList<>();
+        // Adding beginner-level questions
+        questions.add(new Question("Translate 'apple' to Spanish.", 1));
+        questions.add(new Question("Translate 'hello' to Spanish.", 1));
+        return questions;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    //TODO fix this, I have no clue what to do here
     @Override
     public void loadContent(Language language) {
-        if (language == null){
-            throw new IllegalArgumentException("Language cannot be null");
-        }
-        // Implementation to load beginner content for the given language
-
-        this.currentLanguage = language;
-        questionPool.clear();
-
-        Question sampleQuestion = new Question();// I need a parameters for creating a beginner question
-        questionPool.add(sampleQuestion);
-
-        System.out.println("Loaded beginner content for: " + language);
+        /*System.out.println("Loading beginner content for language: " + language.getCode());
+        language.addVocabulary(new Word("apple", "manzana", "mah-nzah-nah", Genre.NOUN, 1, false));
+        language.addVocabulary(new Word("hello", "hola", "oh-lah", Genre.INTERJECTION, 1, false));
+        */
     }
 
     @Override
-    public String toString() {
-        return "BEGINNER";
+    public void evaluatePerformance(int correctAnswers) {
+        if (correctAnswers >= 7) {
+            increaseLevel();
+        } else {
+            decreaseLevel();
+            System.out.println("Keep practicing to advance to the next level!");
+        }
     }
 }
-
-/**
- * Represents the intermediate level state in the CockySpeak application.
- */
