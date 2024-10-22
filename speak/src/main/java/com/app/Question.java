@@ -21,5 +21,8 @@ public class Question {
     public String toString(){
         return " ";
     }
+    public String getPrompt(){
+        return this.prompt;
+    }
 }
 

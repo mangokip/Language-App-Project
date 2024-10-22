@@ -40,6 +40,7 @@ public class Phrase {
         }
         return foreignWords;
     }
+    
 
     /**
      * Gets the words in the phrase.
