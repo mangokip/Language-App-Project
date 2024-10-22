@@ -3,6 +3,8 @@ package com.app;
 import java.util.ArrayList;
 
 public class IntermediateState implements State {
+    private ArrayList<Question> questionPool;
+    private Language currentLanguage;
     /**
      * Constructs a new IntermediateState object.
      */
