@@ -13,7 +13,7 @@ public class Word {
      * 
      * @param text the word as a String
      */
-    public Word(String text, String foregin, String pronounce, Genre genre) {
+    public Word(String text, String foreign, String pronounce, Genre genre) {
         this.text = text;
         this.foreign = foreign;
         this.pronounce = pronounce;

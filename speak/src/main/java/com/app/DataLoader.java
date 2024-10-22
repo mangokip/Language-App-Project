@@ -15,7 +15,6 @@ import org.json.simple.parser.ParseException;
  * The DataLoader class is responsible for reading lesson data from a JSON file.
  * This version is a simple test that reads the file's content and prints it,
  * but it does not yet parse the JSON into objects.
- * @author David Dinh, Bryce Klein
  */
 public class DataLoader extends DataConstants {
 
@@ -27,7 +26,7 @@ public class DataLoader extends DataConstants {
      * @return a List of Lesson objects (currently empty)
      */
     public List<Lesson> loadLessons() {
-        List<Lesson> lessons = new ArrayList<>(); // Return an empty list for now
+        List<Lesson> lessons = new ArrayList<>();
         StringBuilder content = new StringBuilder();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(LESSON_FILE))) {
@@ -57,11 +56,6 @@ public class DataLoader extends DataConstants {
                 content.append(line).append("\n");
             }
 
-            /* Debugging 
-            System.out.println("JSON file content:");
-            System.out.println(content.toString());
-            */
-
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
 
             for (int i = 0; i < usersJSON.size(); i++) {
@@ -73,7 +67,7 @@ public class DataLoader extends DataConstants {
 
                 if (username == null || password == null || email == null) {
                     System.err.println("User data missing or invalid at index " + i);
-                    continue; // Skip this user and continue with the next
+                    continue;
                 }
 
                 User user = new User(username, password, email);
@@ -81,16 +75,7 @@ public class DataLoader extends DataConstants {
                 System.out.println("Successfully loaded user: " + user.getUserName());
             }
 
-            System.out.println("Total users loaded: " + (users.size()));
-
-            /* Debugging Print
-            for (int i = 0; i < users.size(); i++) {
-                User user = users.get(i);
-                System.out.println("User " + (i + 1) + ": " + user.getUserName() + 
-                                   ", Email: " + user.getEmail() + 
-                                   ", Password: " + user.getPassword());
-            }
-            */
+            System.out.println("Total users loaded: " + users.size());
             return users;
         } catch (IOException | ParseException e) {
             System.err.println("Error loading users: " + e.getMessage());
@@ -116,11 +101,6 @@ public class DataLoader extends DataConstants {
                 content.append(line).append("\n");
             }
 
-            /* Debugging
-            System.out.println("JSON file content:");
-            System.out.println(content.toString());
-            */
-
             JSONArray wordsJSON = (JSONArray) new JSONParser().parse(content.toString());
 
             for (int i = 0; i < wordsJSON.size(); i++) {
@@ -129,12 +109,19 @@ public class DataLoader extends DataConstants {
                 String text = (String) wordJSON.get(TEXT);
                 String foreign = (String) wordJSON.get(FOREIGN);
                 String pronounce = (String) wordJSON.get(PRONOUNCE);
-                String genreStr = (String) wordJSON.get(GENRE);
-                Genre genre = Genre.valueOf(genreStr.toUpperCase());
+                String genreString = (String) wordJSON.get(GENRE);
 
-                if (text == null || foreign == null || pronounce == null || genreStr == null) {
+                if (text == null || foreign == null || pronounce == null || genreString == null) {
                     System.err.println("Word data missing or invalid at index " + i);
-                    continue; // Skip this word and continue with the next
+                    continue;
+                }
+
+                Genre genre;
+                try {
+                    genre = Genre.valueOf(genreString.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Invalid genre at index " + i + ": " + genreString);
+                    continue;
                 }
 
                 Word word = new Word(text, foreign, pronounce, genre);
@@ -143,7 +130,6 @@ public class DataLoader extends DataConstants {
             }
 
             System.out.println("Total words loaded: " + words.size());
-
             return words;
         } catch (IOException | ParseException e) {
             System.err.println("Error loading words: " + e.getMessage());
