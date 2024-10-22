@@ -1,18 +1,208 @@
 {
     "Spanish": [
-        {
-            "text": "perro",
-            "foreign": "dog",
-            "pronounce": "peh-roh",
-            "genre": "NOUN",
-            "difficulty": 1
-        },
-        {
-            "text": "correr",
-            "foreign": "run",
-            "pronounce": "ko-rehr",
-            "genre": "VERB",
-            "difficulty": 2
-        }
+      {
+        "text": "perro",
+        "foreign": "dog",
+        "pronounce": "peh-roh",
+        "genre": "NOUN",
+        "difficulty": 1
+      },
+      {
+        "text": "gato",
+        "foreign": "cat",
+        "pronounce": "gah-toh",
+        "genre": "NOUN",
+        "difficulty": 1
+      },
+      {
+        "text": "mujer",
+        "foreign": "woman",
+        "pronounce": "moo-hehr",
+        "genre": "NOUN",
+        "difficulty": 1
+      },
+      {
+        "text": "hombre",
+        "foreign": "man",
+        "pronounce": "ohm-breh",
+        "genre": "NOUN",
+        "difficulty": 1
+      },
+      {
+        "text": "feliz",
+        "foreign": "happy",
+        "pronounce": "feh-lees",
+        "genre": "ADJECTIVE",
+        "difficulty": 1
+      },
+      {
+        "text": "rojo",
+        "foreign": "red",
+        "pronounce": "roh-hoh",
+        "genre": "ADJECTIVE",
+        "difficulty": 1
+      },
+      {
+        "text": "azul",
+        "foreign": "blue",
+        "pronounce": "ah-sool",
+        "genre": "ADJECTIVE",
+        "difficulty": 1
+      },
+      {
+        "text": "amigo",
+        "foreign": "friend",
+        "pronounce": "ah-mee-goh",
+        "genre": "NOUN",
+        "difficulty": 1
+      },
+      {
+        "text": "libro",
+        "foreign": "book",
+        "pronounce": "lee-broh",
+        "genre": "NOUN",
+        "difficulty": 1
+      },
+      {
+        "text": "casa",
+        "foreign": "house",
+        "pronounce": "kah-sah",
+        "genre": "NOUN",
+        "difficulty": 1
+      },
+      {
+        "text": "correr",
+        "foreign": "run",
+        "pronounce": "ko-rehr",
+        "genre": "VERB",
+        "difficulty": 2
+      },
+      {
+        "text": "hablar",
+        "foreign": "speak",
+        "pronounce": "ah-blar",
+        "genre": "VERB",
+        "difficulty": 2
+      },
+      {
+        "text": "comer",
+        "foreign": "eat",
+        "pronounce": "koh-mehr",
+        "genre": "VERB",
+        "difficulty": 2
+      },
+      {
+        "text": "caminar",
+        "foreign": "walk",
+        "pronounce": "kah-mee-nar",
+        "genre": "VERB",
+        "difficulty": 2
+      },
+      {
+        "text": "hermano",
+        "foreign": "brother",
+        "pronounce": "ehr-mah-noh",
+        "genre": "NOUN",
+        "difficulty": 2
+      },
+      {
+        "text": "hermana",
+        "foreign": "sister",
+        "pronounce": "ehr-mah-nah",
+        "genre": "NOUN",
+        "difficulty": 2
+      },
+      {
+        "text": "coche",
+        "foreign": "car",
+        "pronounce": "koh-cheh",
+        "genre": "NOUN",
+        "difficulty": 2
+      },
+      {
+        "text": "escuela",
+        "foreign": "school",
+        "pronounce": "ehs-kweh-lah",
+        "genre": "NOUN",
+        "difficulty": 2
+      },
+      {
+        "text": "escribir",
+        "foreign": "write",
+        "pronounce": "ehs-kree-beer",
+        "genre": "VERB",
+        "difficulty": 2
+      },
+      {
+        "text": "ciudad",
+        "foreign": "city",
+        "pronounce": "syoo-dad",
+        "genre": "NOUN",
+        "difficulty": 2
+      },
+      {
+        "text": "triste",
+        "foreign": "sad",
+        "pronounce": "trees-teh",
+        "genre": "ADJECTIVE",
+        "difficulty": 3
+      },
+      {
+        "text": "padre",
+        "foreign": "father",
+        "pronounce": "pah-dreh",
+        "genre": "NOUN",
+        "difficulty": 3
+      },
+      {
+        "text": "madre",
+        "foreign": "mother",
+        "pronounce": "mah-dreh",
+        "genre": "NOUN",
+        "difficulty": 3
+      },
+      {
+        "text": "familia",
+        "foreign": "family",
+        "pronounce": "fah-mee-lee-ah",
+        "genre": "NOUN",
+        "difficulty": 3
+      },
+      {
+        "text": "noche",
+        "foreign": "night",
+        "pronounce": "noh-cheh",
+        "genre": "NOUN",
+        "difficulty": 3
+      },
+      {
+        "text": "tiempo",
+        "foreign": "time",
+        "pronounce": "tyem-poh",
+        "genre": "NOUN",
+        "difficulty": 3
+      },
+      {
+        "text": "grande",
+        "foreign": "big",
+        "pronounce": "grahn-deh",
+        "genre": "ADJECTIVE",
+        "difficulty": 3
+      },
+      {
+        "text": "pequeno",
+        "foreign": "small",
+        "pronounce": "peh-keh-nyoh",
+        "genre": "ADJECTIVE",
+        "difficulty": 3
+      },
+      {
+        "text": "agua",
+        "foreign": "water",
+        "pronounce": "ah-gwah",
+        "genre": "NOUN",
+        "difficulty": 3
+      }
     ]
-}
+  }
+  
