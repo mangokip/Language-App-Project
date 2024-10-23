@@ -1,5 +1,6 @@
 package com.app;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class CockySpeakUI {
     private static CockySpeak cockySpeak = new CockySpeak(); // Initialize CockySpeak
@@ -29,7 +30,16 @@ public class CockySpeakUI {
         Language selectedLanguage = cockySpeak.promptLanguageSelection();
         cockySpeak.setLanguage(selectedLanguage);
         cockySpeak.promptDifficultySelection(selectedLanguage);
-    
+        WordList wordList = WordList.getInstance();
+        Word correctWord = wordList.getRandomWord(selectedLanguage);
+        ArrayList<Word> wordsForPhrase = new ArrayList<Word>();
+        wordsForPhrase.add(correctWord);
+        for(int i = 0; i < 3; i++){
+            wordsForPhrase.add(wordList.getRandomWord(selectedLanguage));
+        }
+
+        Phrase phrase = new Phrase(wordsForPhrase, "nothing");
+        cockySpeak.playFillBlank(1, correctWord, phrase, selectedLanguage);
         //todo - rest of scenario
     }
 }
