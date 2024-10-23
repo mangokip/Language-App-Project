@@ -18,11 +18,6 @@ public class CockySpeak {
         for (User loadedUser : loader.loadUsers()) {
             userList.addUser(loadedUser.getUserName(), loadedUser.getPassword(), loadedUser.getEmail());
         }
-<<<<<<< HEAD
-
-        /*for (Word loadedWord : loader.loadWords()) {
-            wordList.addWord(loadedWord.getText(), loadedWord.getForeign(), loadedWord.getPronounce(), loadedWord.getGenre());
-        }*/
     }
 
     /**
@@ -39,28 +34,6 @@ public class CockySpeak {
         user.createLanguageProgress(language);
         writer.saveUsers(userList.getUsers());
         System.out.println("Language set to: " + language.getLanguageCode());
-=======
->>>>>>> 11fbaac (Resolved merge conflicts in .class files)
-    }
-
-    /**
-     * Prompts the user to select a language.
-     *
-<<<<<<< HEAD
-     * @return
-     */
-=======
-     * @param language the code for the language to switch to
-     */
-    public void setLanguage(Language language) {
-        if (language == null) {
-            System.out.println("Invalid language. Defaulting to Spanish.");
-            language = new Language("Spanish");
-        }
-        this.currentLanguage = language;
-        user.createLanguageProgress(language);
-        writer.saveUsers(userList.getUsers());
-        System.out.println("Language set to: " + language.getLanguageCode());
     }
 
     /**
@@ -68,7 +41,6 @@ public class CockySpeak {
      *
      * @return
      */
->>>>>>> 11fbaac (Resolved merge conflicts in .class files)
     public Language promptLanguageSelection() {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Available languages: Spanish");
@@ -153,17 +125,4 @@ public class CockySpeak {
     public Language getCurrentLanguage() {
         return currentLanguage;
     }
-
-    public void playFillBlank(int diff, Word correctAnswer, Phrase sentence, Language language){
-        FillBlank fillBlank = new FillBlank(diff, correctAnswer, sentence, language);
-        Scanner k = new Scanner(System.in);
-        fillBlank.toString();
-    }
-
-    //for testing
-    // public static void main(String args[]){
-    //     User thisUser = getCurrentUser();
-    //     Word correctAnswer = wordList.getRandomWord();
-    //     playFillBlank(user.getDifficulty(), )
-    // }
 }

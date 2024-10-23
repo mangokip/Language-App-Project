@@ -15,7 +15,7 @@ public class Tester {
     myWords.add(word3);
     myWords.add(word4);
     Phrase myPhrase = new Phrase(myWords, "idk");
-    FillBlank myFillBlank = new FillBlank(0, word4, myPhrase, );
+    FillBlank myFillBlank = new FillBlank(0, word4, myPhrase);
     System.out.println(myFillBlank.toString());
     }
 
