@@ -43,7 +43,7 @@ public class FillBlank extends Question {
     }
 
     public boolean checkAnswer(Word userAnswer){
-        return(userAnswer == correctAnswer);
+        return(userAnswer.equals(correctAnswer));
     }
 
     public String toString(){
@@ -59,8 +59,8 @@ public class FillBlank extends Question {
                 sB.append(word + " ");
             }
         }
-        for(int i = 1; i < foreignWords.size() + 1; ++i){
-            sB.append("\n" + i + ". " + foreignWords.get(i - 1));
+        for (int i = 0; i < answers.length; ++i) {
+            sB.append("\n" + (i + 1) + ". " + answers[i].getForeign());
         }
         sB.append("\n");
         return sB.toString();
