@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 import java.lang.StringBuilder;
+import java.util.List;
 
 
 public class FillBlank extends Question {
@@ -16,7 +17,7 @@ public class FillBlank extends Question {
 
 
 
-    public FillBlank(int diff, Word correctAnswer, Phrase sentence) {
+    public FillBlank(int diff, Word correctAnswer, Phrase sentence, Language language) {
         super(sharedPrompt, diff);
         this.sentence = sentence;
         this.correctAnswer = correctAnswer;
@@ -24,7 +25,7 @@ public class FillBlank extends Question {
         Random rand = new Random();
         Genre wordGenre = correctAnswer.getGenre();
         WordList wordList = WordList.getInstance();
-        List<Word> genreWords = wordList.getWordsByGenre(wordGenre);
+        List<Word> genreWords = wordList.getWordsByGenre(language, wordGenre);
         answers[rand.nextInt(4)] = correctAnswer;
         for(int i = 0; i < answers.length; i++){
             Word tempWord = genreWords.get(rand.nextInt(genreWords.size()));

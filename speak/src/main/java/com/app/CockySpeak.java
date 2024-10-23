@@ -125,4 +125,17 @@ public class CockySpeak {
     public Language getCurrentLanguage() {
         return currentLanguage;
     }
+
+    public void playFillBlank(int diff, Word correctAnswer, Phrase sentence, Language language){
+        FillBlank fillBlank = new FillBlank(diff, correctAnswer, sentence, language);
+        Scanner k = new Scanner(System.in);
+        fillBlank.toString();
+    }
+
+    //for testing
+    // public static void main(String args[]){
+    //     User thisUser = getCurrentUser();
+    //     Word correctAnswer = wordList.getRandomWord();
+    //     playFillBlank(user.getDifficulty(), )
+    // }
 }

@@ -12,6 +12,7 @@ public class User {
     private String password;
     private String email; 
     private HashMap<Language, ProgressTracker> progressTrackers;
+    // private Language currentLanguage;
 
 
 
@@ -116,6 +117,14 @@ public class User {
             System.out.println("No progress tracker found for language: " + language.getLanguageCode());
         }
     }
+
+    // public void setCurrentLanguage(Language language){
+    //     this.currentLanguage = language;
+    // }
+
+    // public Language getCurrentLanguage(){
+    //     return this.currentLanguage;
+    // }
     
     
    
