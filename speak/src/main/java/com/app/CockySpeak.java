@@ -8,6 +8,7 @@ public class CockySpeak {
     private UserList userList;
     private WordList wordList;
     private User user;
+    private ProgressTracker currentProgressTracker;
     private DataLoader loader = new DataLoader();
     private DataWriter writer = new DataWriter();
 
@@ -34,6 +35,7 @@ public class CockySpeak {
         user.createLanguageProgress(language);
         writer.saveUsers(userList.getUsers());
         System.out.println("Language set to: " + language.getLanguageCode());
+        this.currentProgressTracker = user.getLanguageProgressTracker(currentLanguage);
     }
 
     /**
@@ -136,5 +138,14 @@ public class CockySpeak {
     //     Word correctAnswer = wordList.getRandomWord();
     //     playFillBlank(user.getDifficulty(), )
     // }
+
+    public void playVocabularyMatching(int diff, Word word){
+        if()
+        VocabularyMatching vocabularyMatching = new VocabularyMatching(currentLanguage, diff, word)
+    }
+
+    public void playPhraseQuesiton(){
+
+    }
 
 }
