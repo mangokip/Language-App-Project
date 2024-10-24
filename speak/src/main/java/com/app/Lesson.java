@@ -8,35 +8,30 @@ import java.util.ArrayList;
  */
 public class Lesson {
     private ArrayList<Question> questions;
-    private String title;
+    private String topic;
     private boolean lessonStatus;
 
-    /**
-     * Constructs a Lesson with a given title.
-     * The lesson is inactive by default.
-     * 
-     * @param title The title of the lesson.
-     */
-    public Lesson(String title) {
-        this.title = title;
-        this.questions = new ArrayList<>();
-        this.lessonStatus = false; // Default status is inactive
+    public Lesson() {
+        this.topic = "";
+        this.questions = new ArrayList<Question>();
+        this.lessonStatus = false;
+    }
+    public Lesson(String topic, ArrayList<Question> questions){
+        this.topic = topic;
+        this.questions = questions;
+        this.lessonStatus = false;
+
     }
 
-    /**
-     * Adds a question to the lesson.
-     * 
-     * @param question The question to add to the lesson.
-     */
-    public void addQuestion(Question question) {
-        questions.add(question);
+    public void setLessonStatus (Boolean status){
+        
     }
 
     /**
      * Displays the title and all questions in the lesson.
      */
     public void displayLesson() {
-        System.out.println("Lesson Title: " + title);
+        System.out.println("Lesson Title: " + topic);
         for (Question question : questions) {
             System.out.println(question);
         }
@@ -65,7 +60,7 @@ public class Lesson {
      * Stops the lesson by setting its status to inactive.
      */
     public void stopLesson() {
-        System.out.println("Stopping the lesson: " + title);
+        System.out.println("Stopping the lesson: " + topic);
         this.lessonStatus = false;
     }
 
@@ -75,7 +70,7 @@ public class Lesson {
      * @return The title of the lesson.
      */
     public String getTitle() {
-        return title;
+        return topic;
     }
 
     /**
@@ -86,4 +81,5 @@ public class Lesson {
     public ArrayList<Question> getQuestions() {
         return questions;
     }
+    
 }
