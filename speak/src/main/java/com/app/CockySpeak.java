@@ -123,6 +123,24 @@ public class CockySpeak {
         return true;
     }
 
+    public void logout() {
+        writer.saveUsers(userList.getUsers());
+        System.out.println("Progress saved... Logging out");
+        System.exit(0);
+    }
+
+    public void changeUsername(String newUsername) {
+        user.setUserName(newUsername);
+        writer.saveUsers(userList.getUsers());
+        System.out.println("Username changed to: " + newUsername);
+    }
+
+    public void changePassword(String newPassword) {
+        user.setPassword(newPassword);
+        writer.saveUsers(userList.getUsers());
+        System.out.println("Password changed successfully");
+    }
+
     /**
      * Gets the currently logged-in user.
      *
