@@ -2,48 +2,68 @@ package com.app;
 //carson Sessoms
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Random;
+import java.lang.StringBuilder;
+import java.util.List;
+
 
 public class FillBlank extends Question {
     private Phrase sentence;
+    private Word[] answers;
     private Word correctAnswer;
+    private static final String sharedPrompt = "Select the answer choice that best completes the sentence: ";
 
-    public FillBlank(int diff, String prompt, Word correctAnswer, Phrase sentence) {
-        this.setDifficulty(diff);
+
+
+    public FillBlank(int diff, Word correctAnswer, Phrase sentence, Language language) {
+        super(sharedPrompt, diff);
+        this.sentence = sentence;
+        this.correctAnswer = correctAnswer;
+        answers = new Word[4];
+        Random rand = new Random();
+        Genre wordGenre = correctAnswer.getGenre();
+        WordList wordList = WordList.getInstance();
+        List<Word> genreWords = wordList.getWordsByGenre(language, wordGenre);
+        answers[rand.nextInt(4)] = correctAnswer;
+        for(int i = 0; i < answers.length; i++){
+            Word tempWord = genreWords.get(rand.nextInt(genreWords.size()));
+            if(answers[i].equals(correctAnswer)){
+                continue;
+            }
+            else if(!Arrays.asList(answers).contains(tempWord)){ //makes sure the random word isnt already in the list
+                answers[i] = tempWord;
+            }
+            else{
+                i--;
+            }
+        }
+        
     }
 
-    public void FillBlank(Question baseGame) {
+    public boolean checkAnswer(Word userAnswer){
+        return(userAnswer.equals(correctAnswer));
     }
 
-    public void startGame() {
+    public String toString(){
+        StringBuilder sB = new StringBuilder();
+        sB.append(this.sharedPrompt + "\n");
+        ArrayList<String> foreignWords = new ArrayList<String>();
+        foreignWords = sentence.getForeignPhrase(); 
+        for(String word : foreignWords){
+            if(word.equals(correctAnswer.getForeign())){
+                sB.append(" ________ ");
+            }
+            else{
+                sB.append(word + " ");
+            }
+        }
+        for (int i = 0; i < answers.length; ++i) {
+            sB.append("\n" + (i + 1) + ". " + answers[i].getForeign());
+        }
+        sB.append("\n");
+        return sB.toString();
     }
 
-    public void endGame() {
-    }
-
-    public void displayInstructions() {
-    }
-
-    public Question getBaseGame() {
-        return baseGame;
-    }
-
-    public void setBaseGame(Question baseGame) {
-        this.baseGame = baseGame;
-    }
-
-    public ArrayList<String> getSentences() {
-        return sentences;
-    }
-
-    public void setSentences(ArrayList<String> sentences) {
-        this.sentences = sentences;
-    }
-
-    public ArrayList<String> getCorrectAnswers() {
-        return correctAnswers;
-    }
-
-    public void setCorrectAnswers(ArrayList<String> correctAnswers) {
-        this.correctAnswers = correctAnswers;
-    }
 }

@@ -1,39 +1,42 @@
 package com.app;
-import java.util.UUID;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class User {
 
     private UUID id;
     private String username;
     private String password;
-    private String email; //what does type do 
-    private HashMap<String, ProgressTracker> progressTrackers;
+    private String email; 
+    private HashMap<Language, ProgressTracker> progressTrackers;
+    // private Language currentLanguage;
+
+
 
     
     
 
     public User(String username, String password, String email) {
-        setUserName(username);
-        setPassword(password);
-        setEmail(email);
-    }
-    public User(UUID uuid, String username, String password, String email) {
         this.id = UUID.randomUUID();
         setUserName(username);
         setPassword(password);
         setEmail(email);
+        this.progressTrackers = new HashMap<>();
+    }
+    public User(UUID uuid, String username, String password, String email) {
+        this.id = uuid;
+        setUserName(username);
+        setPassword(password);
+        setEmail(email);
+        this.progressTrackers = new HashMap<>();
     }
     public UUID getUUID() {
-        return id;
+        return this.id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return username;
@@ -59,9 +62,7 @@ public class User {
         this.email = email;
     }
     
-    public HashMap<String, ProgressTracker> getProgressTrackers() {
-        return progressTrackers;
-    }
+   
 
     /**
      * User's language of choice to be selected
@@ -80,10 +81,56 @@ public class User {
      * HashMap<Language (key of what the progressTracker will be assigned to), ProgressTracker (progress tracker object to be linked to language)>
      */
     public HashMap<Language, ProgressTracker> getProgressTracker() {
-        return null;
+        return this.progressTrackers;
 
     }
 
+    public ProgressTracker getLanguageProgressTracker(Language language){
+        return progressTrackers.get(language);
+    }
+
+    public void createLanguageProgress(Language language) {
+        if (!progressTrackers.containsKey(language)) {
+            ProgressTracker tracker = new ProgressTracker(0, 0, 0, 0, 0, 10, 0, new BeginnerState());
+            progressTrackers.put(language, tracker);
+            System.out.println("Language " + language.getLanguageCode() + " initialized for " + username);
+        } else {
+            System.out.println("Language " + language.getLanguageCode() + " already initialized for " + username);
+        }
+    }
+    
+    public List<String> getLanguageProgress() {
+        List<String> progressList = new ArrayList<>();
+        for (Map.Entry<Language, ProgressTracker> entry : progressTrackers.entrySet()) {
+            Language language = entry.getKey();
+            ProgressTracker progressTracker = entry.getValue();
+            progressList.add("Language: " + language.getLanguageCode() + ", Progress: " + progressTracker.displayProgress());
+        }
+        return progressList;
+    }
+
+    /**
+     * Switch the state (difficulty) of the ProgressTracker for a given language.
+     */
+    public void switchDifficulty(Language language, State newState) {
+        ProgressTracker tracker = progressTrackers.get(language);
+        if (tracker != null) {
+            tracker.setState(newState);
+            System.out.println("Switched to " + newState.toString() + " difficulty for " + language.getLanguageCode());
+        } else {
+            System.out.println("No progress tracker found for language: " + language.getLanguageCode());
+        }
+    }
+
+    // public void setCurrentLanguage(Language language){
+    //     this.currentLanguage = language;
+    // }
+
+    // public Language getCurrentLanguage(){
+    //     return this.currentLanguage;
+    // }
+    
+    
    
 
 }

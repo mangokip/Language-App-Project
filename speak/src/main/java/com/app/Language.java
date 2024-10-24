@@ -1,44 +1,70 @@
 package com.app;
-/*
- * LaMorra Strong
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * The Language class represents a language with a list of vocabulary words,
+ * phrases, and grammar rules.
  */
 public class Language {
-    private String languageCode;
+    private String code;
+    private WordList vocabularyList;
+    private ArrayList<String> grammarRules;
 
-    /**
-     * Constructs a Language object with the specified language code.
-     * 
-     * @param languageCode the code representing the language (e.g., "en" for English)
-     */
-    public Language(String languageCode) {
-        this.languageCode = languageCode;
+    public Language(String name) {
+        this.code = name;
+        this.vocabularyList = WordList.getInstance();
+        this.grammarRules = new ArrayList<>();
     }
 
-    /**
-     * Gets the language code.
-     * 
-     * @return the language code as a String
-     */
+    public void addVocabulary(String text, String translation, String pronounce, Genre genre, int difficulty) {
+        vocabularyList.addWord(this, text, translation, pronounce, genre, difficulty);
+    }
+
+    public void addPhrase(String phrase) {
+        vocabularyList.addWord(this, phrase, "", "", null, 1); // Default difficulty for phrases
+    }
+
+    public void addGrammarRule(String rule) {
+        grammarRules.add(rule);
+    }
+
+    public void displayContent() {
+        System.out.println("Language: " + code);
+        System.out.println("Vocabulary:");
+        for (Map.Entry<Language, List<Word>> entry : vocabularyList.getLanguageWords().entrySet()) {
+            if (entry.getKey().equals(this)) {
+                for (Word word : entry.getValue()) {
+                    int difficulty = vocabularyList.getDifficulty(word);
+                    System.out.println(word.getText() + " - " + word.getForeign() + " (" + word.getPronounce() + ") - Difficulty: " + difficulty);
+                }
+            }
+        }
+        System.out.println("Grammar Rules:");
+        for (String rule : grammarRules) {
+            System.out.println(rule);
+        }
+    }
+
+    public String getType() {
+        return code;
+    }
+
+    public void setType(String type) {
+        this.code = type;
+    }
+
     public String getLanguageCode() {
-        return languageCode;
+        return this.code;
     }
 
-    /**
-     * Sets the language code.
-     * 
-     * @param languageCode the new language code
-     */
-    public void setLanguageCode(String languageCode) {
-        this.languageCode = languageCode;
+    public List<Word> getVocabularyList() {
+        return vocabularyList.getLanguageWords().get(this);
     }
 
-    /**
-     * Loads the language settings based on the language code.
-     * 
-     * TODO: Implement the logic for loading the language-specific settings.
-     */
-    public void loadLanguage() {
-        // TODO: Load language settings based on languageCode
-        System.out.println("Loading language: " + languageCode);
+    public ArrayList<String> getGrammarRules() {
+        return grammarRules;
     }
 }

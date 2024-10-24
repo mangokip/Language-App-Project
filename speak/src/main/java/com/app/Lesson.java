@@ -11,6 +11,7 @@ public class Lesson {
     private String title;
     private boolean lessonStatus;
 
+<<<<<<< HEAD
     /**
      * Constructs a Lesson with a given title.
      * The lesson is inactive by default.
@@ -30,6 +31,22 @@ public class Lesson {
      */
     public void addQuestion(Question question) {
         questions.add(question);
+=======
+    public Lesson() {
+        this.topic = "";
+        this.questions = new ArrayList<Question>();
+        this.lessonStatus = false;
+    }
+    public Lesson(String topic, ArrayList<Question> questions){
+        this.topic = topic;
+        this.questions = questions;
+        this.lessonStatus = false;
+
+    }
+
+    public void setLessonStatus (Boolean status){
+        
+>>>>>>> 5a16735b4a827493d6d1928ce248ded47c5e6a18
     }
 
     /**

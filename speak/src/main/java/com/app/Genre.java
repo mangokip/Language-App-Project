@@ -1,5 +1,6 @@
 package com.app;
 
 public enum Genre {
-    
+    NOUN, VERB, ADJECTIVE, ADVERB, PREPOSITION, CONJUNCTION, INTERJECTION
+
 }

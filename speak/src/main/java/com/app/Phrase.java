@@ -2,53 +2,72 @@ package com.app;
 /*
  * LaMorra Strong
  */
+import java.util.ArrayList;
+
+/**
+ * The Phrase class represents a phrase consisting of multiple words and its meaning.
+ */
 public class Phrase {
-    private String phraseText;
+
+    // A list of words that make up the phrase.
+    private ArrayList<Word> words;
+
+    // The meaning of the phrase.
+    private String meaning;
 
     /**
-     * Constructs a Phrase object with the specified phrase text.
+     * Constructor to create a new Phrase object.
      * 
-     * @param phraseText the phrase as a String
+     * @param words   The words that make up the phrase.
+     * @param meaning The meaning of the phrase.
      */
-    public Phrase(String phraseText) {
-        this.phraseText = phraseText;
+    public Phrase(ArrayList<Word> words, String meaning) {
+        this.words = words;
+        this.meaning = meaning;
+    }
+
+    public ArrayList<String> getEnglishPhrase(){
+        ArrayList<String> englishWords = new ArrayList<String>();
+        for(Word word : words){
+            englishWords.add(word.getText());
+        }
+        return englishWords;
+    }
+    public ArrayList<String> getForeignPhrase(){
+        ArrayList<String> foreignWords = new ArrayList<String>();
+        for(Word word: words){
+            foreignWords.add(word.getForeign());
+        }
+        return foreignWords;
+    }
+    
+
+    /**
+     * Gets the words in the phrase.
+     * 
+     * @return An ArrayList of Word objects representing the words in the phrase.
+     */
+    public ArrayList<Word> getWords() {
+        return words;
     }
 
     /**
-     * Gets the phrase text.
+     * Gets the meaning of the phrase.
      * 
-     * @return the phrase as a String
+     * @return The meaning of the phrase as a String.
      */
-    public String getPhraseText() {
-        return phraseText;
+    public String getMeaning() {
+        return meaning;
     }
 
     /**
-     * Sets the phrase text.
-     * 
-     * @param phraseText the new phrase text
+     * Displays the phrase details, including the words and their meaning.
      */
-    public void setPhraseText(String phraseText) {
-        this.phraseText = phraseText;
-    }
-
-    /**
-     * Translates the phrase to another language.
-     * 
-     * TODO: Implement the logic for translating the phrase.
-     */
-    public void translate() {
-        // TODO: Implement phrase translation logic here
-        System.out.println("Translating phrase: " + phraseText);
-    }
-
-    /**
-     * Analyzes the phrase to extract linguistic information such as syntax and structure.
-     * 
-     * TODO: Implement the logic for phrase analysis.
-     */
-    public void analyzePhrase() {
-        // TODO: Implement logic to analyze the phrase structure
-        System.out.println("Analyzing phrase: " + phraseText);
+    public void displayPhrase() {
+        System.out.print("Phrase: ");
+        for (Word word : words) {
+            System.out.print(word.getText() + " ");
+        }
+        System.out.println("\nMeaning: " + meaning);
     }
 }
