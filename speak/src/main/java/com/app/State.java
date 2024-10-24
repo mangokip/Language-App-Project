@@ -1,10 +1,9 @@
 package com.app;
 
 import java.util.ArrayList;
-
 /**
- * The State interface defines the contract for all concrete state classes
- * in the CockySpeak application's state pattern implementation.
+ * State class
+ * @author David Dinh
  */
 public interface State {
 
@@ -33,8 +32,14 @@ public interface State {
      * to load content.
      */
     void loadContent(Language language);
-}
 
-/**
- * Represents the beginner level state in the CockySpeak application.
- */
+    /**
+     * Evaluates the user's performance and determines if they should advance to the next level.
+     *
+     * @param correctAnswers The number of correct answers given by the user.
+     */
+    void evaluatePerformance(int correctAnswers);
+
+    @Override
+    public String toString();
+}

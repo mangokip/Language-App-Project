@@ -15,7 +15,6 @@ import org.json.simple.parser.ParseException;
  * The DataLoader class is responsible for reading lesson data from a JSON file.
  * This version is a simple test that reads the file's content and prints it,
  * but it does not yet parse the JSON into objects.
- * @author David Dinh, Bryce Klein
  */
 public class DataLoader extends DataConstants {
 
@@ -27,7 +26,7 @@ public class DataLoader extends DataConstants {
      * @return a List of Lesson objects (currently empty)
      */
     public List<Lesson> loadLessons() {
-        List<Lesson> lessons = new ArrayList<>(); // Return an empty list for now
+        List<Lesson> lessons = new ArrayList<>();
         StringBuilder content = new StringBuilder();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(LESSON_FILE))) {
@@ -57,11 +56,6 @@ public class DataLoader extends DataConstants {
                 content.append(line).append("\n");
             }
 
-            /* Debugging 
-            System.out.println("JSON file content:");
-            System.out.println(content.toString());
-            */
-
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
 
             for (int i = 0; i < usersJSON.size(); i++) {
@@ -73,7 +67,7 @@ public class DataLoader extends DataConstants {
 
                 if (username == null || password == null || email == null) {
                     System.err.println("User data missing or invalid at index " + i);
-                    continue; // Skip this user and continue with the next
+                    continue;
                 }
 
                 User user = new User(username, password, email);
@@ -81,16 +75,7 @@ public class DataLoader extends DataConstants {
                 System.out.println("Successfully loaded user: " + user.getUserName());
             }
 
-            System.out.println("Total users loaded: " + (users.size()));
-
-            /* Debugging Print
-            for (int i = 0; i < users.size(); i++) {
-                User user = users.get(i);
-                System.out.println("User " + (i + 1) + ": " + user.getUserName() + 
-                                   ", Email: " + user.getEmail() + 
-                                   ", Password: " + user.getPassword());
-            }
-            */
+            System.out.println("Total users loaded: " + users.size());
             return users;
         } catch (IOException | ParseException e) {
             System.err.println("Error loading users: " + e.getMessage());
@@ -105,9 +90,7 @@ public class DataLoader extends DataConstants {
      *
      * @return a List of Word objects
      */
-    public static ArrayList<Word> loadWords() {
-        ArrayList<Word> words = new ArrayList<>();
-
+    public static void loadWords() {
         try (BufferedReader reader = new BufferedReader(new FileReader(WORD_FILE))) {
             StringBuilder content = new StringBuilder();
             String line;
@@ -116,41 +99,48 @@ public class DataLoader extends DataConstants {
                 content.append(line).append("\n");
             }
 
-            /* Debugging
-            System.out.println("JSON file content:");
-            System.out.println(content.toString());
-            */
+            JSONObject wordsJSON = (JSONObject) new JSONParser().parse(content.toString());
 
-            JSONArray wordsJSON = (JSONArray) new JSONParser().parse(content.toString());
+            for (Object key : wordsJSON.keySet()) {
+                String languageCode = (String) key;
+                JSONArray wordsArray = (JSONArray) wordsJSON.get(languageCode);
+                Language language = new Language(languageCode);
 
-            for (int i = 0; i < wordsJSON.size(); i++) {
-                JSONObject wordJSON = (JSONObject) wordsJSON.get(i);
+                for (Object obj : wordsArray) {
+                    JSONObject wordJSON = (JSONObject) obj;
 
-                String text = (String) wordJSON.get(TEXT);
-                String foreign = (String) wordJSON.get(FOREIGN);
-                String pronounce = (String) wordJSON.get(PRONOUNCE);
-                String genreStr = (String) wordJSON.get(GENRE);
-                Genre genre = Genre.valueOf(genreStr.toUpperCase());
+                    String text = (String) wordJSON.get(TEXT);
+                    String foreign = (String) wordJSON.get(FOREIGN);
+                    String pronounce = (String) wordJSON.get(PRONOUNCE);
+                    String genreString = (String) wordJSON.get(GENRE);
+                    Long difficultyLong = (Long) wordJSON.get("difficulty");
 
-                if (text == null || foreign == null || pronounce == null || genreStr == null) {
-                    System.err.println("Word data missing or invalid at index " + i);
-                    continue; // Skip this word and continue with the next
+                    if (text == null || foreign == null || pronounce == null || genreString == null || difficultyLong == null) {
+                        System.err.println("Word data missing or invalid for language " + languageCode);
+                        continue;
+                    }
+
+                    Genre genre;
+                    try {
+                        genre = Genre.valueOf(genreString.toUpperCase());
+                    } catch (IllegalArgumentException e) {
+                        System.err.println("Invalid genre for language " + languageCode + ": " + genreString);
+                        continue;
+                    }
+
+                    int difficulty = difficultyLong.intValue();
+                    language.addVocabulary(text, foreign, pronounce, genre, difficulty);
+                    System.out.println("Successfully loaded word: " + text + " for language " + languageCode);
                 }
 
-                Word word = new Word(text, foreign, pronounce, genre);
-                words.add(word);
-                System.out.println("Successfully loaded word: " + word.getText());
+                System.out.println("Total words loaded for language " + language.getLanguageCode() + ": " + language.getVocabularyList().size());
             }
 
-            System.out.println("Total words loaded: " + words.size());
-
-            return words;
+            System.out.println("Total words loaded.");
         } catch (IOException | ParseException e) {
             System.err.println("Error loading words: " + e.getMessage());
             e.printStackTrace();
         }
-
-        return words;
     }
 
     /**
