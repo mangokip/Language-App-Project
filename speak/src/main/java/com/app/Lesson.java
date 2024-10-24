@@ -1,49 +1,89 @@
 package com.app;
-//Carson Sessoms
+
 import java.util.ArrayList;
 
-
+/**
+ * Represents a lesson in the language learning application.
+ * A lesson contains a list of questions, a title, and a status indicating whether the lesson is active.
+ */
 public class Lesson {
-    private String topic;
     private ArrayList<Question> questions;
+    private String title;
     private boolean lessonStatus;
 
-    public Lesson() {
-        this.topic = "";
-        this.questions = new ArrayList<Question>();
-        this.lessonStatus = false;
-    }
-    public Lesson(String topic, ArrayList<Question> questions){
-        this.topic = topic;
-        this.questions = questions;
-        this.lessonStatus = false;
-
-    }
-
-    public void setLessonStatus (Boolean status){
-        
+    /**
+     * Constructs a Lesson with a given title.
+     * The lesson is inactive by default.
+     * 
+     * @param title The title of the lesson.
+     */
+    public Lesson(String title) {
+        this.title = title;
+        this.questions = new ArrayList<>();
+        this.lessonStatus = false; // Default status is inactive
     }
 
-    public boolean getLessonStatus(){
+    /**
+     * Adds a question to the lesson.
+     * 
+     * @param question The question to add to the lesson.
+     */
+    public void addQuestion(Question question) {
+        questions.add(question);
+    }
+
+    /**
+     * Displays the title and all questions in the lesson.
+     */
+    public void displayLesson() {
+        System.out.println("Lesson Title: " + title);
+        for (Question question : questions) {
+            System.out.println(question);
+        }
+    }
+
+    /**
+     * Sets the status of the lesson.
+     * 
+     * @param status The new status of the lesson (true for active, false for inactive).
+     */
+    public void setLessonStatus(boolean status) {
+        //TODO implement better??
+        this.lessonStatus = status;
+    }
+
+    /**
+     * Returns the current status of the lesson.
+     * 
+     * @return True if the lesson is active, false otherwise.
+     */
+    public boolean isLessonStatus() {
         return lessonStatus;
     }
 
-    public void stopLesson(){
-        
+    /**
+     * Stops the lesson by setting its status to inactive.
+     */
+    public void stopLesson() {
+        System.out.println("Stopping the lesson: " + title);
+        this.lessonStatus = false;
     }
 
-    public Object getTopic() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTopic'");
+    /**
+     * Returns the title of the lesson.
+     * 
+     * @return The title of the lesson.
+     */
+    public String getTitle() {
+        return title;
     }
 
-    public Question[] getQuestions() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getQuestions'");
-    }
-
-    public Object isLessonStatus() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isLessonStatus'");
+    /**
+     * Returns the list of questions in the lesson.
+     * 
+     * @return An ArrayList of questions in the lesson.
+     */
+    public ArrayList<Question> getQuestions() {
+        return questions;
     }
 }
