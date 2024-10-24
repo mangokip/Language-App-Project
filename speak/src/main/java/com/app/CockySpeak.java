@@ -9,6 +9,7 @@ public class CockySpeak {
     private WordList wordList;
     private User user;
     private ProgressTracker currentProgressTracker;
+    private int difficulty;
     private DataLoader loader = new DataLoader();
     private DataWriter writer = new DataWriter();
 
@@ -36,6 +37,13 @@ public class CockySpeak {
         writer.saveUsers(userList.getUsers());
         System.out.println("Language set to: " + language.getLanguageCode());
         this.currentProgressTracker = user.getLanguageProgressTracker(currentLanguage);
+        if(currentProgressTracker.getState().toString().equals("INTERMEDIATE")){
+            this.difficulty = 2;
+        }else if(currentProgressTracker.getState().toString().equals("EXPERT")){
+            this.difficulty = 3;
+        }else{
+            this.difficulty = 1;
+        }
     }
 
     /**
@@ -132,20 +140,15 @@ public class CockySpeak {
         Scanner k = new Scanner(System.in);
         fillBlank.toString();
     }
-    //for testing
-    // public static void main(String args[]){
-    //     User thisUser = getCurrentUser();
-    //     Word correctAnswer = wordList.getRandomWord();
-    //     playFillBlank(user.getDifficulty(), )
-    // }
 
-    public void playVocabularyMatching(int diff, Word word){
-        if()
-        VocabularyMatching vocabularyMatching = new VocabularyMatching(currentLanguage, diff, word)
+    public void playVocabularyMatching(Word word){
+        VocabularyMatching vocabularyMatching = new VocabularyMatching(currentLanguage, difficulty, word);
+
+
     }
 
     public void playPhraseQuesiton(){
-
+        
     }
 
 }
