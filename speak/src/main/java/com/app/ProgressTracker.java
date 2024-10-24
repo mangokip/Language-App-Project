@@ -1,5 +1,7 @@
 package com.app;
 
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ProgressTracker {
 
@@ -14,6 +16,7 @@ public class ProgressTracker {
     private State beginnerState;
     private State intermediateState;
     private State expertState;
+
 
     /**
      * Basic constructor
@@ -109,4 +112,32 @@ public class ProgressTracker {
         this.streak++;
     }
 
+    public void changeState(State state) {
+        if(state == this.beginnerState) {
+            this.currentState = beginnerState;
+        } else if(state == this.intermediateState) {
+            this.currentState = intermediateState;
+        } else if(state == this.expertState) {
+            this.currentState = expertState;
+        } else {
+            System.out.println("Incorrect State.");
+        }
+    }
+
+        public void saveProgressToFile(String filename) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write("Questions Completed: " + this.questionsCompleted + "\n");
+            writer.write("Lessons Completed: " + this.lessonsCompleted + "\n");
+            writer.write("Total XP: " + this.xp + "\n");
+            writer.write("Current Streak: " + this.streak + "\n");
+            writer.write("Completed Lessons: " + this.completedLessons + "\n");
+            writer.write("Total Lessons: " + this.totalLessons + "\n");
+            writer.write("Progress Percentage: " + this.progressPercentage + "%\n");
+            writer.write("Current Level: " + this.currentState + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
+
