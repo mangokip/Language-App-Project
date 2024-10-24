@@ -33,7 +33,7 @@ public class ProgressTracker {
         expertState = null;
     }
 
-    public ProgressTracker(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState, State beginnerState, State intermediateState, State expertState) {
+    public ProgressTracker(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState) {
         this.questionsCompleted = questionsCompleted;
         this.lessonsCompleted = lessonsCompleted;
         this.xp = xp;
@@ -43,13 +43,10 @@ public class ProgressTracker {
         this.progressPercentage = progressPercentage;
         this.currentState = currentState;
         //Edit later
-        this.beginnerState = beginnerState;
-        this.intermediateState = intermediateState;
-        this.expertState = expertState;
     }
 
     /*test line */
-    public void updateProgress(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState, State beginnerState, State intermediateState, State expertState) {
+    public void updateProgress(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState) {
         this.questionsCompleted = questionsCompleted;
         this.lessonsCompleted = lessonsCompleted;
         this.xp = xp;
@@ -58,9 +55,6 @@ public class ProgressTracker {
         this.totalLessons = totalLessons;
         this.progressPercentage = progressPercentage;
         this.currentState = currentState;
-        this.beginnerState = beginnerState;
-        this.intermediateState = intermediateState;
-        this.expertState = expertState;
     }
 
     public String displayProgress() {
@@ -105,7 +99,9 @@ public class ProgressTracker {
     public State getState() {
         return this.currentState;
     }
-    
+    public void setState(State state) {
+        this.currentState = state;
+    }
     
 
     public void increaseXP(int xp) {

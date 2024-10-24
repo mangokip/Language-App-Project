@@ -3,7 +3,7 @@ package com.app;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.List;
 import java.util.Random;
 import java.lang.StringBuilder;
 
@@ -16,7 +16,7 @@ public class FillBlank extends Question {
 
 
 
-    public FillBlank(int diff, Word correctAnswer, Phrase sentence) {
+    public FillBlank(int diff, Word correctAnswer, Phrase sentence, Language language) {
         super(sharedPrompt, diff);
         this.sentence = sentence;
         this.correctAnswer = correctAnswer;
@@ -24,7 +24,7 @@ public class FillBlank extends Question {
         Random rand = new Random();
         Genre wordGenre = correctAnswer.getGenre();
         WordList wordList = WordList.getInstance();
-        List<Word> genreWords = wordList.getWordsByGenre(wordGenre);
+        List<Word> genreWords = wordList.getWordsByGenre(language, wordGenre);
         answers[rand.nextInt(4)] = correctAnswer;
         for(int i = 0; i < answers.length; i++){
             Word tempWord = genreWords.get(rand.nextInt(genreWords.size()));
@@ -42,7 +42,7 @@ public class FillBlank extends Question {
     }
 
     public boolean checkAnswer(Word userAnswer){
-        return(userAnswer == correctAnswer);
+        return(userAnswer.equals(correctAnswer));
     }
 
     public String toString(){
@@ -58,8 +58,8 @@ public class FillBlank extends Question {
                 sB.append(word + " ");
             }
         }
-        for(int i = 1; i < foreignWords.size() + 1; ++i){
-            sB.append("\n" + i + ". " + foreignWords.get(i - 1));
+        for (int i = 0; i < answers.length; ++i) {
+            sB.append("\n" + (i + 1) + ". " + answers[i].getForeign());
         }
         sB.append("\n");
         return sB.toString();
