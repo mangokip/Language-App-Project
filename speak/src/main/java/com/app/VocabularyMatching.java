@@ -10,13 +10,13 @@ import java.util.HashMap;
 public class VocabularyMatching extends Question {
     private Map<String, String> wordPairs;
     private Word wordNeedingStudying;
-    private static final String vocabularyMatchingPrompt = "Match the words in their english form to their foreing form ";
+    private static final String vocabularyMatchingPrompt = "Match the words in their english form to their foreign form ";
 
     public VocabularyMatching(Language language, int diff, Word word) {
         super(vocabularyMatchingPrompt, diff);
         Random rand = new Random();
         wordNeedingStudying = word;
-        wordPairs = new HashMap<>();
+        // wordPairs = new HashMap<>();
         WordList wordList = WordList.getInstance();
         List<Word> words = wordList.getWordsByGenre(language, wordNeedingStudying.getGenre());
         ArrayList<Word> wordsForQuestion = new ArrayList<Word>();
@@ -57,6 +57,6 @@ public class VocabularyMatching extends Question {
     
 
     public String toString(){
-
+        return " ";
     }
 }

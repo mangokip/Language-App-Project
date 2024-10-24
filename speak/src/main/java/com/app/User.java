@@ -85,6 +85,10 @@ public class User {
 
     }
 
+    public ProgressTracker getLanguageProgressTracker(Language language){
+        return progressTrackers.get(language);
+    }
+
     public void createLanguageProgress(Language language) {
         if (!progressTrackers.containsKey(language)) {
             ProgressTracker tracker = new ProgressTracker(0, 0, 0, 0, 0, 10, 0, new BeginnerState());
