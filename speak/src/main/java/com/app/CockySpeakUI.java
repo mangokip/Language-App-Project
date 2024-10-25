@@ -8,12 +8,17 @@ public class CockySpeakUI {
     private static CockySpeak cockySpeak = new CockySpeak(); // Initialize CockySpeak
 
     public static void main(String[] args) {
-        scenario2();
+        scenario1();
     }
 
     public static void scenario1() {
         System.out.println("User to Login: JohnDoe");
         cockySpeak.login("JohnDoe", "password123");
+        System.out.println("Changing username to: JaneDoe");
+        cockySpeak.changeUsername("JaneDoe");
+        System.out.println("Changing password to: newpassword123");
+        cockySpeak.changePassword("newpassword123");
+        cockySpeak.logout();
         //todo - going through intermediate lesson
     }
 
