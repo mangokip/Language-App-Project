@@ -26,7 +26,7 @@ public class Lesson {
         this.language = language;
         this.questions = new ArrayList<Question>();
         WordList wordList = WordList.getInstance();
-        questions.add(new MultipleChoice(diff, wordList.getRandomWord(language),language),new MultipleChoice(diff, wordList.getRandomWord(language),language),new MultipleChoice(diff, wordList.getRandomWord(language),language), FillBlank(diff, ), VocabularyMatching());
+        questions.add(new MultipleChoice(diff, wordList.getRandomWord(language),language),new MultipleChoice(diff, wordList.getRandomWord(language),language),new MultipleChoice(diff, wordList.getRandomWord(language),language), new FillBlank(diff, Phrase sentence ), new VocabularyMatching(language, diff, wordList.getRandomWord(language)));
         this.lessonStatus = false;
 
     }
