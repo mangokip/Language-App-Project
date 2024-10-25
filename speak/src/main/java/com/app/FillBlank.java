@@ -1,69 +1,96 @@
 package com.app;
-//carson Sessoms
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Random;
-import java.lang.StringBuilder;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
-
+/**
+ * Represents a fill-in-the-blank question in the language learning application.
+ */
 public class FillBlank extends Question {
     private Phrase sentence;
-    private Word[] answers;
+    private ArrayList<Word> answers;
     private Word correctAnswer;
     private static final String sharedPrompt = "Select the answer choice that best completes the sentence: ";
 
-
-
+    /**
+     * Constructs a FillBlank question.
+     * 
+     * @param diff The difficulty level.
+     * @param correctAnswer The correct answer for the blank.
+     * @param sentence The phrase containing the blank.
+     * @param language The language object used for selecting other possible answers.
+     */
     public FillBlank(int diff, Word correctAnswer, Phrase sentence, Language language) {
         super(sharedPrompt, diff);
         this.sentence = sentence;
         this.correctAnswer = correctAnswer;
-        answers = new Word[4];
+        this.answers = new ArrayList<>();
         Random rand = new Random();
+
+        // Ensure correct answer is added to the list of possible answers
+        answers.add(correctAnswer);
+
+        // Get words from the word list with the same genre as the correct answer
         Genre wordGenre = correctAnswer.getGenre();
         WordList wordList = WordList.getInstance();
+        // word list
         List<Word> genreWords = wordList.getWordsByGenre(language, wordGenre);
-        answers[rand.nextInt(4)] = correctAnswer;
-        for(int i = 0; i < answers.length; i++){
+
+        // Add other unique answers to the list until we have 4 options in total
+        Set<Word> uniqueAnswers = new HashSet<>();
+        uniqueAnswers.add(correctAnswer);
+
+        // Keep selecting random words until we have 4 unique answers
+        while (uniqueAnswers.size() < 4) {
             Word tempWord = genreWords.get(rand.nextInt(genreWords.size()));
-            if(answers[i].equals(correctAnswer)){
-                continue;
-            }
-            else if(!Arrays.asList(answers).contains(tempWord)){ //makes sure the random word isnt already in the list
-                answers[i] = tempWord;
-            }
-            else{
-                i--;
-            }
+            uniqueAnswers.add(tempWord);
         }
-        
+
+        // Clear the answers list and add all unique answers from the set
+        answers.clear();
+        answers.addAll(uniqueAnswers);
     }
 
-    public boolean checkAnswer(Word userAnswer){
-        return(userAnswer.equals(correctAnswer));
+    /**
+     * Checks whether the given answer is correct.
+     *
+     * @param userAnswer The user's answer.
+     * @return True if the answer is correct, false otherwise.
+     */
+    public boolean checkAnswer(Word userAnswer) {
+        // Compare the user's answer to the correct answer
+        return correctAnswer.equals(userAnswer);
     }
 
-    public String toString(){
+    /**
+     * Returns the prompt for the fill-in-the-blank question, along with answer choices.
+     *
+     * @return The question prompt with answer choices.
+     */
+    @Override
+    public String toString() {
         StringBuilder sB = new StringBuilder();
-        sB.append(this.sharedPrompt + "\n");
-        ArrayList<String> foreignWords = new ArrayList<String>();
-        foreignWords = sentence.getForeignPhrase(); 
-        for(String word : foreignWords){
-            if(word.equals(correctAnswer.getForeign())){
+        sB.append(sharedPrompt).append("\n");
+        ArrayList<String> foreignWords = sentence.getForeignPhrase();
+
+        // Construct the sentence with the blank space for the correct answer
+        for (String word : foreignWords) {
+            if (word.equals(correctAnswer.getForeign())) {
                 sB.append(" ________ ");
+            } else {
+                sB.append(word).append(" ");
             }
-            else{
-                sB.append(word + " ");
-            }
-        }
-        for (int i = 0; i < answers.length; ++i) {
-            sB.append("\n" + (i + 1) + ". " + answers[i].getForeign());
         }
         sB.append("\n");
+
+        // Append answer choices to the prompt
+        for (int i = 0; i < answers.size(); ++i) {
+            sB.append((i + 1)).append(". ").append(answers.get(i).getForeign()).append("\n");
+        }
+
         return sB.toString();
     }
-
 }
