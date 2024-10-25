@@ -1,7 +1,10 @@
 package com.app;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
+
+import com.narration.Narriator;
 
 public class CockySpeak {
 
@@ -14,6 +17,7 @@ public class CockySpeak {
     private DataLoader loader = new DataLoader();
     private DataWriter writer = new DataWriter();
     private List<Flashcard> flashcards;
+    private Flashcard selectedWord;
 
     public CockySpeak() {
         userList = UserList.getInstance();
@@ -22,6 +26,7 @@ public class CockySpeak {
         for (User loadedUser : loader.loadUsers()) {
             userList.addUser(loadedUser.getUserName(), loadedUser.getPassword(), loadedUser.getEmail());
         }
+        flashcards = Flashcard.generateFlashcards();
     }
 
     /**
@@ -39,11 +44,11 @@ public class CockySpeak {
         writer.saveUsers(userList.getUsers());
         System.out.println("Language set to: " + language.getLanguageCode());
         this.currentProgressTracker = user.getLanguageProgressTracker(currentLanguage);
-        if(currentProgressTracker.getState().toString().equals("INTERMEDIATE")){
+        if (currentProgressTracker.getState().toString().equals("INTERMEDIATE")) {
             this.difficulty = 2;
-        }else if(currentProgressTracker.getState().toString().equals("EXPERT")){
+        } else if (currentProgressTracker.getState().toString().equals("EXPERT")) {
             this.difficulty = 3;
-        }else{
+        } else {
             this.difficulty = 1;
         }
     }
@@ -146,16 +151,54 @@ public class CockySpeak {
     public void loadFlashcards() {
         // Generate flashcards by loading words and phrases from DataLoader
         flashcards = Flashcard.generateFlashcards();
-    
+
         System.out.println("Flashcards loaded: " + flashcards.size());
-    
+
         // Print all flashcards to verify loading
         for (Flashcard card : flashcards) {
             card.display();  // Call the display() method for each card
             System.out.println();  // Add a blank line between flashcards
         }
     }
-    
+
+    /**
+     * Allows the user to input a word or phrase and searches for it in the
+     * flashcards.
+     */
+    public void searchAndStorePhraseOrWord() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a word or phrase: ");
+        String input = scanner.nextLine().trim().toLowerCase();
+
+        // Search for the input in flashcards
+        Optional<Flashcard> foundItem = flashcards.stream()
+                .filter(card -> card.getText().equalsIgnoreCase(input))
+                .findFirst();
+
+        if (foundItem.isPresent()) {
+            selectedWord = foundItem.get();  // Store the found flashcard
+            System.out.println("Found: " + selectedWord.getText());
+
+            // Pass the text (word or phrase) to Polly for narration
+            pronounceTextWithPolly(selectedWord.getText());
+        } else {
+            System.out.println("Not found.");
+        }
+    }
+
+    /**
+     * Uses AWS Polly to pronounce the given text (word or phrase).
+     */
+    private void pronounceTextWithPolly(String text) {
+        try {
+            System.out.println("Pronouncing: " + text);
+
+            Narriator.playSound(text);  // Pass the text to Polly
+
+        } catch (Exception e) {
+            System.err.println("Error pronouncing the text: " + e.getMessage());
+        }
+    }
 
     /**
      * Gets the currently logged-in user.
@@ -169,20 +212,20 @@ public class CockySpeak {
     public Language getCurrentLanguage() {
         return currentLanguage;
     }
-    public void playFillBlank(int diff, Word correctAnswer, Phrase sentence, Language language){
+
+    public void playFillBlank(int diff, Word correctAnswer, Phrase sentence, Language language) {
         FillBlank fillBlank = new FillBlank(diff, correctAnswer, sentence, language);
         Scanner k = new Scanner(System.in);
         fillBlank.toString();
     }
 
-    public void playVocabularyMatching(Word word){
+    public void playVocabularyMatching(Word word) {
         VocabularyMatching vocabularyMatching = new VocabularyMatching(currentLanguage, difficulty, word);
-
 
     }
 
-    public void playPhraseQuesiton(){
-        
+    public void playPhraseQuesiton() {
+
     }
 
 }
