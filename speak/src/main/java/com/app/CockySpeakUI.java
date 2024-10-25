@@ -55,6 +55,7 @@ public class CockySpeakUI {
         System.out.println("Logging in: JaneDoe");
         cockySpeak.login("JaneDoe", "newpassword123");
         cockySpeak.loadFlashcards();
+        cockySpeak.searchAndStorePhraseOrWord();
         
     }
     
