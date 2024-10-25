@@ -1,5 +1,3 @@
-package com.app;
-
 public class TrueFalse extends Question {
     private String word;
     private String translation;
