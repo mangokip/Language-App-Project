@@ -11,6 +11,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import software.amazon.awssdk.core.document.Document.ListBuilder;
+
 /**
  * The DataLoader class is responsible for reading lesson data from a JSON file.
  * This version is a simple test that reads the file's content and prints it,
@@ -87,9 +89,49 @@ public class DataLoader extends DataConstants {
 
     
     
+    public List<Word> loadWordsToList() {
+        List<Word> words = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(WORD_FILE))) {
+            StringBuilder content = new StringBuilder();
+            String line;
     
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
     
+            // Parse JSON content
+            JSONObject wordsJSON = (JSONObject) new JSONParser().parse(content.toString());
+            JSONArray wordsArray = (JSONArray) wordsJSON.get("Spanish");
     
+            for (Object obj : wordsArray) {
+                JSONObject wordJSON = (JSONObject) obj;
+    
+                String text = (String) wordJSON.get("text");
+                String translation = (String) wordJSON.get("foreign");
+                String pronounce = (String) wordJSON.get("pronounce");
+                String genreStr = (String) wordJSON.get("genre");
+                Long difficultyLong = (Long) wordJSON.get("difficulty");
+    
+                // Validate that values are not null
+                if (text != null && translation != null && pronounce != null && genreStr != null && difficultyLong != null) {
+                    int difficulty = difficultyLong.intValue();
+    
+                    try {
+                        Genre tempGenre = Genre.valueOf(genreStr.toUpperCase());
+                        words.add(new Word(text, translation, pronounce, tempGenre, difficulty));
+                        System.out.println("Loaded word: " + text);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Error: Invalid genre '" + genreStr + "' for word: " + text);
+                    }
+                } else {
+                    System.out.println("Error: One or more fields are null for word entry.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Print stack trace for debugging
+        }
+        return words;
+    }
     
     public static List<Flashcard> loadWords() {
             List<Flashcard> words = new ArrayList<>();

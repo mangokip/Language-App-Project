@@ -6,14 +6,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.junit.internal.ArrayComparisonFailure;
+
 public class WordList {
+    private DataLoader dataLoader = new DataLoader();
     private Map<Language, List<Word>> languageWords;
     private Map<Word, Integer> wordDifficulty;
+    // private List<Word> words;
     private static WordList wordList;
 
     private WordList() {
         languageWords = new HashMap<>();
+        LanguageList languageList = LanguageList.getInstance();
+        Language thisLanguage = languageList.getLanguage("Spanish");
+        languageWords.put(thisLanguage, dataLoader.loadWordsToList());
         wordDifficulty = new HashMap<>();
+        // words = dataLoader.loadWordsToList();
     }
 
     public static WordList getInstance() {
@@ -24,7 +32,7 @@ public class WordList {
     }
 
     public Word addWord(Language language, String text, String translation, String pronounce, Genre genre, int difficulty) {
-        Word word = new Word(text, translation, pronounce, genre, difficulty, false);
+        Word word = new Word(text, translation, pronounce, genre, difficulty);
         languageWords.computeIfAbsent(language, k -> new ArrayList<>()).add(word);
         wordDifficulty.put(word, difficulty);
         return word;
