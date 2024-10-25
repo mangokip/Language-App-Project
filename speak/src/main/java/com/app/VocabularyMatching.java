@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+
+import software.amazon.awssdk.services.polly.endpoints.internal.Value.Str;
+
 import java.util.HashMap;
 
 public class VocabularyMatching extends Question {
@@ -21,7 +24,7 @@ public class VocabularyMatching extends Question {
         List<Word> words = wordList.getWordsByGenre(language, wordNeedingStudying.getGenre());
         ArrayList<Word> wordsForQuestion = new ArrayList<Word>();
         wordsForQuestion.add(wordNeedingStudying);
-        while(wordsForQuestion.size() < 4){
+        while(wordsForQuestion.size() < 3){
             Word wordToAdd = words.get(rand.nextInt(words.size()));
             if(wordsForQuestion.contains(wordToAdd)){
                 continue;
@@ -54,9 +57,17 @@ public class VocabularyMatching extends Question {
     
         return correct;
     }
-    
 
+    public Map<String, String> getWordPairs(){
+        return wordPairs;
+    }
+    
+ 
     public String toString(){
-        return " ";
+        StringBuilder sB = new StringBuilder();
+        for(String key : wordPairs.keySet()){
+            sB.append(key + ": " + wordPairs.get(key) + "\n");
+        }
+        return sB.toString();
     }
 }
