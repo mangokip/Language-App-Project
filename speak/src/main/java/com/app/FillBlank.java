@@ -2,6 +2,7 @@ package com.app;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -35,7 +36,8 @@ public class FillBlank extends Question {
         // Get words from the word list with the same genre as the correct answer
         Genre wordGenre = correctAnswer.getGenre();
         WordList wordList = WordList.getInstance();
-        ArrayList<Word> genreWords = wordList.getWordsByGenre(language, wordGenre);
+        // word list
+        List<Word> genreWords = wordList.getWordsByGenre(language, wordGenre);
 
         // Add other unique answers to the list until we have 4 options in total
         Set<Word> uniqueAnswers = new HashSet<>();
