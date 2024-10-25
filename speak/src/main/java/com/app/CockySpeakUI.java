@@ -3,17 +3,23 @@ package com.app;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class CockySpeakUI {
 
     private static CockySpeak cockySpeak = new CockySpeak(); // Initialize CockySpeak
 
     public static void main(String[] args) {
-        scenario2();
+        scenario3();
     }
 
     public static void scenario1() {
         System.out.println("User to Login: JohnDoe");
         cockySpeak.login("JohnDoe", "password123");
+        System.out.println("Changing username to: JaneDoe");
+        cockySpeak.changeUsername("JaneDoe");
+        System.out.println("Changing password to: newpassword123");
+        cockySpeak.changePassword("newpassword123");
+        cockySpeak.logout();
         //todo - going through intermediate lesson
     }
 
@@ -44,6 +50,15 @@ public class CockySpeakUI {
 
         //todo - rest of scenario
     }
+
+    public static void scenario3() {
+        System.out.println("Logging in: JaneDoe");
+        cockySpeak.login("JaneDoe", "newpassword123");
+        cockySpeak.loadFlashcards();
+        cockySpeak.searchAndStorePhraseOrWord();
+        
+    }
+    
 }
 
 
