@@ -1,15 +1,11 @@
 package com.app;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.List;
-=======
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
 
 import software.amazon.awssdk.services.polly.endpoints.internal.Value.Array;
->>>>>>> d076aa40294398392203c9019a0a9b95fbb19936
 
 /**
  * Represents a lesson in the language learning application.
