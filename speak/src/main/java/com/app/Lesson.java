@@ -8,23 +8,31 @@ import java.util.ArrayList;
  */
 public class Lesson {
     private ArrayList<Question> questions;
+    private Language language;
     private String topic;
+    private int numQuestionsComplete;
     private boolean lessonStatus;
+    public static final int diff = 1;
 
-    public Lesson() {
-        this.topic = "";
-        this.questions = new ArrayList<Question>();
-        this.lessonStatus = false;
-    }
-    public Lesson(String topic, ArrayList<Question> questions){
+    // public Lesson() {
+    //     this.topic = "";
+    //     this.questions = new ArrayList<Question>();
+    //     questions.add(MultipleChoice(), MultipleChoice(), MultipleChoice(), FillBlank(), VocabularyMatching());
+    //     this.lessonStatus = false;
+    // }
+
+    public Lesson(String topic, Language language){
         this.topic = topic;
-        this.questions = questions;
+        this.language = language;
+        this.questions = new ArrayList<Question>();
+        WordList wordList = WordList.getInstance();
+        questions.add(new MultipleChoice(diff, wordList.getRandomWord(language),language),new MultipleChoice(diff, wordList.getRandomWord(language),language),new MultipleChoice(diff, wordList.getRandomWord(language),language), FillBlank(diff, ), VocabularyMatching());
         this.lessonStatus = false;
 
     }
 
     public void setLessonStatus (Boolean status){
-        
+        this.lessonStatus = status;
     }
 
     /**
