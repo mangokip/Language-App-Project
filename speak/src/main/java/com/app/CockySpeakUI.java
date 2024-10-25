@@ -9,7 +9,9 @@ public class CockySpeakUI {
     private static CockySpeak cockySpeak = new CockySpeak(); // Initialize CockySpeak
 
     public static void main(String[] args) {
-        scenario3();
+        // scenario3();
+        scenario4();
+
     }
 
     public static void scenario1() {
@@ -58,7 +60,13 @@ public class CockySpeakUI {
         cockySpeak.searchAndStorePhraseOrWord();
         
     }
-    
+
+    public static void scenario4() {
+        Language thisLanguage = new Language("Spanish");
+        Lesson thLesson = new Lesson("Spanish Lesson", thisLanguage);
+        thLesson.playLesson();
+
+    }
 }
 
 

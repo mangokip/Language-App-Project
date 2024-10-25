@@ -16,6 +16,7 @@ public class Lesson {
     private Language language;
     private String topic;
     private int numQuestionsCorrect;
+    private double percentCorrect;
     private boolean lessonStatus;
     public static final int diff = 1;
 
@@ -41,6 +42,7 @@ public class Lesson {
     }
 
     public void playLesson() {
+        System.out.println(topic);
         for (Question q : questions) {
             if (q instanceof MultipleChoice) {
                 playMultipleChoice((MultipleChoice) q);
