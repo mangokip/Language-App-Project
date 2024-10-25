@@ -1,5 +1,6 @@
 package com.app;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CockySpeak {
@@ -12,6 +13,7 @@ public class CockySpeak {
     private int difficulty;
     private DataLoader loader = new DataLoader();
     private DataWriter writer = new DataWriter();
+    private List<Flashcard> flashcards;
 
     public CockySpeak() {
         userList = UserList.getInstance();
@@ -140,6 +142,20 @@ public class CockySpeak {
         writer.saveUsers(userList.getUsers());
         System.out.println("Password changed successfully");
     }
+
+    public void loadFlashcards() {
+        // Generate flashcards by loading words and phrases from DataLoader
+        flashcards = Flashcard.generateFlashcards();
+    
+        System.out.println("Flashcards loaded: " + flashcards.size());
+    
+        // Print all flashcards to verify loading
+        for (Flashcard card : flashcards) {
+            card.display();  // Call the display() method for each card
+            System.out.println();  // Add a blank line between flashcards
+        }
+    }
+    
 
     /**
      * Gets the currently logged-in user.
