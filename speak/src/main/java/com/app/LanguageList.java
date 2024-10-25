@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Bryce Klein
  */
 public class LanguageList {
-    private static LanguageList languageList = null;
+    private static LanguageList languageList;
     private ArrayList<Language> languages;
 
     /*

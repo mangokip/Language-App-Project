@@ -10,8 +10,11 @@ public class User {
     private UUID id;
     private String username;
     private String password;
-    private String email; //what does type do 
+    private String email; 
     private HashMap<Language, ProgressTracker> progressTrackers;
+    // private Language currentLanguage;
+
+
 
     
     
@@ -82,22 +85,18 @@ public class User {
 
     }
 
-    /**
-     * Adds or updates a ProgressTracker for a specific language in the user's progressTrackers map.
-     *
-     * @param language the language being learned
-     * @param questionsCompleted the number of questions completed for that language
-     * @param lessonsCompleted the number of lessons completed for that language
-     * @param xp the experience points earned for that language
-     * @param streak the current streak for that language
-     * @param completedLessons the number of completed lessons for that language
-     * @param totalLessons the total number of lessons for that language
-     * @param progressPercentage the percentage of progress for that language
-     * @param state the current state (level) of the user in that language
-     */
-    public void addLanguageProgress(Language language, int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State state) {
-        ProgressTracker progress = new ProgressTracker(questionsCompleted, lessonsCompleted, xp, streak, completedLessons, totalLessons, progressPercentage, state, null, null, null);
-        this.progressTrackers.put(language, progress);
+    public ProgressTracker getLanguageProgressTracker(Language language){
+        return progressTrackers.get(language);
+    }
+
+    public void createLanguageProgress(Language language) {
+        if (!progressTrackers.containsKey(language)) {
+            ProgressTracker tracker = new ProgressTracker(0, 0, 0, 0, 0, 10, 0, new BeginnerState());
+            progressTrackers.put(language, tracker);
+            System.out.println("Language " + language.getLanguageCode() + " initialized for " + username);
+        } else {
+            System.out.println("Language " + language.getLanguageCode() + " already initialized for " + username);
+        }
     }
     
     public List<String> getLanguageProgress() {
@@ -110,6 +109,28 @@ public class User {
         return progressList;
     }
 
+    /**
+     * Switch the state (difficulty) of the ProgressTracker for a given language.
+     */
+    public void switchDifficulty(Language language, State newState) {
+        ProgressTracker tracker = progressTrackers.get(language);
+        if (tracker != null) {
+            tracker.setState(newState);
+            System.out.println("Switched to " + newState.toString() + " difficulty for " + language.getLanguageCode());
+        } else {
+            System.out.println("No progress tracker found for language: " + language.getLanguageCode());
+        }
+    }
+
+    // public void setCurrentLanguage(Language language){
+    //     this.currentLanguage = language;
+    // }
+
+    // public Language getCurrentLanguage(){
+    //     return this.currentLanguage;
+    // }
+    
+    
    
 
 }

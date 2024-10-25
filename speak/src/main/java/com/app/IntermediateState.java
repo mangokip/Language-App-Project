@@ -47,4 +47,9 @@ class IntermediateState implements State {
             System.out.println("Keep practicing to advance to the next level!");
         }
     }
+
+    @Override
+    public String toString() {
+        return "INTERMEDIATE";
+    }
 }

@@ -1,5 +1,7 @@
 package com.app;
 
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ProgressTracker {
 
@@ -14,6 +16,7 @@ public class ProgressTracker {
     private State beginnerState;
     private State intermediateState;
     private State expertState;
+
 
     /**
      * Basic constructor
@@ -30,7 +33,7 @@ public class ProgressTracker {
         expertState = null;
     }
 
-    public ProgressTracker(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState, State beginnerState, State intermediateState, State expertState) {
+    public ProgressTracker(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState) {
         this.questionsCompleted = questionsCompleted;
         this.lessonsCompleted = lessonsCompleted;
         this.xp = xp;
@@ -40,13 +43,10 @@ public class ProgressTracker {
         this.progressPercentage = progressPercentage;
         this.currentState = currentState;
         //Edit later
-        this.beginnerState = beginnerState;
-        this.intermediateState = intermediateState;
-        this.expertState = expertState;
     }
 
     /*test line */
-    public void updateProgress(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState, State beginnerState, State intermediateState, State expertState) {
+    public void updateProgress(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState) {
         this.questionsCompleted = questionsCompleted;
         this.lessonsCompleted = lessonsCompleted;
         this.xp = xp;
@@ -55,9 +55,6 @@ public class ProgressTracker {
         this.totalLessons = totalLessons;
         this.progressPercentage = progressPercentage;
         this.currentState = currentState;
-        this.beginnerState = beginnerState;
-        this.intermediateState = intermediateState;
-        this.expertState = expertState;
     }
 
     public String displayProgress() {
@@ -102,7 +99,9 @@ public class ProgressTracker {
     public State getState() {
         return this.currentState;
     }
-    
+    public void setState(State state) {
+        this.currentState = state;
+    }
     
 
     public void increaseXP(int xp) {
@@ -123,6 +122,22 @@ public class ProgressTracker {
         } else {
             System.out.println("Incorrect State.");
         }
-        
+    }
+
+        public void saveProgressToFile(String filename) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write("Questions Completed: " + this.questionsCompleted + "\n");
+            writer.write("Lessons Completed: " + this.lessonsCompleted + "\n");
+            writer.write("Total XP: " + this.xp + "\n");
+            writer.write("Current Streak: " + this.streak + "\n");
+            writer.write("Completed Lessons: " + this.completedLessons + "\n");
+            writer.write("Total Lessons: " + this.totalLessons + "\n");
+            writer.write("Progress Percentage: " + this.progressPercentage + "%\n");
+            writer.write("Current Level: " + this.currentState + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
+

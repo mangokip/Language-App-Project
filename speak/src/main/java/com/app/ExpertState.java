@@ -8,17 +8,26 @@ import java.util.ArrayList;
  */
 class ExpertState implements State {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void increaseLevel() {
         System.out.println("You're already at the highest level: Expert.");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void decreaseLevel() {
         System.out.println("Level decreased! You're now at the Intermediate level.");
         // Logic to transition to IntermediateState can be implemented here.
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ArrayList<Question> getQuestionPool() {
         ArrayList<Question> questions = new ArrayList<>();
@@ -28,7 +37,9 @@ class ExpertState implements State {
         return questions;
     }
 
-    //TODO fix Loadcontent
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void loadContent(Language language) {
         /* 
@@ -42,9 +53,13 @@ class ExpertState implements State {
     @Override
     public void evaluatePerformance(int correctAnswers) {
         if (correctAnswers >= 7) {
-            System.out.println("Congratulations! You've mastered the Expert level!");
+            System.out.println("Congratulations! You've mastered the Expert level!g");
         } else {
             System.out.println("Keep practicing to master the Expert level!");
         }
+    }
+    @Override
+    public String toString() {
+        return "EXPERT";
     }
 }
