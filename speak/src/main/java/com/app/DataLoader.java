@@ -85,101 +85,144 @@ public class DataLoader extends DataConstants {
         return users;
     }
 
-    /**
-     * Loads words from a JSON file and returns them as a list of Word objects.
-     *
-     * @return a List of Word objects
-     */
-    public static void loadWords() {
+    public static List<Flashcard> loadWords() {
+        List<Flashcard> words = new ArrayList<>();
+    
         try (BufferedReader reader = new BufferedReader(new FileReader(WORD_FILE))) {
             StringBuilder content = new StringBuilder();
             String line;
-
+    
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
-
+    
             JSONObject wordsJSON = (JSONObject) new JSONParser().parse(content.toString());
+            JSONArray wordsArray = (JSONArray) wordsJSON.get("Spanish");
+    
+            for (Object obj : wordsArray) {
+                JSONObject wordJSON = (JSONObject) obj;
+    
+                String text = (String) wordJSON.get("text");
+                String translation = (String) wordJSON.get("foreign");
+                String pronunciation = (String) wordJSON.get("pronounce");
+                String genre = (String) wordJSON.get("genre");
+                int difficulty = ((Long) wordJSON.get("difficulty")).intValue();
 
-            for (Object key : wordsJSON.keySet()) {
-                String languageCode = (String) key;
-                JSONArray wordsArray = (JSONArray) wordsJSON.get(languageCode);
-                Language language = new Language(languageCode);
-
-                for (Object obj : wordsArray) {
-                    JSONObject wordJSON = (JSONObject) obj;
-
-                    String text = (String) wordJSON.get(TEXT);
-                    String foreign = (String) wordJSON.get(FOREIGN);
-                    String pronounce = (String) wordJSON.get(PRONOUNCE);
-                    String genreString = (String) wordJSON.get(GENRE);
-                    Long difficultyLong = (Long) wordJSON.get("difficulty");
-
-                    if (text == null || foreign == null || pronounce == null || genreString == null || difficultyLong == null) {
-                        System.err.println("Word data missing or invalid for language " + languageCode);
-                        continue;
-                    }
-
-                    Genre genre;
-                    try {
-                        genre = Genre.valueOf(genreString.toUpperCase());
-                    } catch (IllegalArgumentException e) {
-                        System.err.println("Invalid genre for language " + languageCode + ": " + genreString);
-                        continue;
-                    }
-
-                    int difficulty = difficultyLong.intValue();
-                    language.addVocabulary(text, foreign, pronounce, genre, difficulty);
-                    System.out.println("Successfully loaded word: " + text + " for language " + languageCode);
-                }
-
-                System.out.println("Total words loaded for language " + language.getLanguageCode() + ": " + language.getVocabularyList().size());
+    
+                words.add(new Flashcard(text, translation, pronunciation, genre, difficulty));
+                System.out.println("Loaded word: " + text);
             }
-
-            System.out.println("Total words loaded.");
         } catch (IOException | ParseException e) {
             System.err.println("Error loading words: " + e.getMessage());
-            e.printStackTrace();
         }
+    
+        return words;
     }
-
-       /**
-     * Loads phrases from a JSON file and returns them as a List of Strings.
-     *
-     * @return a List of phrases
-     */
-    public static List<String> loadPhrases() {
-        List<String> phrases = new ArrayList<>();
-
+    
+    public static List<Flashcard> loadPhrases() {
+        List<Flashcard> phrases = new ArrayList<>();
+    
         try (BufferedReader reader = new BufferedReader(new FileReader(PHRASE_FILE))) {
             StringBuilder content = new StringBuilder();
             String line;
-
+    
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
-
+    
+            // Parse the JSON content correctly
             JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
-            JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Phrases");
-
+            JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
+    
+            // Iterate over the array of phrase objects
             for (Object obj : phrasesArray) {
-                String phrase = (String) obj;
-                if (phrase != null && !phrase.isEmpty()) {
-                    phrases.add(phrase);
-                    System.out.println("Successfully loaded phrase: " + phrase);
-                } else {
-                    System.err.println("Invalid phrase entry.");
-                }
+                JSONObject phraseJSON = (JSONObject) obj;
+    
+                // Extract values from the JSON object
+                String text = (String) phraseJSON.get("text");
+                String translation = (String) phraseJSON.get("translation");
+                String pronunciation = (String) phraseJSON.get("pronounce");
+    
+                // Create a Flashcard for each phrase and add it to the list
+                phrases.add(new Flashcard(text, translation, pronunciation));
+                System.out.println("Loaded phrase: " + text);
             }
-
-            System.out.println("Total phrases loaded: " + phrases.size());
+    
         } catch (IOException | ParseException e) {
             System.err.println("Error loading phrases: " + e.getMessage());
             e.printStackTrace();
         }
-
+    
         return phrases;
     }
+    
+    
+    
+        public static List<Flashcard> loadWords() {
+            List<Flashcard> words = new ArrayList<>();
+    
+            try (BufferedReader reader = new BufferedReader(new FileReader(WORD_FILE))) {
+                StringBuilder content = new StringBuilder();
+                String line;
+    
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+    
+                JSONObject wordsJSON = (JSONObject) new JSONParser().parse(content.toString());
+                JSONArray wordsArray = (JSONArray) wordsJSON.get("Spanish");
+    
+                for (Object obj : wordsArray) {
+                    JSONObject wordJSON = (JSONObject) obj;
+    
+                    String text = (String) wordJSON.get("text");
+                    String translation = (String) wordJSON.get("foreign");
+                    String pronunciation = (String) wordJSON.get("pronounce");
+                    String genre = (String) wordJSON.get("genre");
+                    int difficulty = ((Long) wordJSON.get("difficulty")).intValue();
+    
+                    words.add(new Flashcard(text, translation, pronunciation, genre, difficulty));
+                    System.out.println("Loaded word: " + text);
+                }
+            } catch (IOException | ParseException e) {
+                System.err.println("Error loading words: " + e.getMessage());
+            }
+    
+            return words;
+        }
+    
+        public static List<Flashcard> loadPhrases() {
+            List<Flashcard> phrases = new ArrayList<>();
+    
+            try (BufferedReader reader = new BufferedReader(new FileReader(PHRASE_FILE))) {
+                StringBuilder content = new StringBuilder();
+                String line;
+    
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+    
+                JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
+                JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
+    
+                for (Object obj : phrasesArray) {
+                    JSONObject phraseJSON = (JSONObject) obj;
+    
+                    String text = (String) phraseJSON.get("text");
+                    String translation = (String) phraseJSON.get("translation");
+                    String pronunciation = (String) phraseJSON.get("pronounce");
+    
+                    phrases.add(new Flashcard(text, translation, pronunciation));
+                    System.out.println("Loaded phrase: " + text);
+                }
+            } catch (IOException | ParseException e) {
+                System.err.println("Error loading phrases: " + e.getMessage());
+            }
+    
+            return phrases;
+        }
+    
+    
 
     /**
      * Main method to test the DataLoader class. Loads lessons from the JSON

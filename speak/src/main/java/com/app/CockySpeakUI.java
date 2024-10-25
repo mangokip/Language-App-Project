@@ -3,12 +3,13 @@ package com.app;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class CockySpeakUI {
 
     private static CockySpeak cockySpeak = new CockySpeak(); // Initialize CockySpeak
 
     public static void main(String[] args) {
-        scenario1();
+        scenario3();
     }
 
     public static void scenario1() {
@@ -49,6 +50,14 @@ public class CockySpeakUI {
 
         //todo - rest of scenario
     }
+
+    public static void scenario3() {
+        System.out.println("Logging in: JaneDoe");
+        cockySpeak.login("JaneDoe", "newpassword123");
+        cockySpeak.loadFlashcards();
+        
+    }
+    
 }
 
 
