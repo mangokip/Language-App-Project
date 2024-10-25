@@ -143,6 +143,44 @@ public class DataLoader extends DataConstants {
         }
     }
 
+       /**
+     * Loads phrases from a JSON file and returns them as a List of Strings.
+     *
+     * @return a List of phrases
+     */
+    public static List<String> loadPhrases() {
+        List<String> phrases = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(PHRASE_FILE))) {
+            StringBuilder content = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+
+            JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
+            JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Phrases");
+
+            for (Object obj : phrasesArray) {
+                String phrase = (String) obj;
+                if (phrase != null && !phrase.isEmpty()) {
+                    phrases.add(phrase);
+                    System.out.println("Successfully loaded phrase: " + phrase);
+                } else {
+                    System.err.println("Invalid phrase entry.");
+                }
+            }
+
+            System.out.println("Total phrases loaded: " + phrases.size());
+        } catch (IOException | ParseException e) {
+            System.err.println("Error loading phrases: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return phrases;
+    }
+
     /**
      * Main method to test the DataLoader class. Loads lessons from the JSON
      * file and prints the file's content to the console. If no lessons are

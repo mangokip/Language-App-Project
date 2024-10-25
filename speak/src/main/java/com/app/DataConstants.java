@@ -25,4 +25,7 @@ public abstract class DataConstants {
     protected static final String FOREIGN = "foreign";
     protected static final String PRONOUNCE = "pronounce";
     protected static final String GENRE = "genre";
+
+    // Phrases
+    protected static final String PHRASE_FILE = "json/phrases.json";
 }
