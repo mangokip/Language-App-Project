@@ -1,6 +1,7 @@
 package com.app;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a lesson in the language learning application.
@@ -90,4 +91,31 @@ public class Lesson {
         return questions;
     }
     
+    private void createTrueFalseQuestions() {
+        // Loop through all words for the given language
+        List<Word> words = WordList.getInstance().getWords(language);  // Fetch words for the language
+    
+        for (Word word : words) {
+            boolean isCorrect = Math.random() > 0.5;
+            String incorrectTranslation = null;
+    
+            if (!isCorrect) {
+                // Get words of the same genre
+                List<Word> sameGenreWords = WordList.getInstance().getWordsByGenre(language, word.getGenre());
+    
+                // Ensure we get an incorrect word for the same genre
+                Word incorrectWord;
+                do {
+                    incorrectWord = sameGenreWords.get((int) (Math.random() * sameGenreWords.size()));
+                } while (incorrectWord.getForeign().equals(word.getForeign()));  // Ensure it's not the same word
+    
+                incorrectTranslation = incorrectWord.getForeign();
+            }
+    
+            // Add True/False question to the lesson
+            questions.add(new TrueFalse(
+                word, incorrectTranslation, isCorrect, word.getDifficulty()
+            ));
+        }
+    }
 }
