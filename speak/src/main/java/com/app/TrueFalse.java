@@ -1,4 +1,6 @@
-public class TrueFalse extends Question {
+  package com.app;
+
+ class TrueFalse extends Question {
     private String word;
     private String translation;
     private boolean isCorrectTranslation;
