@@ -1,4 +1,13 @@
+<<<<<<< HEAD
   package com.app;
+=======
+package com.app;
+
+public class TrueFalse extends Question {
+    private String word;
+    private String translation;
+    private boolean isCorrectTranslation;
+>>>>>>> d076aa40294398392203c9019a0a9b95fbb19936
 
   public class TrueFalse extends Question {
     private Word word;  // The Word object (contains English and Spanish translations)
