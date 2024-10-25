@@ -1,15 +1,105 @@
 {
     "Spanish": [
-      "El perro corre en el parque.",
-      "La casa es roja.",
-      "Tengo un libro nuevo.",
-      "El amigo de Juan está feliz.",
-      "Ella es una mujer amable.",
-      "Me gusta el color azul.",
-      "El hombre lee un libro.",
-      "El gato duerme en la casa.",
-      "¿Es azul tu coche?",
-      "Mis amigos están muy felices hoy."
+      {
+        "text": "El perro corre rápido.",
+        "translation": "The dog runs fast.",
+        "pronounce": "el peh-roh koh-reh rah-pee-doh"
+      },
+      {
+        "text": "La escuela está en la ciudad.",
+        "translation": "The school is in the city.",
+        "pronounce": "lah es-kweh-lah es-tah en lah syoo-dad"
+      },
+      {
+        "text": "Mi hermana estudia en la biblioteca.",
+        "translation": "My sister studies in the library.",
+        "pronounce": "mee ehr-mah-nah es-too-dyah en lah bee-blee-oh-teh-kah"
+      },
+      {
+        "text": "El hombre alto lee un libro.",
+        "translation": "The tall man reads a book.",
+        "pronounce": "el ohm-breh al-toh leh-eh un lee-broh"
+      },
+      {
+        "text": "El coche es azul.",
+        "translation": "The car is blue.",
+        "pronounce": "el koh-cheh es ah-sool"
+      },
+      {
+        "text": "La mujer está feliz hoy.",
+        "translation": "The woman is happy today.",
+        "pronounce": "lah moo-hehr es-tah feh-lees oy"
+      },
+      {
+        "text": "El amigo de Juan juega al fútbol.",
+        "translation": "Juan's friend plays soccer.",
+        "pronounce": "el ah-mee-goh deh hwan hoo-eh-gah al foot-bohl"
+      },
+      {
+        "text": "El niño pequeño corre en el parque.",
+        "translation": "The small child runs in the park.",
+        "pronounce": "el nee-nyoh peh-keh-nyoh koh-reh en el par-keh"
+      },
+      {
+        "text": "El gato duerme en la casa.",
+        "translation": "The cat sleeps in the house.",
+        "pronounce": "el gah-toh dwehr-meh en lah kah-sah"
+      },
+      {
+        "text": "Tengo que escribir una carta.",
+        "translation": "I have to write a letter.",
+        "pronounce": "ten-goh keh es-kree-beer oo-nah kar-tah"
+      },
+      {
+        "text": "Ella habla con su madre por teléfono.",
+        "translation": "She talks to her mother on the phone.",
+        "pronounce": "eh-yah ah-blah kon soo mah-dreh por teh-leh-foh-noh"
+      },
+      {
+        "text": "Vamos a comer en la noche.",
+        "translation": "We are going to eat at night.",
+        "pronounce": "vah-mos ah koh-mehr en lah noh-cheh"
+      },
+      {
+        "text": "Mi padre escucha música en el coche.",
+        "translation": "My father listens to music in the car.",
+        "pronounce": "mee pah-dreh es-koo-chah moo-see-kah en el koh-cheh"
+      },
+      {
+        "text": "Nosotros caminamos hacia la escuela.",
+        "translation": "We walk toward the school.",
+        "pronounce": "noh-soh-tros kah-mee-nah-mos ah-syah lah es-kweh-lah"
+      },
+      {
+        "text": "Ellos estudian juntos cada día.",
+        "translation": "They study together every day.",
+        "pronounce": "eh-yos es-too-dyan hoon-tos kah-dah dee-ah"
+      },
+      {
+        "text": "¿Puedes jugar conmigo en el parque?",
+        "translation": "Can you play with me in the park?",
+        "pronounce": "pweh-des hoo-gar kon-mee-goh en el par-keh"
+      },
+      {
+        "text": "El coche rojo es muy rápido.",
+        "translation": "The red car is very fast.",
+        "pronounce": "el koh-cheh roh-hoh es moo-ee rah-pee-doh"
+      },
+      {
+        "text": "La familia tiene una casa grande.",
+        "translation": "The family has a big house.",
+        "pronounce": "lah fah-mee-lee-ah tee-eh-neh oo-nah kah-sah grahn-deh"
+      },
+      {
+        "text": "El perro duerme en la cama pequeña.",
+        "translation": "The dog sleeps in the small bed.",
+        "pronounce": "el peh-roh dwehr-meh en lah kah-mah peh-keh-nyah"
+      },
+      {
+        "text": "Me gusta leer por la noche.",
+        "translation": "I like to read at night.",
+        "pronounce": "meh goo-stah leh-ehr por lah noh-cheh"
+      }
     ]
   }
   
