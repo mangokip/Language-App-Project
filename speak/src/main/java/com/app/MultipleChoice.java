@@ -3,6 +3,7 @@ package com.app;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Collections;
 
 public class MultipleChoice extends Question {
     private static final String prompt = "Select the foreign word that matches this english word: ";
@@ -27,7 +28,7 @@ public class MultipleChoice extends Question {
                 wordsForQuestion.add(wordToAdd);
             }
         }
-
+        Collections.shuffle(wordsForQuestion);
     }
 
     public boolean checkAnswer(Word userAnswer){
@@ -35,6 +36,11 @@ public class MultipleChoice extends Question {
             return true;
         }
         else return false;
-
+    }
+    public ArrayList<Word> getWordsForQuestion(){
+        return wordsForQuestion;
+    }
+    public Word getCorrectAnswer(){
+        return correctAnswer;
     }
 }

@@ -1,6 +1,11 @@
 package com.app;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+import software.amazon.awssdk.services.polly.endpoints.internal.Value.Array;
 
 /**
  * Represents a lesson in the language learning application.
@@ -10,7 +15,7 @@ public class Lesson {
     private ArrayList<Question> questions;
     private Language language;
     private String topic;
-    private int numQuestionsComplete;
+    private int numQuestionsCorrect;
     private boolean lessonStatus;
     public static final int diff = 1;
 
@@ -25,10 +30,62 @@ public class Lesson {
         this.topic = topic;
         this.language = language;
         this.questions = new ArrayList<Question>();
+        numQuestionsCorrect = 0;
         WordList wordList = WordList.getInstance();
-        questions.add(new MultipleChoice(diff, wordList.getRandomWord(language),language),new MultipleChoice(diff, wordList.getRandomWord(language),language),new MultipleChoice(diff, wordList.getRandomWord(language),language), new FillBlank(diff, Phrase sentence ), new VocabularyMatching(language, diff, wordList.getRandomWord(language)));
+        questions.add(new MultipleChoice(diff, wordList.getRandomWord(language), language));
+        questions.add(new MultipleChoice(diff, wordList.getRandomWord(language), language));
+        questions.add(new MultipleChoice(diff, wordList.getRandomWord(language), language));
+        questions.add(new VocabularyMatching(language, diff, wordList.getRandomWord(language)));
         this.lessonStatus = false;
 
+    }
+
+    public void playLesson() {
+        for (Question q : questions) {
+            if (q instanceof MultipleChoice) {
+                playMultipleChoice((MultipleChoice) q);
+            // } else if (q instanceof FillBlank) { //Replace FillBlank with new question type
+            //     playFillBlank((FillBlank) q);
+            } else if (q instanceof VocabularyMatching) {
+                playVocabularyMatching((VocabularyMatching) q);
+            }
+        }
+    }
+
+    public void playMultipleChoice(MultipleChoice q) {
+        Scanner keyboard = new Scanner(System.in);
+        String promp = q.getPrompt();
+        System.out.println(q.getPrompt());
+        ArrayList<Word> wordsForQuestion = q.getWordsForQuestion();
+        for(int i = 0; i < wordsForQuestion.size(); i++){
+            System.out.println(i + 1 + ". " + wordsForQuestion.get(i).getForeign());
+        }
+        System.out.println("Select the correct answer: ");
+        int userAnswer = keyboard.nextInt();
+        if(wordsForQuestion.get(userAnswer - 1).equals(q.getCorrectAnswer())){
+            System.out.println("Correct!");
+            numQuestionsCorrect++;
+        }else{
+            System.out.println("Incorrect. The correct answer is: " + q.getCorrectAnswer().getForeign());
+        }
+    }
+
+        public void playVocabularyMatching(VocabularyMatching q) {
+            Scanner keyboard = new Scanner(System.in);
+            String prompt = q.getPrompt();
+            System.out.println(prompt);
+            HashMap<String, String> userPairs = new HashMap<>();
+            for(Map.Entry<String, String> entry : q.getWordPairs().entrySet()){
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+                String userInput = keyboard.nextLine();
+                userPairs.put(entry.getKey(), userInput);
+            }
+            if(q.checkAnswer(userPairs)){
+                System.out.println("Correct!");
+                numQuestionsCorrect++;
+            }else{
+                System.out.println("Incorrect. The correct answer is: \n" + q.toString());
+            }
     }
 
     public void setLessonStatus (Boolean status){
@@ -91,3 +148,4 @@ public class Lesson {
     }
     
 }
+
