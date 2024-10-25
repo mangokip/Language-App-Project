@@ -2,9 +2,9 @@ package com.app;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.List;
 
 /**
  * Represents a fill-in-the-blank question in the language learning application.
