@@ -62,7 +62,8 @@ public class CockySpeakUI {
     }
 
     public static void scenario4() {
-        Language thisLanguage = new Language("Spanish");
+        LanguageList languageList = LanguageList.getInstance();
+        Language thisLanguage = languageList.getLanguage("Spanish");
         Lesson thLesson = new Lesson("Spanish Lesson", thisLanguage);
         thLesson.playLesson();
 

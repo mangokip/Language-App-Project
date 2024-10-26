@@ -19,7 +19,7 @@ public class VocabularyMatching extends Question {
         super(vocabularyMatchingPrompt, diff);
         Random rand = new Random();
         wordNeedingStudying = word;
-        // wordPairs = new HashMap<>();
+        wordPairs = new HashMap<>();
         WordList wordList = WordList.getInstance();
         List<Word> words = wordList.getWordsByGenre(language, wordNeedingStudying.getGenre());
         ArrayList<Word> wordsForQuestion = new ArrayList<Word>();

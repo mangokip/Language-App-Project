@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collections;
 
 import software.amazon.awssdk.services.polly.endpoints.internal.Value.Array;
 
@@ -57,12 +58,11 @@ public class Lesson {
     public void playMultipleChoice(MultipleChoice q) {
         Scanner keyboard = new Scanner(System.in);
         String promp = q.getPrompt();
-        System.out.println(q.getPrompt());
+        System.out.println(q.getPrompt() + q.getCorrectAnswer().getText());
         ArrayList<Word> wordsForQuestion = q.getWordsForQuestion();
         for(int i = 0; i < wordsForQuestion.size(); i++){
             System.out.println(i + 1 + ". " + wordsForQuestion.get(i).getForeign());
         }
-        System.out.println("Select the correct answer: ");
         int userAnswer = keyboard.nextInt();
         if(wordsForQuestion.get(userAnswer - 1).equals(q.getCorrectAnswer())){
             System.out.println("Correct!");
@@ -73,12 +73,19 @@ public class Lesson {
     }
 
         public void playVocabularyMatching(VocabularyMatching q) {
+            ArrayList<String> foreignWords = new ArrayList<>(q.getWordPairs().keySet());
+            ArrayList<String> englishWords = new ArrayList<>(q.getWordPairs().values());
+            Collections.shuffle(foreignWords);
+            Collections.shuffle(englishWords);
             Scanner keyboard = new Scanner(System.in);
             String prompt = q.getPrompt();
             System.out.println(prompt);
             HashMap<String, String> userPairs = new HashMap<>();
+            for(int i = 0; i < foreignWords.size(); i++){
+                System.out.println(foreignWords.get(i) + ": " + englishWords.get(i));
+            }
             for(Map.Entry<String, String> entry : q.getWordPairs().entrySet()){
-                System.out.println(entry.getKey() + ": " + entry.getValue());
+                System.out.println(entry.getKey() + ": ");
                 String userInput = keyboard.nextLine();
                 userPairs.put(entry.getKey(), userInput);
             }
