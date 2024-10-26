@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Expert state
+ *
  * @author David Dinh
  */
 class ExpertState implements State {
@@ -44,7 +45,7 @@ class ExpertState implements State {
         language.addVocabulary(new Word("to be (subjunctive)", "sea", "seh-ah", Genre.VERB, 3, false));
         language.addVocabulary(new Word("philosophy", "filosofía", "fee-loh-soh-fee-ah", Genre.NOUN, 3, false));
         language.addGrammarRule("Use 'sea' for subjunctive form of 'to be' in Spanish.");
-        */
+         */
     }
 
     @Override
@@ -55,6 +56,7 @@ class ExpertState implements State {
             System.out.println("Keep practicing to master the Expert level!");
         }
     }
+
     @Override
     public String toString() {
         return "EXPERT";

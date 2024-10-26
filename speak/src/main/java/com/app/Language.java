@@ -8,6 +8,7 @@ import java.util.List;
  * phrases, and grammar rules.
  */
 public class Language {
+
     private String code;
     private WordList vocabularyList; // Shared WordList instance
     private ArrayList<String> grammarRules;
@@ -18,14 +19,10 @@ public class Language {
         this.grammarRules = new ArrayList<>();
     }
 
-
-
-   
     public void addGrammarRule(String rule) {
         grammarRules.add(rule);
     }
 
-    
     public void displayContent() {
         System.out.println("Language: " + code);
         System.out.println("Vocabulary:");
@@ -33,8 +30,8 @@ public class Language {
         List<Word> words = vocabularyList.getLanguageWords(code);
         if (words != null && !words.isEmpty()) {
             for (Word word : words) {
-                System.out.println(word.getText() + " - " + word.getForeign() + 
-                    " (" + word.getPronounce() + ") - Difficulty: " + word.getDifficulty());
+                System.out.println(word.getText() + " - " + word.getForeign()
+                        + " (" + word.getPronounce() + ") - Difficulty: " + word.getDifficulty());
             }
         } else {
             System.out.println("No vocabulary available.");

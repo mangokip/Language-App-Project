@@ -47,7 +47,7 @@ public class VocabularyMatching extends Question {
             userPairs.put(englishWord, userInput);
         }
 
-        return validateAnswer("");  
+        return validateAnswer("");
     }
 
     @Override

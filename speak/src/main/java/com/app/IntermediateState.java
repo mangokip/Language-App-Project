@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * intermediate State
+ *
  * @author David Dinh
  */
 class IntermediateState implements State {
@@ -33,7 +34,7 @@ class IntermediateState implements State {
         language.addVocabulary(new Word("ate", "comí", "koh-mee", Genre.VERB, 2, false));
         language.addVocabulary(new Word("children", "niños", "nee-nyos", Genre.NOUN, 2, false));
         language.addGrammarRule("Use 'comí' for 'I ate' in past tense.");
-        */
+         */
     }
 
     @Override

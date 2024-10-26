@@ -9,7 +9,7 @@ public class CockySpeakUI {
     }
 
     public static void scenarioJimSmith() {
-        
+
         System.out.println("Registering Jim Smith...");
         cockySpeak.register("JimSmith", "securePass", "jim@smith.com");
 
@@ -22,7 +22,7 @@ public class CockySpeakUI {
 
         System.out.println("Jim starts Module 1...");
         Lesson module1 = new Lesson("Module 1", spanish);
-        int module1Score = module1.playLesson(); 
+        int module1Score = module1.playLesson();
 
         // Check if the user passed Module 1 before starting Module 2
         if (module1Score >= 80) {
@@ -33,7 +33,6 @@ public class CockySpeakUI {
             System.out.println("Jim did not pass Module 1. Please try again.");
         }
 
-        
         cockySpeak.logout();
 
         System.out.println("Jim logs back in...");

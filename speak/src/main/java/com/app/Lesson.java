@@ -68,9 +68,9 @@ public class Lesson {
         for (Phrase phrase : phrases) {
             if (phrase.getText().toLowerCase().contains(word.getForeign().toLowerCase())) {
                 return new Phrase(
-                    phrase.withBlank(word),
-                    phrase.getTranslation(),
-                    phrase.getPronunciation()
+                        phrase.withBlank(word),
+                        phrase.getTranslation(),
+                        phrase.getPronunciation()
                 );
             }
         }
@@ -88,7 +88,6 @@ public class Lesson {
             }
         }
 
-        
         int score = (numQuestionsCorrect * 100) / questions.size();
         System.out.println("Lesson completed. Score: " + score + "%");
 
@@ -98,6 +97,6 @@ public class Lesson {
             System.out.println("You did not pass. Please try this lesson again.");
         }
 
-        return score; 
+        return score;
     }
 }
