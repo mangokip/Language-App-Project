@@ -37,6 +37,8 @@ public class FillBlank extends Question {
 
     @Override
     public boolean askQuestion(Scanner scanner) {
+        pronouncePrompt();  // Pronounce the phrase before displaying
+
         if (phrase != null) {
             System.out.println(phrase.getText());
 

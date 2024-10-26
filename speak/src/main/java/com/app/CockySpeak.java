@@ -40,17 +40,9 @@ public class CockySpeak {
             language = new Language("Spanish");
         }
         this.currentLanguage = language;
-        user.createLanguageProgress(language);
+        user.createLanguageProgress(language);  // Ensure progress is initialized
         writer.saveUsers(userList.getUsers());
         System.out.println("Language set to: " + language.getLanguageCode());
-        this.currentProgressTracker = user.getLanguageProgressTracker(currentLanguage);
-        if (currentProgressTracker.getState().toString().equals("INTERMEDIATE")) {
-            this.difficulty = 2;
-        } else if (currentProgressTracker.getState().toString().equals("EXPERT")) {
-            this.difficulty = 3;
-        } else {
-            this.difficulty = 1;
-        }
     }
 
     /**
@@ -64,10 +56,10 @@ public class CockySpeak {
         System.out.print("Please select a language: ");
         String selectedLanguageCode = keyboard.nextLine().trim();
 
-        // Ensure a valid Language object is returned
+       
         if (selectedLanguageCode.isEmpty()) {
             System.out.println("Invalid input. Defaulting to Spanish.");
-            return new Language("Spanish");  // Default to Spanish if input is invalid
+            return new Language("Spanish");  
         }
         return new Language(selectedLanguageCode);
     }
@@ -94,18 +86,22 @@ public class CockySpeak {
         }
     }
 
-    /**
-     * Attempts to log in a user.
-     *
-     * @param username The username to log in with.
-     * @param password The password to log in with.
-     */
     public void login(String username, String password) {
         if (userList.hasUser(username)) {
             User thisUser = userList.getUser(username);
             if (password.equals(thisUser.getPassword())) {
                 this.user = thisUser;
                 System.out.println("Welcome " + username);
+
+                
+                Language spanish = new Language("Spanish");
+                if (user.getLanguageProgressTracker(spanish) == null) {
+                    user.createLanguageProgress(spanish);
+                }
+
+               
+                writer.saveUsers(userList.getUsers());
+
             } else {
                 System.out.println("Invalid password");
             }
@@ -182,14 +178,41 @@ public class CockySpeak {
         }
     }
 
-    public void updateModuleProgress(String moduleName, boolean advance) {
-        System.out.println("Updating progress for: " + moduleName);
-        if (advance) {
-            System.out.println("Advancing to the next module.");
-        } else {
-            System.out.println("Repeating the current module.");
+    public void startModule(String moduleName) {
+        if (currentLanguage == null) {
+            System.out.println("No language set. Defaulting to Spanish.");
+            setLanguage(new Language("Spanish"));
         }
-        writer.saveUsers(userList.getUsers());
+
+        System.out.println("\nStarting " + moduleName + "...");
+        Lesson lesson = new Lesson(moduleName, currentLanguage);  // Use the current language
+        int score = lesson.playLesson();
+
+        ProgressTracker tracker = user.getLanguageProgressTracker(currentLanguage);
+        if (tracker == null) {
+            System.out.println("Error: No progress tracker found for " + currentLanguage.getLanguageCode());
+            return;  // Exit if no tracker is found
+        }
+
+        if (score >= 80) {
+            System.out.println("You passed " + moduleName + "!");
+            tracker.completeLesson();  // Mark the lesson as completed
+        } else {
+            System.out.println("You did not pass " + moduleName + ". Please try again.");
+        }
+
+        writer.saveUsers(userList.getUsers());  // Save progress
+    }
+
+    public void resumeFromProgress(String languageCode) {
+        ProgressTracker tracker = user.getLanguageProgressTracker(new Language(languageCode));
+        int completedLessons = tracker.getCompletedLessons();
+
+        if (completedLessons < 1) {
+            startModule("Module 1");
+        } else {
+            startModule("Module 2");
+        }
     }
 
     /**

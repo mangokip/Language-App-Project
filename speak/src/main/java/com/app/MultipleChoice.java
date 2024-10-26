@@ -37,6 +37,8 @@ public class MultipleChoice extends Question {
 
     @Override
     public boolean askQuestion(Scanner scanner) {
+        pronouncePrompt();  // Pronounce the question before displaying
+
         System.out.println(getPrompt());
 
         for (int i = 0; i < answerOptions.size(); ++i) {

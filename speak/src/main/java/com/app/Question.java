@@ -2,6 +2,8 @@ package com.app;
 
 import java.util.Scanner;
 
+import com.narration.Narriator; // Import Narriator class
+
 public abstract class Question {
     private String prompt;
     private int difficulty;
@@ -24,16 +26,18 @@ public abstract class Question {
     }
 
     /**
-     * Abstract method to ask the question.
-     * Must be implemented by all subclasses.
+     * Pronounces the question using AWS Polly via the Narriator.
      */
-    public abstract boolean askQuestion(Scanner scanner);  // Changed to boolean
+    public void pronouncePrompt() {
+        try {
+            Narriator.playSoundEnglish(prompt);  // Use Narriator to pronounce the prompt
+        } catch (Exception e) {
+            System.err.println("Error pronouncing the prompt: " + e.getMessage());
+        }
+    }
 
-    /**
-     * Abstract method to validate the answer.
-     * Must be implemented by all subclasses.
-     */
-    public abstract boolean validateAnswer(String userAnswer);  // Ensure consistency
+    public abstract boolean askQuestion(Scanner scanner);
+    public abstract boolean validateAnswer(String userAnswer);
 
     @Override
     public String toString() {

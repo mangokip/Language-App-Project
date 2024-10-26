@@ -25,42 +25,55 @@ public class Lesson {
         WordList wordList = WordList.getInstance();
         PhraseList phraseList = PhraseList.getInstance();
 
-        Word randomWord1 = wordList.getRandomWord(language);
-        Word randomWord2 = wordList.getRandomWord(language);
-        Word randomWord3 = wordList.getRandomWord(language);
-
-        if (randomWord1 != null && randomWord2 != null && randomWord3 != null) {
-            // Add multiple-choice questions
-            questions.add(new MultipleChoice(diff, randomWord1, language));
-            questions.add(new MultipleChoice(diff, randomWord2, language));
-
-            // Add True/False question with random correctness
+        // Add exactly 5 questions
+        while (questions.size() < 5) {
             Word randomWord = wordList.getRandomWord(language);
-            boolean isCorrect = new Random().nextBoolean();  // Random correctness
 
-            String correctTranslation = randomWord.getForeign();
-            String incorrectTranslation = "Dog";  // Arbitrary incorrect answer
-            String displayedTranslation = isCorrect ? correctTranslation : incorrectTranslation;
-
-            questions.add(new TrueFalse(randomWord, displayedTranslation, incorrectTranslation, isCorrect, diff));
-
-            // Add VocabularyMatching question (counts as one question)
-            questions.add(new VocabularyMatching(randomWord3, language, diff));
-
-            // Add FillBlank question if a suitable phrase is found
-            List<Word> wordListForPhrase = wordList.getLanguageWords(language.getLanguageCode());
-            if (wordListForPhrase != null && !wordListForPhrase.isEmpty()) {
-                Word selectedWord = wordListForPhrase.get(new Random().nextInt(wordListForPhrase.size()));
-                Phrase phraseWithBlank = generatePhraseWithWord(selectedWord, phraseList.getPhrases());
-
-                if (phraseWithBlank != null) {
-                    questions.add(new FillBlank(diff, selectedWord, language, phraseWithBlank));
-                }
-            } else {
-                System.out.println("Error: No words available for phrases.");
+            if (randomWord == null) {
+                System.out.println("Error: Unable to generate question due to missing words.");
+                continue; // Skip this iteration if no word is found
             }
-        } else {
-            System.out.println("Error: Unable to generate questions due to missing words.");
+
+            switch (questions.size()) {
+                case 0:
+                case 1:
+                    // Add multiple-choice questions
+                    questions.add(new MultipleChoice(diff, randomWord, language));
+                    break;
+
+                case 2:
+                    // Add a True/False question
+                    boolean isCorrect = new Random().nextBoolean();
+                    String correctTranslation = randomWord.getForeign();
+                    String incorrectTranslation = "Dog"; // Arbitrary incorrect answer
+                    questions.add(new TrueFalse(randomWord, isCorrect, diff));
+
+                    break;
+
+                case 3:
+                    // Add a VocabularyMatching question
+                    questions.add(new VocabularyMatching(randomWord, language, diff));
+                    break;
+
+                case 4:
+                    // Add a FillBlank question
+                    List<Word> wordListForPhrase = wordList.getLanguageWords(language.getLanguageCode());
+                    if (wordListForPhrase != null && !wordListForPhrase.isEmpty()) {
+                        Word selectedWord = wordListForPhrase.get(new Random().nextInt(wordListForPhrase.size()));
+                        Phrase phraseWithBlank = generatePhraseWithWord(selectedWord, phraseList.getPhrases());
+
+                        if (phraseWithBlank != null) {
+                            questions.add(new FillBlank(diff, selectedWord, language, phraseWithBlank));
+                        } else {
+                            // If no phrase found, fallback to multiple-choice
+                            questions.add(new MultipleChoice(diff, randomWord, language));
+                        }
+                    } else {
+                        // Fallback to multiple-choice if no words for phrases
+                        questions.add(new MultipleChoice(diff, randomWord, language));
+                    }
+                    break;
+            }
         }
     }
 
