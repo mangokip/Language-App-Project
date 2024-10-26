@@ -3,6 +3,7 @@
 =======
 package com.app;
 
+<<<<<<< HEAD
 public class TrueFalse extends Question {
     private String word;
     private String translation;
@@ -20,21 +21,52 @@ public class TrueFalse extends Question {
         this.word = word;
         this.translation = isCorrect ? word.getForeign() : incorrectTranslation;
         this.isCorrectTranslation = isCorrect;
+=======
+import java.util.Scanner;
+
+public class TrueFalse extends Question {
+
+    private boolean correctTranslation; 
+
+    public TrueFalse(Word word, String correctAnswer, String incorrectAnswer, boolean correctTranslation, int difficulty) {
+        super("Is this translation correct? " + word.getText() + " -> " + correctAnswer, difficulty);
+        this.correctTranslation = correctTranslation; 
+>>>>>>> f76a5091e1cbe1cfb8998e4e728117936cdfab9e
     }
 
-    // Method to check the user's answer (True/False)
-    public boolean checkAnswer(String answer) {
-        try {
-            boolean userAnswer = Boolean.parseBoolean(answer.toLowerCase());
-            return userAnswer == isCorrectTranslation;
-        } catch (Exception e) {
-            System.out.println("Invalid input. Please enter 'True' or 'False'.");
-            return false;  // Invalid input should return false for incorrect answer
+    @Override
+    public boolean askQuestion(Scanner scanner) {
+        System.out.println(getPrompt());
+        System.out.println("1. True");
+        System.out.println("2. False");
+
+        System.out.print("Enter your answer (1 or 2): ");
+        String userAnswer = scanner.nextLine().trim();
+
+        boolean userSelectedTrue = userAnswer.equals("1"); 
+
+ 
+        boolean isCorrectAnswer = (userSelectedTrue == correctTranslation);  
+
+        if (isCorrectAnswer) {
+            System.out.println("Correct!");
+            return true;
+        } else {
+            System.out.println("Incorrect.");
+            return false;
         }
     }
 
     @Override
-    public String toString() {
-        return this.getPrompt();
+    public boolean validateAnswer(String userAnswer) {
+        boolean userSelectedTrue = userAnswer.equals("1");  
+        boolean isCorrectAnswer = (userSelectedTrue == correctTranslation);  
+
+        if (isCorrectAnswer) {
+            System.out.println("Correct!");
+        } else {
+            System.out.println("Incorrect.");
+        }
+        return isCorrectAnswer;
     }
 }

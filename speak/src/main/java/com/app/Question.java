@@ -1,9 +1,8 @@
 package com.app;
-//Carson Sessoms
 
-import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Question {
+public abstract class Question {
     private String prompt;
     private int difficulty;
 
@@ -12,17 +11,32 @@ public class Question {
         this.difficulty = difficulty;
     }
 
-    public void setDifficulty(int difficulty){
-        this.difficulty = difficulty;
-    }
-    public int getDifficulty(){
-        return this.difficulty;
-    }
-    public String toString(){
-        return " ";
-    }
-    public String getPrompt(){
+    public String getPrompt() {
         return this.prompt;
     }
-}
 
+    public int getDifficulty() {
+        return this.difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    /**
+     * Abstract method to ask the question.
+     * Must be implemented by all subclasses.
+     */
+    public abstract boolean askQuestion(Scanner scanner);  // Changed to boolean
+
+    /**
+     * Abstract method to validate the answer.
+     * Must be implemented by all subclasses.
+     */
+    public abstract boolean validateAnswer(String userAnswer);  // Ensure consistency
+
+    @Override
+    public String toString() {
+        return prompt;
+    }
+}
