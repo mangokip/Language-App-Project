@@ -31,9 +31,6 @@ class ExpertState implements State {
     @Override
     public ArrayList<Question> getQuestionPool() {
         ArrayList<Question> questions = new ArrayList<>();
-        // Adding expert-level questions
-        questions.add(new Question("What is the subjunctive form of 'to be' in Spanish?", 3));
-        questions.add(new Question("Translate 'philosophy' to Spanish.", 3));
         return questions;
     }
 

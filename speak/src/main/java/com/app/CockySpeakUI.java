@@ -1,74 +1,44 @@
 package com.app;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-
-
 public class CockySpeakUI {
 
     private static CockySpeak cockySpeak = new CockySpeak(); // Initialize CockySpeak
 
     public static void main(String[] args) {
-        // scenario3();
-        scenario4();
-
+        scenarioJimSmith();
     }
 
-    public static void scenario1() {
-        System.out.println("User to Login: JohnDoe");
-        cockySpeak.login("JohnDoe", "password123");
-        System.out.println("Changing username to: JaneDoe");
-        cockySpeak.changeUsername("JaneDoe");
-        System.out.println("Changing password to: newpassword123");
-        cockySpeak.changePassword("newpassword123");
-        cockySpeak.logout();
-        //todo - going through intermediate lesson
-    }
-
-    public static void scenario2() {
-        Scanner keyboard = new Scanner(System.in);
-        System.out.println("Enter Username:");
-        String username = keyboard.nextLine();
-        System.out.println("Enter Password:");
-        String password = keyboard.nextLine();
-        System.out.println("Enter Email:");
-        String email = keyboard.nextLine();
-        cockySpeak.register(username, password, email);
-        cockySpeak.login(username, password);
-
-        Language selectedLanguage = cockySpeak.promptLanguageSelection();
-        cockySpeak.setLanguage(selectedLanguage);
-        cockySpeak.promptDifficultySelection(selectedLanguage);
-
-        WordList wordList = WordList.getInstance();
-        Word correctWord = wordList.getRandomWord(selectedLanguage);
-        ArrayList<Word> wordsForPhrase = new ArrayList<Word>();
-        wordsForPhrase.add(correctWord);
-        for (int i = 0; i < 3; i++) {
-            wordsForPhrase.add(wordList.getRandomWord(selectedLanguage));
-        }
-        Phrase phrase = new Phrase(wordsForPhrase, "nothing");
-        cockySpeak.playFillBlank(1, correctWord, phrase, selectedLanguage);
-
-        //todo - rest of scenario
-    }
-
-    public static void scenario3() {
-        System.out.println("Logging in: JaneDoe");
-        cockySpeak.login("JaneDoe", "newpassword123");
-        cockySpeak.loadFlashcards();
-        cockySpeak.searchAndStorePhraseOrWord();
+    public static void scenarioJimSmith() {
         
-    }
+        System.out.println("Registering Jim Smith...");
+        cockySpeak.register("JimSmith", "securePass", "jim@smith.com");
 
-    public static void scenario4() {
-        LanguageList languageList = LanguageList.getInstance();
-        Language thisLanguage = languageList.getLanguage("Spanish");
-        Lesson thLesson = new Lesson("Spanish Lesson", thisLanguage);
-        thLesson.playLesson();
+        System.out.println("Jim Smith logging in...");
+        cockySpeak.login("JimSmith", "securePass");
 
+        // Set Language and Start Module 1
+        Language spanish = new Language("Spanish");
+        cockySpeak.setLanguage(spanish);
+
+        System.out.println("Jim starts Module 1...");
+        Lesson module1 = new Lesson("Module 1", spanish);
+        int module1Score = module1.playLesson(); 
+
+        // Check if the user passed Module 1 before starting Module 2
+        if (module1Score >= 80) {
+            System.out.println("\nJim starts Module 2...");
+            Lesson module2 = new Lesson("Module 2", spanish);
+            module2.playLesson();
+        } else {
+            System.out.println("Jim did not pass Module 1. Please try again.");
+        }
+
+        
+        cockySpeak.logout();
+
+        System.out.println("Jim logs back in...");
+        cockySpeak.login("JimSmith", "securePass");
+
+        System.out.println("Jim continues from Module 2.");
     }
 }
-
-
-    

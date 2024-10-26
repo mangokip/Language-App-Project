@@ -6,60 +6,64 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.junit.internal.ArrayComparisonFailure;
-
 public class WordList {
-    private DataLoader dataLoader = new DataLoader();
-    private Map<Language, List<Word>> languageWords;
-    private Map<Word, Integer> wordDifficulty;
-    // private List<Word> words;
-    private static WordList wordList;
+    private Map<String, List<Word>> languageWords; 
+    private static WordList instance;
 
+    
     private WordList() {
-        languageWords = new HashMap<>();
-        LanguageList languageList = LanguageList.getInstance();
-        Language thisLanguage = languageList.getLanguage("Spanish");
-        languageWords.put(thisLanguage, dataLoader.loadWordsToList());
-        wordDifficulty = new HashMap<>();
-        // words = dataLoader.loadWordsToList();
+        languageWords = new HashMap<>();  
+        loadWords();  
     }
 
+  
     public static WordList getInstance() {
-        if (wordList == null) {
-            wordList = new WordList();
+        if (instance == null) {
+            instance = new WordList();
         }
-        return wordList;
+        return instance;
     }
 
-    public Word addWord(Language language, String text, String translation, String pronounce, Genre genre, int difficulty) {
-        Word word = new Word(text, translation, pronounce, genre, difficulty);
-        languageWords.computeIfAbsent(language, k -> new ArrayList<>()).add(word);
-        wordDifficulty.put(word, difficulty);
-        return word;
+    private void loadWords() {
+        
+        Map<String, List<Word>> loadedWords = DataLoader.loadWords();
+        if (loadedWords != null && !loadedWords.isEmpty()) {
+            languageWords.putAll(loadedWords);
+        } else {
+            System.err.println("DataLoader returned no words.");
+        }
     }
 
+   
     public Word getRandomWord(Language language) {
-        List<Word> words = languageWords.get(language);
-        if (words == null || words.isEmpty()) {
+        return getRandomWord(language.getLanguageCode());
+    }
+
+    public Word getRandomWord(String languageCode) {
+        List<Word> words = languageWords.getOrDefault(languageCode, new ArrayList<>());
+        if (words.isEmpty()) {
+            System.err.println("No words available for language: " + languageCode);
             return null;
         }
         Random rand = new Random();
         return words.get(rand.nextInt(words.size()));
     }
 
+    
+    public List<Word> getLanguageWords(String languageCode) {
+        return languageWords.getOrDefault(languageCode, new ArrayList<>());
+    }
+
     public List<Word> getWordsByGenre(Language language, Genre genre) {
-        List<Word> words = languageWords.get(language);
-        if (words == null) {
-            return new ArrayList<>();
+        List<Word> genreWords = new ArrayList<>();
+        for (Word word : getLanguageWords(language.getLanguageCode())) {
+            if (word.getGenre() == genre) {
+                genreWords.add(word);
+            }
         }
-        return words.stream().filter(word -> word.getGenre() == genre).toList();
+        return genreWords;
     }
-
-    public int getDifficulty(Word word) {
-        return wordDifficulty.getOrDefault(word, 0);
-    }
-
-    public Map<Language, List<Word>> getLanguageWords() {
-        return languageWords;
-    }
+    
+    
 }
+

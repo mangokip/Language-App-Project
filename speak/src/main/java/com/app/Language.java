@@ -2,7 +2,6 @@ package com.app;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * The Language class represents a language with a list of vocabulary words,
@@ -10,60 +9,57 @@ import java.util.Map;
  */
 public class Language {
     private String code;
-    private WordList vocabularyList;
+    private WordList vocabularyList; // Shared WordList instance
     private ArrayList<String> grammarRules;
 
-    public Language(String name) {
-        this.code = name;
-        this.vocabularyList = WordList.getInstance();
+    public Language(String code) {
+        this.code = code;
+        this.vocabularyList = WordList.getInstance(); // Singleton to avoid duplicate instances
         this.grammarRules = new ArrayList<>();
     }
 
-    public void addVocabulary(String text, String translation, String pronounce, Genre genre, int difficulty) {
-        vocabularyList.addWord(this, text, translation, pronounce, genre, difficulty);
-    }
 
-    public void addPhrase(String phrase) {
-        vocabularyList.addWord(this, phrase, "", "", null, 1); // Default difficulty for phrases
-    }
 
+   
     public void addGrammarRule(String rule) {
         grammarRules.add(rule);
     }
 
+    
     public void displayContent() {
         System.out.println("Language: " + code);
         System.out.println("Vocabulary:");
-        for (Map.Entry<Language, List<Word>> entry : vocabularyList.getLanguageWords().entrySet()) {
-            if (entry.getKey().equals(this)) {
-                for (Word word : entry.getValue()) {
-                    int difficulty = vocabularyList.getDifficulty(word);
-                    System.out.println(word.getText() + " - " + word.getForeign() + " (" + word.getPronounce() + ") - Difficulty: " + difficulty);
-                }
+
+        List<Word> words = vocabularyList.getLanguageWords(code);
+        if (words != null && !words.isEmpty()) {
+            for (Word word : words) {
+                System.out.println(word.getText() + " - " + word.getForeign() + 
+                    " (" + word.getPronounce() + ") - Difficulty: " + word.getDifficulty());
             }
+        } else {
+            System.out.println("No vocabulary available.");
         }
+
         System.out.println("Grammar Rules:");
-        for (String rule : grammarRules) {
-            System.out.println(rule);
+        if (grammarRules.isEmpty()) {
+            System.out.println("No grammar rules added.");
+        } else {
+            for (String rule : grammarRules) {
+                System.out.println(rule);
+            }
         }
     }
 
-    public String getType() {
+    // Getters and Setters for the language code
+    public String getLanguageCode() {
         return code;
     }
 
-    public void setType(String type) {
-        this.code = type;
+    public void setLanguageCode(String code) {
+        this.code = code;
     }
 
-    public String getLanguageCode() {
-        return this.code;
-    }
-
-    public List<Word> getVocabularyList() {
-        return vocabularyList.getLanguageWords().get(this);
-    }
-
+    // Get the list of grammar rules
     public ArrayList<String> getGrammarRules() {
         return grammarRules;
     }

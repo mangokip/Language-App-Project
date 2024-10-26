@@ -23,9 +23,6 @@ class IntermediateState implements State {
     @Override
     public ArrayList<Question> getQuestionPool() {
         ArrayList<Question> questions = new ArrayList<>();
-        // Adding intermediate-level questions
-        questions.add(new Question("Conjugate the verb 'to eat' in the past tense in Spanish.", 2));
-        questions.add(new Question("What is the plural form of 'child' in Spanish?", 2));
         return questions;
     }
 
