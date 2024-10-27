@@ -91,18 +91,24 @@ public class User {
     }
 
     public ProgressTracker getLanguageProgressTracker(Language language) {
-        return progressTrackers.get(language);
+        ProgressTracker tracker = progressTrackers.get(language);
+        if (tracker == null) {
+            System.out.println("Progress tracker not found for language: " + language.getLanguageCode());
+        }
+        return tracker;
     }
+    
 
     public void createLanguageProgress(Language language) {
         if (!progressTrackers.containsKey(language)) {
             ProgressTracker tracker = new ProgressTracker(0, 0, 0, 0, 0, 10, 0, new BeginnerState());
-            progressTrackers.put(language, tracker);
+            progressTrackers.put(language, tracker);  // Add tracker to map
             System.out.println("Language " + language.getLanguageCode() + " initialized for " + username);
         } else {
             System.out.println("Language " + language.getLanguageCode() + " already initialized for " + username);
         }
     }
+    
 
     public List<String> getLanguageProgress() {
         List<String> progressList = new ArrayList<>();

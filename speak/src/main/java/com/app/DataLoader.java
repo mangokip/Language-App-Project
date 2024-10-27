@@ -87,35 +87,31 @@ public class DataLoader extends DataConstants {
         return users;
     }
 
-    
-    
     public static List<Word> loadWordsToList() {
         List<Word> words = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(WORD_FILE))) {
             StringBuilder content = new StringBuilder();
             String line;
-    
+
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
-    
-            
+
             JSONObject wordsJSON = (JSONObject) new JSONParser().parse(content.toString());
             JSONArray wordsArray = (JSONArray) wordsJSON.get("Spanish");
-    
+
             for (Object obj : wordsArray) {
                 JSONObject wordJSON = (JSONObject) obj;
-    
+
                 String text = (String) wordJSON.get("text");
                 String translation = (String) wordJSON.get("foreign");
                 String pronounce = (String) wordJSON.get("pronounce");
                 String genreStr = (String) wordJSON.get("genre");
                 Long difficultyLong = (Long) wordJSON.get("difficulty");
-    
-                
+
                 if (text != null && translation != null && pronounce != null && genreStr != null && difficultyLong != null) {
                     int difficulty = difficultyLong.intValue();
-    
+
                     try {
                         Genre tempGenre = Genre.valueOf(genreStr.toUpperCase());
                         words.add(new Word(text, translation, pronounce, tempGenre, difficulty));
@@ -128,11 +124,11 @@ public class DataLoader extends DataConstants {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
         return words;
     }
-    
+
     public static Map<String, List<Word>> loadWords() {
         Map<String, List<Word>> languageWords = new HashMap<>();
 
@@ -140,15 +136,12 @@ public class DataLoader extends DataConstants {
             StringBuilder content = new StringBuilder();
             String line;
 
-            
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
 
-            
             JSONObject wordsJSON = (JSONObject) new JSONParser().parse(content.toString());
 
-           
             for (Object key : wordsJSON.keySet()) {
                 String languageCode = (String) key;
                 JSONArray wordsArray = (JSONArray) wordsJSON.get(languageCode);
@@ -157,14 +150,12 @@ public class DataLoader extends DataConstants {
                 for (Object obj : wordsArray) {
                     JSONObject wordJSON = (JSONObject) obj;
 
-                   
                     String text = (String) wordJSON.get("text");
                     String translation = (String) wordJSON.get("foreign");
                     String pronunciation = (String) wordJSON.get("pronounce");
                     String genre = (String) wordJSON.get("genre");
                     int difficulty = ((Long) wordJSON.get("difficulty")).intValue();
 
-                    
                     wordList.add(new Word(text, translation, pronunciation, Genre.valueOf(genre), difficulty));
                 }
 
@@ -177,8 +168,8 @@ public class DataLoader extends DataConstants {
 
         return languageWords;
     }
-     
-      public static List<Phrase> loadPhrases() {
+
+    public static List<Phrase> loadPhrases() {
         List<Phrase> phrases = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(PHRASE_FILE))) {
@@ -235,7 +226,6 @@ public class DataLoader extends DataConstants {
                     String translation = (String) phraseObject.get("translation");
                     String pronunciation = (String) phraseObject.get("pronounce");
 
-                   
                     Flashcard phraseFlashcard = new Flashcard(text, translation, pronunciation);
                     flashcards.add(phraseFlashcard);
                 }
@@ -248,7 +238,6 @@ public class DataLoader extends DataConstants {
 
         return flashcards;
     }
-    
 
     /**
      * Main method to test the DataLoader class. Loads lessons from the JSON
@@ -261,6 +250,6 @@ public class DataLoader extends DataConstants {
         DataLoader dataLoader = new DataLoader();
         dataLoader.loadLessons();
         loadUsers();
-      
+
     }
 }

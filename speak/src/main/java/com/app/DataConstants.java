@@ -1,6 +1,7 @@
 package com.app;
 
 public abstract class DataConstants {
+
     protected static final String USER_ID = "UUID";
     protected static final String USER_NAME = "username";
     protected static final String PASSWORD = "password";

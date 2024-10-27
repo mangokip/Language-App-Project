@@ -56,7 +56,7 @@ public class UserList {
      *
      * @param username The username for the new user.
      * @param password The password for the new user.
-     * @param email    The email for the new user.
+     * @param email The email for the new user.
      * @return true if the user was added successfully, false otherwise.
      */
     public boolean addUser(String username, String password, String email) {

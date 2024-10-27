@@ -7,16 +7,15 @@ import java.util.Map;
 import java.util.Random;
 
 public class WordList {
-    private Map<String, List<Word>> languageWords; 
+
+    private Map<String, List<Word>> languageWords;
     private static WordList instance;
 
-    
     private WordList() {
-        languageWords = new HashMap<>();  
-        loadWords();  
+        languageWords = new HashMap<>();
+        loadWords();
     }
 
-  
     public static WordList getInstance() {
         if (instance == null) {
             instance = new WordList();
@@ -25,7 +24,7 @@ public class WordList {
     }
 
     private void loadWords() {
-        
+
         Map<String, List<Word>> loadedWords = DataLoader.loadWords();
         if (loadedWords != null && !loadedWords.isEmpty()) {
             languageWords.putAll(loadedWords);
@@ -34,7 +33,6 @@ public class WordList {
         }
     }
 
-   
     public Word getRandomWord(Language language) {
         return getRandomWord(language.getLanguageCode());
     }
@@ -49,7 +47,6 @@ public class WordList {
         return words.get(rand.nextInt(words.size()));
     }
 
-    
     public List<Word> getLanguageWords(String languageCode) {
         return languageWords.getOrDefault(languageCode, new ArrayList<>());
     }
@@ -63,7 +60,5 @@ public class WordList {
         }
         return genreWords;
     }
-    
-    
-}
 
+}
