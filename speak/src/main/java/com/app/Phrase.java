@@ -1,73 +1,50 @@
 package com.app;
-/*
- * LaMorra Strong
- */
-import java.util.ArrayList;
 
-/**
- * The Phrase class represents a phrase consisting of multiple words and its meaning.
- */
 public class Phrase {
+    private String text; // The original phrase text
+    private String translation; // The translated text
+    private String pronunciation; // The pronunciation guide
 
-    // A list of words that make up the phrase.
-    private ArrayList<Word> words;
-
-    // The meaning of the phrase.
-    private String meaning;
-
-    /**
-     * Constructor to create a new Phrase object.
-     * 
-     * @param words   The words that make up the phrase.
-     * @param meaning The meaning of the phrase.
-     */
-    public Phrase(ArrayList<Word> words, String meaning) {
-        this.words = words;
-        this.meaning = meaning;
+    // Constructor to initialize the phrase with text, translation, and pronunciation
+    public Phrase(String text, String translation, String pronunciation) {
+        this.text = text;
+        this.translation = translation;
+        this.pronunciation = pronunciation;
     }
 
-    public ArrayList<String> getEnglishPhrase(){
-        ArrayList<String> englishWords = new ArrayList<String>();
-        for(Word word : words){
-            englishWords.add(word.getText());
+    // Getter for the original text of the phrase
+    public String getText() {
+        return text;
+    }
+
+    // Getter for the translation of the phrase
+    public String getTranslation() {
+        return translation;
+    }
+
+    // Getter for the pronunciation of the phrase
+    public String getPronunciation() {
+        return pronunciation;
+    }
+
+    /**
+     * Replaces the correct word in the phrase text with a blank.
+     * Assumes that the word's **foreign text** exists in the phrase.
+     */
+    public String withBlank(Word correctWord) {
+        if (text.contains(correctWord.getForeign())) {
+            return text.replace(correctWord.getForeign(), "______");
+        } else {
+            return text;  // If the word is not found, return the original text.
         }
-        return englishWords;
-    }
-    public ArrayList<String> getForeignPhrase(){
-        ArrayList<String> foreignWords = new ArrayList<String>();
-        for(Word word: words){
-            foreignWords.add(word.getForeign());
-        }
-        return foreignWords;
-    }
-    
-
-    /**
-     * Gets the words in the phrase.
-     * 
-     * @return An ArrayList of Word objects representing the words in the phrase.
-     */
-    public ArrayList<Word> getWords() {
-        return words;
     }
 
-    /**
-     * Gets the meaning of the phrase.
-     * 
-     * @return The meaning of the phrase as a String.
-     */
-    public String getMeaning() {
-        return meaning;
-    }
-
-    /**
-     * Displays the phrase details, including the words and their meaning.
-     */
-    public void displayPhrase() {
-        System.out.print("Phrase: ");
-        for (Word word : words) {
-            System.out.print(word.getText() + " ");
-        }
-        System.out.println("\nMeaning: " + meaning);
+    @Override
+    public String toString() {
+        return "Phrase{" +
+                "text='" + text + '\'' +
+                ", translation='" + translation + '\'' +
+                ", pronunciation='" + pronunciation + '\'' +
+                '}';
     }
 }

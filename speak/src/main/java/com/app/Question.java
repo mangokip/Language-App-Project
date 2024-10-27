@@ -1,9 +1,10 @@
 package com.app;
-//Carson Sessoms
 
-import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Question {
+import com.narration.Narriator; // Import Narriator class
+
+public abstract class Question {
     private String prompt;
     private int difficulty;
 
@@ -12,17 +13,34 @@ public class Question {
         this.difficulty = difficulty;
     }
 
-    public void setDifficulty(int difficulty){
-        this.difficulty = difficulty;
-    }
-    public int getDifficulty(){
-        return this.difficulty;
-    }
-    public String toString(){
-        return " ";
-    }
-    public String getPrompt(){
+    public String getPrompt() {
         return this.prompt;
     }
-}
 
+    public int getDifficulty() {
+        return this.difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    /**
+     * Pronounces the question using AWS Polly via the Narriator.
+     */
+    public void pronouncePrompt() {
+        try {
+            Narriator.playSoundEnglish(prompt);  // Use Narriator to pronounce the prompt
+        } catch (Exception e) {
+            System.err.println("Error pronouncing the prompt: " + e.getMessage());
+        }
+    }
+
+    public abstract boolean askQuestion(Scanner scanner);
+    public abstract boolean validateAnswer(String userAnswer);
+
+    @Override
+    public String toString() {
+        return prompt;
+    }
+}

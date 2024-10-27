@@ -1,12 +1,15 @@
 package com.app;
+
 import java.util.ArrayList;
 
 /**
- * Singleton class that manages a list of languages in the CockySpeak application.
- * It allows adding, removing, and managing the current language.
+ * Singleton class that manages a list of languages in the CockySpeak
+ * application. It allows adding, removing, and managing the current language.
+ *
  * @author Bryce Klein
  */
 public class LanguageList {
+
     private static LanguageList languageList;
     private ArrayList<Language> languages;
 
@@ -19,6 +22,7 @@ public class LanguageList {
 
     /**
      * Singleton pattern - getInstance method
+     *
      * @return The instance of the LanguageList
      */
     public static LanguageList getInstance() {
@@ -30,6 +34,7 @@ public class LanguageList {
 
     /**
      * Gets the current language
+     *
      * @param name The name of the language to get
      * @return The language object if found, null otherwise
      */
@@ -44,8 +49,9 @@ public class LanguageList {
 
     /**
      * Checks if a language exists with the given name
+     *
      * @param name The name of the language to check
-     * @return  true if the language exists, false otherwise
+     * @return true if the language exists, false otherwise
      */
     public boolean hasLanguage(String name) {
         for (Language language : languages) {
@@ -58,6 +64,7 @@ public class LanguageList {
 
     /**
      * Adds a new language to the list
+     *
      * @param name The name of the language to add
      * @return true if the language was added successfully, false otherwise
      */
@@ -72,6 +79,7 @@ public class LanguageList {
 
     /**
      * Removes a language from the list
+     *
      * @param name The name of the language to remove
      * @return true if the language was removed successfully, false otherwise
      */

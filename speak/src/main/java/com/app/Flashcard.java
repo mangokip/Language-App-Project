@@ -1,6 +1,8 @@
 package com.app;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Flashcard {
 
@@ -10,7 +12,6 @@ public class Flashcard {
     private String genre;        // Only for words
     private Integer difficulty;  // Only for words
 
-    // Constructor for words (with genre and difficulty)
     public Flashcard() {
         this.text = "";
         this.translation = "";
@@ -57,33 +58,33 @@ public class Flashcard {
     }
 
     public void display() {
-        int boxWidth = 50; // Set the fixed width for the box
+        int boxWidth = 50;
         String topBorder = "╔" + "═".repeat(boxWidth) + "╗";
         String bottomBorder = "╚" + "═".repeat(boxWidth) + "╝";
-    
+
         System.out.println(topBorder);
         printWrappedLine("Word/Phrase: " + text, boxWidth);
         printWrappedLine("Pronunciation: " + pronunciation, boxWidth);
         printWrappedLine("Translation: " + translation, boxWidth);
-    
+
         if (!genre.equals("PHRASE")) {
             printWrappedLine(String.format("Genre: %s | Difficulty: %d", genre, difficulty), boxWidth);
         }
-        
+
         System.out.println(bottomBorder);
     }
-    
+
     private void printWrappedLine(String text, int width) {
         while (text.length() > width) {
-            // Print the first part of the text that fits in the box
-            System.out.printf("║ %-"+(width-2)+"s ║\n", text.substring(0, width-2));
-            // Move the remaining text to the next line
-            text = text.substring(width-2);
+
+            System.out.printf("║ %-" + (width - 2) + "s ║\n", text.substring(0, width - 2));
+
+            text = text.substring(width - 2);
         }
-        // Print any remaining text
-        System.out.printf("║ %-"+(width-2)+"s ║\n", text);
+
+        System.out.printf("║ %-" + (width - 2) + "s ║\n", text);
     }
-    
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -101,11 +102,27 @@ public class Flashcard {
         return builder.toString();
     }
 
-    // Generate flashcards from DataLoader
     public static List<Flashcard> generateFlashcards() {
         List<Flashcard> flashcards = new ArrayList<>();
-        flashcards.addAll(DataLoader.loadWords());
-        flashcards.addAll(DataLoader.loadPhrases());
+
+        Map<String, List<Word>> wordsMap = DataLoader.loadWords();
+        if (wordsMap != null) {
+            for (List<Word> words : wordsMap.values()) {
+                for (Word word : words) {
+                    flashcards.add(new Flashcard(
+                            word.getText(),
+                            word.getForeign(),
+                            word.getPronounce(),
+                            word.getGenre().toString(),
+                            word.getDifficulty()
+                    ));
+                }
+            }
+        }
+
+        List<Flashcard> phraseFlashcards = DataLoader.loadPhraseCards();  // Ensure loadPhrases() returns List<Flashcard>
+        flashcards.addAll(phraseFlashcards);
+
         return flashcards;
     }
 

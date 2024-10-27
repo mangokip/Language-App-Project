@@ -12,8 +12,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- * The DataWriter class is responsible for saving data related to users
- * in the CockySpeak application. It provides methods to save users to a data source.
+ * The DataWriter class is responsible for saving data related to users in the
+ * CockySpeak application. It provides methods to save users to a data source.
  */
 public class DataWriter extends DataConstants {
 
@@ -113,7 +113,7 @@ public class DataWriter extends DataConstants {
             progressDetails.put(PROGRESS_PERCENTAGE, progress.getProgressPercentage());
             progressDetails.put(CURRENT_STATE, progress.getState() == null ? null : progress.getState().toString());
 
-           languageProgress.put(language.getLanguageCode(), progressDetails);
+            languageProgress.put(language.getLanguageCode(), progressDetails);
         }
 
         userDetails.put(PROGRESS_TRACKERS, languageProgress); // match the JSON structure

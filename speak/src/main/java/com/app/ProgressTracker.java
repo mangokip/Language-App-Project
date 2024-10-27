@@ -248,7 +248,17 @@ public class ProgressTracker {
         }
     }
 
+    public void completeLesson() {
+        this.completedLessons++;  // Increment the completed lessons
+        this.lessonsCompleted++;  // Increment the total lessons completed count
+        
+        // Optionally update progress percentage
+        if (totalLessons > 0) {
+            this.progressPercentage = (completedLessons * 100) / totalLessons;
+        }
     
+        System.out.println("Lesson completed! Total completed lessons: " + this.completedLessons);
     }
-
+    
+}
 
