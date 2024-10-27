@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents a vocabulary matching question.
@@ -37,8 +39,14 @@ public class VocabularyMatching extends Question {
 
     @Override
     public boolean askQuestion(Scanner scanner) {
-        System.out.println(getPrompt());
-
+        ArrayList<String> foreignWords = new ArrayList<>(wordPairs.keySet());
+        ArrayList<String> englishWords = new ArrayList<>(wordPairs.values());
+        Collections.shuffle(foreignWords);
+        Collections.shuffle(englishWords);
+        System.out.println(getPrompt() + "\n");
+        for (int i = 0; i < foreignWords.size(); i++) {
+            System.out.println(foreignWords.get(i) + "     " + englishWords.get(i) + "\n");
+        }
         for (Map.Entry<String, String> entry : wordPairs.entrySet()) {
             String englishWord = entry.getKey();
             System.out.print("Enter the matching word for '" + englishWord + "': ");
