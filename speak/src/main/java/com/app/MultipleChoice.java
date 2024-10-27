@@ -6,11 +6,22 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+/*
+ * Class for a multiple choice question.
+ * @param answerOptions - List of Word objects that represent the possible answers
+ * @param correctAnswer - Word object that represents the correct answer
+ */
 public class MultipleChoice extends Question {
 
     private List<Word> answerOptions;
     private Word correctAnswer;
 
+    /*
+     * Constructor for a multiple choice question.
+     * @param difficulty - The difficulty level of the multiple choice question
+     * @param correctAnswer - The correct answer for the multiple choice question
+     * @param language - The language to be used for the multiple choice question
+     */
     public MultipleChoice(int difficulty, Word correctAnswer, Language language) {
         super("Select the foreign word that matches this English word: " + correctAnswer.getText(), difficulty);
         this.correctAnswer = correctAnswer;
@@ -18,6 +29,10 @@ public class MultipleChoice extends Question {
         populateAnswerOptions(language);
     }
 
+    /*
+     * Populates the answer options list with random words from the passed language. then shuffles th the list
+     * @param language - The language to be used for the multiple choice question
+     */
     private void populateAnswerOptions(Language language) {
         WordList wordList = WordList.getInstance();
         List<Word> genreWords = wordList.getWordsByGenre(language, correctAnswer.getGenre());
@@ -35,6 +50,10 @@ public class MultipleChoice extends Question {
         Collections.shuffle(answerOptions);
     }
 
+    /*
+     * Prints the question and the answer options and asks the user to select an answer
+     * this method is used in the lesson class to ask each quesiton
+     */
     @Override
     public boolean askQuestion(Scanner scanner) {
         pronouncePrompt();  // Pronounce the question before displaying
@@ -57,6 +76,8 @@ public class MultipleChoice extends Question {
         return result;
     }
 
+    //function to validate the user's answer based on the answer options list and the correct answer
+    // returns true if the user's answer is correct and false if it is not
     @Override
     public boolean validateAnswer(String userAnswer) {
         try {
