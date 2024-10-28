@@ -47,6 +47,10 @@ public class DataLoader extends DataConstants {
         return lessons;
     }
 
+    /**
+     * Loads users from file
+     * @return ArrayList<User> of users
+     */
     public static ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<>();
 
@@ -87,6 +91,10 @@ public class DataLoader extends DataConstants {
         return users;
     }
 
+    /**
+     * Loads words from the JSON file and returns them as a list of Word objects.
+     * @return  List of Word objects
+     */
     public static List<Word> loadWordsToList() {
         List<Word> words = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(WORD_FILE))) {
@@ -129,6 +137,10 @@ public class DataLoader extends DataConstants {
         return words;
     }
 
+    /**
+     * Loads words from the JSON file and returns them as a map of language code to list of Word objects.
+     * @return Map of language code to list of Word objects
+     */
     public static Map<String, List<Word>> loadWords() {
         Map<String, List<Word>> languageWords = new HashMap<>();
 
@@ -169,6 +181,10 @@ public class DataLoader extends DataConstants {
         return languageWords;
     }
 
+    /**
+     * Loads phrases from the JSON file and returns them as a list of Phrase objects.
+     * @return List of Phrase objects
+     */
     public static List<Phrase> loadPhrases() {
         List<Phrase> phrases = new ArrayList<>();
 
@@ -204,6 +220,10 @@ public class DataLoader extends DataConstants {
         return phrases;
     }
 
+    /**
+     * Loads phrases from the JSON file and returns them as a list of Flashcard objects.
+     * @return List of Flashcard objects
+     */
     public static List<Flashcard> loadPhraseCards() {
         List<Flashcard> flashcards = new ArrayList<>();
 
