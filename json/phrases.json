@@ -6,24 +6,9 @@
       "pronounce": "el peh-roh koh-reh rah-pee-doh"
     },
     {
-      "text": "La escuela está en la ciudad.",
-      "translation": "The school is in the city.",
-      "pronounce": "lah es-kweh-lah es-tah en lah syoo-dad"
-    },
-    {
-      "text": "Mi hermana estudia en la biblioteca.",
-      "translation": "My sister studies in the library.",
-      "pronounce": "mee ehr-mah-nah es-too-dyah en lah bee-blee-oh-teh-kah"
-    },
-    {
-      "text": "El hombre alto lee un libro.",
-      "translation": "The tall man reads a book.",
-      "pronounce": "el ohm-breh al-toh leh-eh un lee-broh"
-    },
-    {
-      "text": "El coche es azul.",
-      "translation": "The car is blue.",
-      "pronounce": "el koh-cheh es ah-sool"
+      "text": "El gato duerme en la casa.",
+      "translation": "The cat sleeps in the house.",
+      "pronounce": "el gah-toh dwehr-meh en lah kah-sah"
     },
     {
       "text": "La mujer está feliz hoy.",
@@ -31,74 +16,159 @@
       "pronounce": "lah moo-hehr es-tah feh-lees oy"
     },
     {
-      "text": "El amigo de Juan juega al fútbol.",
-      "translation": "Juan's friend plays soccer.",
-      "pronounce": "el ah-mee-goh deh hwan hoo-eh-gah al foot-bohl"
+      "text": "El hombre alto lee un libro.",
+      "translation": "The tall man reads a book.",
+      "pronounce": "el ohm-breh al-toh leh-eh un lee-broh"
     },
     {
-      "text": "El niño pequeño corre en el parque.",
-      "translation": "The small child runs in the park.",
-      "pronounce": "el nee-nyoh peh-keh-nyoh koh-reh en el par-keh"
+      "text": "Hoy me siento feliz.",
+      "translation": "Today I feel happy.",
+      "pronounce": "oy meh syen-toh feh-lees"
     },
     {
-      "text": "El gato duerme en la casa.",
-      "translation": "The cat sleeps in the house.",
-      "pronounce": "el gah-toh dwehr-meh en lah kah-sah"
+      "text": "El coche es rojo.",
+      "translation": "The car is red.",
+      "pronounce": "el koh-cheh es roh-hoh"
     },
     {
-      "text": "Tengo que escribir una carta.",
-      "translation": "I have to write a letter.",
-      "pronounce": "ten-goh keh es-kree-beer oo-nah kar-tah"
+      "text": "El cielo es azul.",
+      "translation": "The sky is blue.",
+      "pronounce": "el sye-loh es ah-sool"
     },
     {
-      "text": "Ella habla con su madre por teléfono.",
-      "translation": "She talks to her mother on the phone.",
-      "pronounce": "eh-yah ah-blah kon soo mah-dreh por teh-leh-foh-noh"
+      "text": "Mi amigo siempre me ayuda.",
+      "translation": "My friend always helps me.",
+      "pronounce": "mee ah-mee-goh syehm-preh meh ah-yoo-dah"
     },
     {
-      "text": "Vamos a comer en la noche.",
-      "translation": "We are going to eat at night.",
-      "pronounce": "vah-mos ah koh-mehr en lah noh-cheh"
+      "text": "Estoy leyendo un libro interesante.",
+      "translation": "I am reading an interesting book.",
+      "pronounce": "es-toy leh-yen-do un lee-broh een-teh-reh-sahn-teh"
     },
     {
-      "text": "Mi padre escucha música en el coche.",
-      "translation": "My father listens to music in the car.",
-      "pronounce": "mee pah-dreh es-koo-chah moo-see-kah en el koh-cheh"
+      "text": "La casa tiene tres habitaciones.",
+      "translation": "The house has three rooms.",
+      "pronounce": "lah kah-sah tee-eh-neh tres ah-bee-tah-syon-es"
     },
     {
-      "text": "Nosotros caminamos hacia la escuela.",
-      "translation": "We walk toward the school.",
-      "pronounce": "noh-soh-tros kah-mee-nah-mos ah-syah lah es-kweh-lah"
+      "text": "Voy a correr en el parque.",
+      "translation": "I am going to run in the park.",
+      "pronounce": "voy ah koh-rehr en el par-keh"
     },
     {
-      "text": "Ellos estudian juntos cada día.",
-      "translation": "They study together every day.",
-      "pronounce": "eh-yos es-too-dyan hoon-tos kah-dah dee-ah"
+      "text": "Me gusta hablar con mis amigos.",
+      "translation": "I like to talk with my friends.",
+      "pronounce": "meh goo-stah ah-blar kon mees ah-mee-gos"
     },
     {
-      "text": "¿Puedes jugar conmigo en el parque?",
-      "translation": "Can you play with me in the park?",
-      "pronounce": "pweh-des hoo-gar kon-mee-goh en el par-keh"
+      "text": "Vamos a comer juntos.",
+      "translation": "We are going to eat together.",
+      "pronounce": "vah-mos ah koh-mehr hoon-tos"
     },
     {
-      "text": "El coche rojo es muy rápido.",
-      "translation": "The red car is very fast.",
-      "pronounce": "el koh-cheh roh-hoh es moo-ee rah-pee-doh"
+      "text": "Nos gusta caminar en la playa.",
+      "translation": "We like to walk on the beach.",
+      "pronounce": "nos goo-stah kah-mee-nar en lah plah-yah"
     },
     {
-      "text": "La familia tiene una casa grande.",
-      "translation": "The family has a big house.",
-      "pronounce": "lah fah-mee-lee-ah tee-eh-neh oo-nah kah-sah grahn-deh"
+      "text": "Mi hermano es muy alto.",
+      "translation": "My brother is very tall.",
+      "pronounce": "mee ehr-mah-noh es moo-ee al-toh"
     },
     {
-      "text": "El perro duerme en la cama pequeña.",
-      "translation": "The dog sleeps in the small bed.",
-      "pronounce": "el peh-roh dwehr-meh en lah kah-mah peh-keh-nyah"
+      "text": "Mi hermana estudia en la escuela.",
+      "translation": "My sister studies at the school.",
+      "pronounce": "mee ehr-mah-nah es-too-dyah en lah es-kweh-lah"
+    },
+    {
+      "text": "El coche está aparcado afuera.",
+      "translation": "The car is parked outside.",
+      "pronounce": "el koh-cheh es-tah ah-par-kah-doh ah-fweh-rah"
+    },
+    {
+      "text": "La escuela está en la ciudad.",
+      "translation": "The school is in the city.",
+      "pronounce": "lah es-kweh-lah es-tah en lah syoo-dad"
+    },
+    {
+      "text": "Necesito escribir una carta.",
+      "translation": "I need to write a letter.",
+      "pronounce": "neh-seh-see-toh es-kree-beer oo-nah kar-tah"
+    },
+    {
+      "text": "La ciudad es muy grande.",
+      "translation": "The city is very big.",
+      "pronounce": "lah syoo-dad es moo-ee grahn-deh"
+    },
+    {
+      "text": "Me siento triste hoy.",
+      "translation": "I feel sad today.",
+      "pronounce": "meh syen-toh trees-teh oy"
+    },
+    {
+      "text": "Mi padre trabaja todo el día.",
+      "translation": "My father works all day.",
+      "pronounce": "mee pah-dreh tra-bah-hah toh-doh el dee-ah"
+    },
+    {
+      "text": "Mi madre cocina muy bien.",
+      "translation": "My mother cooks very well.",
+      "pronounce": "mee mah-dreh koh-see-nah moo-ee byen"
+    },
+    {
+      "text": "La familia come junta los domingos.",
+      "translation": "The family eats together on Sundays.",
+      "pronounce": "lah fah-mee-lee-ah koh-meh hoon-tah los doh-meen-gos"
     },
     {
       "text": "Me gusta leer por la noche.",
       "translation": "I like to read at night.",
       "pronounce": "meh goo-stah leh-ehr por lah noh-cheh"
+    },
+    {
+      "text": "No tengo tiempo para eso.",
+      "translation": "I don't have time for that.",
+      "pronounce": "no ten-goh tyem-poh pah-rah eh-so"
+    },
+    {
+      "text": "La casa es muy grande.",
+      "translation": "The house is very big.",
+      "pronounce": "lah kah-sah es moo-ee grahn-deh"
+    },
+    {
+      "text": "El perro es muy pequeño.",
+      "translation": "The dog is very small.",
+      "pronounce": "el peh-roh es moo-ee peh-keh-nyoh"
+    },
+    {
+      "text": "El agua está fría.",
+      "translation": "The water is cold.",
+      "pronounce": "el ah-gwah es-tah free-ah"
+    }
+    ,{
+      "text": "El perro es pequeño.",
+      "translation": "The dog is small.",
+      "pronounce": "el peh-roh es peh-keh-nyoh"
+    },
+    {
+      "text": "El niño pequeño juega en el parque.",
+      "translation": "The small child plays in the park.",
+      "pronounce": "el nee-nyoh peh-keh-nyoh hoo-eh-gah en el par-keh"
+    },
+    {
+      "text": "Este libro es pequeño.",
+      "translation": "This book is small.",
+      "pronounce": "es-teh lee-broh es peh-keh-nyoh"
+    },
+    {
+      "text": "La casa pequeña tiene dos habitaciones.",
+      "translation": "The small house has two rooms.",
+      "pronounce": "lah kah-sah peh-keh-nyoh tee-eh-neh dos ah-bee-ta-syoh-nes"
+    },
+    {
+      "text": "Un coche pequeño está en la calle.",
+      "translation": "A small car is on the street.",
+      "pronounce": "un koh-cheh peh-keh-nyoh es-tah en lah kah-yeh"
     }
   ]
 }

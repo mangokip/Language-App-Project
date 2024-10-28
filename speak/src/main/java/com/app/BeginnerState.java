@@ -12,7 +12,6 @@ class BeginnerState implements State {
     @Override
     public void increaseLevel() {
         System.out.println("Level increased! You're now at the Intermediate level.");
-        // Logic to transition to IntermediateState can be implemented here.
     }
 
     @Override
@@ -23,9 +22,6 @@ class BeginnerState implements State {
     @Override
     public ArrayList<Question> getQuestionPool() {
         ArrayList<Question> questions = new ArrayList<>();
-        // Adding beginner-level questions
-        questions.add(new Question("Translate 'apple' to Spanish.", 1));
-        questions.add(new Question("Translate 'hello' to Spanish.", 1));
         return questions;
     }
 
