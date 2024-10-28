@@ -19,6 +19,9 @@ public class CockySpeak {
     private List<Flashcard> flashcards;
     private Flashcard selectedWord;
 
+    /**
+     * Basic constructor
+     */
     public CockySpeak() {
         userList = UserList.getInstance();
         wordList = WordList.getInstance();
@@ -48,7 +51,7 @@ public class CockySpeak {
     /**
      * Prompts the user to select a language.
      *
-     * @return
+     * @return Language - the selected language
      */
     public Language promptLanguageSelection() {
         Scanner keyboard = new Scanner(System.in);
@@ -64,6 +67,10 @@ public class CockySpeak {
         return new Language(selectedLanguageCode);
     }
 
+    /**
+     * Prompts the user to select a difficulty level.
+     * @param language - the language to be used for the difficulty selection
+     */
     public void promptDifficultySelection(Language language) {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Select difficulty level: BEGINNER, INTERMEDIATE, EXPERT");
@@ -86,6 +93,11 @@ public class CockySpeak {
         }
     }
 
+    /**
+     * Logs in the user with the given username and password.
+     * @param username  The username
+     * @param password The password
+     */
     public void login(String username, String password) {
         if (userList.hasUser(username)) {
             User thisUser = userList.getUser(username);
@@ -126,23 +138,37 @@ public class CockySpeak {
         return true;
     }
 
+    /**
+     * Logs out the current user and saves progress.
+     */
     public void logout() {
         writer.saveUsers(userList.getUsers());
         System.out.println("Progress saved... Logging out");
     }
 
+    /**
+     * Changes the username of the currently logged-in user.
+     * @param newUsername The new username to be changed
+     */
     public void changeUsername(String newUsername) {
         user.setUserName(newUsername);
         writer.saveUsers(userList.getUsers());
         System.out.println("Username changed to: " + newUsername);
     }
 
+    /**
+     * Changes the password of the currently logged-in user.
+     * @param newPassword The new password to be changed
+     */
     public void changePassword(String newPassword) {
         user.setPassword(newPassword);
         writer.saveUsers(userList.getUsers());
         System.out.println("Password changed successfully");
     }
 
+    /**
+     * Changes the email of the currently logged-in user.
+     */
     public void loadFlashcards() {
 
         flashcards = Flashcard.generateFlashcards();
@@ -178,6 +204,10 @@ public class CockySpeak {
         }
     }
 
+    /**
+     * Starts a lesson for the currently logged-in user.
+     * @param moduleName The name of the module to start
+     */
     public void startModule(String moduleName) {
         if (currentLanguage == null) {
             System.out.println("No language set. Defaulting to Spanish.");
@@ -204,6 +234,10 @@ public class CockySpeak {
         writer.saveUsers(userList.getUsers());  // Save progress
     }
 
+    /**
+     * Resumes the user's progress from the last completed lesson.
+     * @param languageCode the language of choice
+     */
     public void resumeFromProgress(String languageCode) {
         ProgressTracker tracker = user.getLanguageProgressTracker(new Language(languageCode));
         int completedLessons = tracker.getCompletedLessons();
