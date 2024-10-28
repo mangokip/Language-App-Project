@@ -7,6 +7,11 @@ import java.util.Scanner;
 
 /**
  * Represents a lesson in the language learning application.
+ * @param questions - ArrayList of Question with different types of questions
+ * @param language - the langauge of the lesson
+ * @param topic - the topic of the lesson
+ * @param numQuestionsCorrect - the number of questions the user has answered correctly
+ * @param diff - the difficulty level of the lesson
  */
 public class Lesson {
 
@@ -16,6 +21,7 @@ public class Lesson {
     private int numQuestionsCorrect;
     private static final int diff = 1;
 
+    // constructor for the lesson class
     public Lesson(String topic, Language language) {
         this.topic = topic;
         this.questions = new ArrayList<>();
@@ -34,6 +40,7 @@ public class Lesson {
                 continue; // Skip this iteration if no word is found
             }
 
+            //adds different question types based on the size of the questions arraylist
             switch (questions.size()) {
                 case 0:
                 case 1:
@@ -77,6 +84,10 @@ public class Lesson {
         }
     }
 
+    // function to generate a phrase with a word that is passed in the function
+    // @param word - the word to be used to generate the phrase
+    // @param phrases - the list of phrases to be used to generate the phrase
+    // returns a phrase with a blank space for the word passed in
     private Phrase generatePhraseWithWord(Word word, List<Phrase> phrases) {
         for (Phrase phrase : phrases) {
             if (phrase.getText().toLowerCase().contains(word.getForeign().toLowerCase())) {
@@ -90,20 +101,26 @@ public class Lesson {
         return null;
     }
 
+    // function to play the lesson
     public int playLesson() {
         System.out.println("Starting lesson: " + topic);
         Scanner scanner = new Scanner(System.in);
-
+        /*
+         * loops throught the questions arraylist and asks the questions
+         * if the question is correct, it increments the numQuestionsCorrect variable
+         */
         for (Question question : questions) {
             boolean isCorrect = question.askQuestion(scanner);
             if (isCorrect) {
                 numQuestionsCorrect++;
             }
         }
-
+        //calculates the score of the lesson and prints it
         int score = (numQuestionsCorrect * 100) / questions.size();
         System.out.println("Lesson completed. Score: " + score + "%");
 
+        //if the score is greater than or equal to 80, the user passes the lesson and moves on to the next module
+        //if the score is less than 80, the user fails the lesson
         if (score >= 80) {
             System.out.println("You passed! Proceeding to the next module.");
         } else {

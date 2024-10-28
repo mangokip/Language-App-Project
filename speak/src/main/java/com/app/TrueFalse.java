@@ -2,12 +2,24 @@ package com.app;
 
 import java.util.Scanner;
 
+/*
+ * Class for a true-false question.
+ * @param word - The word to be used for the true-false question
+ * @param correctTranslation - Whether the translation is correct or not
+ * @param difficulty - The difficulty level of the true-false question
+ */
 public class TrueFalse extends Question {
 
     private boolean correctTranslation;
     private Word word;
     private String displayedAnswer;
 
+    /*
+     * Constructor for a true-false question.
+     * @param word - The word to be used for the true-false question
+     * @param correctTranslation - Whether the translation is correct or not
+     * @param difficulty - The difficulty level of the true-false question
+     */
     public TrueFalse(Word word, boolean correctTranslation, int difficulty) {
         super("Is this translation correct? " + word.getText() + " -> " + 
               (correctTranslation ? word.getForeign() : getRandomIncorrectTranslation(word)), 
@@ -17,6 +29,10 @@ public class TrueFalse extends Question {
         this.correctTranslation = correctTranslation;
     }
 
+    /*
+     * method for asking the question used in the lesson class
+     * 
+     */
     @Override
     public boolean askQuestion(Scanner scanner) {
         pronouncePrompt();  // Pronounce the question before displaying it
@@ -40,6 +56,7 @@ public class TrueFalse extends Question {
         }
     }
 
+    //method for validating the answer used in the askQuestion method
     @Override
     public boolean validateAnswer(String userAnswer) {
         boolean userSelectedTrue = userAnswer.equals("1");
@@ -53,6 +70,7 @@ public class TrueFalse extends Question {
         return isCorrectAnswer;
     }
 
+    //method for getting a random incorrect translation if the answer is false and the translation is incorrect
     private static String getRandomIncorrectTranslation(Word correctWord) {
         WordList wordList = WordList.getInstance();
         String incorrectTranslation;
