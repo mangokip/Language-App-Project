@@ -54,7 +54,7 @@ public class WordList {
     }
 
     private void loadWords(String filepath) {
-        Map<String, List<Word>> loadedWords = DataLoader.loadWords(filepath);
+        Map<String, List<Word>> loadedWords = DataLoader.loadWordsFromResource(filepath);
         if (loadedWords != null && !loadedWords.isEmpty()) {
             languageWords.putAll(loadedWords);
         } else {
