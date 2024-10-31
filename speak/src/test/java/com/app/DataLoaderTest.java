@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataLoaderTest {
+
     private UserList users = UserList.getInstance();
     private ArrayList<User> userList = users.getUsers();
     private User testUser;
@@ -21,7 +22,7 @@ class DataLoaderTest {
         userList.clear();
         testUser = new User("TestUser", "TestPassword123", "testuser@example.com");
         userList.add(testUser);
-        DataWriter.saveUsers(userList);
+        DataWriter.saveUsers(userList, "user.json");
         System.out.println("UserList in setup: " + userList);
 
     }
@@ -29,26 +30,28 @@ class DataLoaderTest {
     @AfterEach
     public void tearDown() {
         userList.clear();
-        DataWriter.saveUsers(userList);
+        DataWriter.saveUsers(userList, "/user.json");
     }
+
 
     @Test
     void testGetUsersSize() {
-        userList = DataLoader.loadUsers();
-        assertEquals(12, userList.size());
+        userList = DataLoader.loadUsers("/user.json");
+        assertEquals(1, userList.size(), "User list size should match the test setup with only 1 user.");
     }
-
+    
     @Test
     void testGetUsersSizeZero() {
         userList.clear();
-        DataWriter.saveUsers(userList);
-        userList = DataLoader.loadUsers();
-        assertEquals(0, userList.size());
+        DataWriter.saveUsers(userList, "/user.json");
+        userList = DataLoader.loadUsers("/user.json");
+        assertEquals(0, userList.size(), "User list size should be zero after clearing and saving an empty list.");
     }
+    
 
     @Test
     void testGetUserPassword() {
-        userList = DataLoader.loadUsers();
+        userList = DataLoader.loadUsers("/user.json");
         assertEquals("TestPassword123", userList.get(0).getPassword());
     }
 
@@ -57,7 +60,7 @@ class DataLoaderTest {
         Map<String, List<Word>> languageWords = DataLoader.loadWords();
         assertNotNull(languageWords);
         assertTrue(languageWords.size() > 0);
-        
+
         List<Word> spanishWords = languageWords.get("Spanish");
         assertNotNull(spanishWords);
         assertTrue(spanishWords.size() > 0);
@@ -65,13 +68,16 @@ class DataLoaderTest {
 
     @Test
     public void testLoadUsers() {
-        ArrayList<User> loadedUsers = DataLoader.loadUsers();
-        assertNotNull(loadedUsers);
-        assertEquals(12, loadedUsers.size());
+        ArrayList<User> loadedUsers = DataLoader.loadUsers("/user.json");
+
+   
+        assertNotNull(loadedUsers, "Loaded users should not be null.");
+        assertEquals(1, loadedUsers.size(), "Only one user should be loaded in the test.");
 
         User loadedUser = loadedUsers.get(0);
-        assertEquals("JaneDoe", loadedUser.getUserName());
-        assertEquals("newpassword123", loadedUser.getPassword());
-        assertEquals("john.doe@example.com", loadedUser.getEmail());
+        assertEquals("TestUser", loadedUser.getUserName(), "Username should match 'TestUser'.");
+        assertEquals("TestPassword123", loadedUser.getPassword(), "Password should match 'TestPassword123'.");
+        assertEquals("testuser@example.com", loadedUser.getEmail(), "Email should match 'testuser@example.com'.");
     }
+
 }

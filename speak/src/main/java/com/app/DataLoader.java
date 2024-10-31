@@ -20,7 +20,7 @@ public class DataLoader extends DataConstants {
     public static ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<>();
         
-        try (InputStream inputStream = DataLoader.class.getResourceAsStream("/user.json");
+        try (InputStream inputStream = DataLoader.class.getResourceAsStream(USER_FILE);
              InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
              BufferedReader reader = new BufferedReader(inputStreamReader)) {
 
@@ -51,6 +51,42 @@ public class DataLoader extends DataConstants {
 
         return users;
     }
+
+    public static ArrayList<User> loadUsers(String filePath) {
+        ArrayList<User> users = new ArrayList<>();
+        
+        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath);
+             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+             BufferedReader reader = new BufferedReader(inputStreamReader)) {
+    
+            StringBuilder content = new StringBuilder();
+            String line;
+    
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+    
+            JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
+    
+            for (Object obj : usersJSON) {
+                JSONObject userJSON = (JSONObject) obj;
+    
+                String username = (String) userJSON.get(USER_NAME);
+                String password = (String) userJSON.get(PASSWORD);
+                String email = (String) userJSON.get(EMAIL);
+    
+                if (username != null && password != null && email != null) {
+                    users.add(new User(username, password, email));
+                }
+            }
+    
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    
+        return users;
+    }
+    
 
     public static List<Word> loadWordsToList() {
         List<Word> words = new ArrayList<>();
@@ -209,4 +245,5 @@ public class DataLoader extends DataConstants {
 
         return flashcards;
     }
+    
 }
