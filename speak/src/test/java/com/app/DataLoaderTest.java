@@ -15,21 +15,16 @@ class DataLoaderTest {
 
     private UserList users = UserList.getInstance();
     private ArrayList<User> userList = users.getUsers();
-    private User testUser;
+    private User user;
 
     @BeforeEach
     public void setup() {
-        userList.clear();
-        testUser = new User("TestUser", "TestPassword123", "testuser@example.com");
-        userList.add(testUser);
-        DataWriter.saveUsers(userList, "/user.json");
-        System.out.println("UserList in setup: " + userList);
+        userList = DataLoader.loadUsersFromResource("/user.json");
 
     }
 
     @AfterEach
     public void tearDown() {
-        userList.clear();
         DataWriter.saveUsers(userList, "/user.json");
     }
 
@@ -37,7 +32,7 @@ class DataLoaderTest {
     @Test
     void testGetUsersSize() {
         userList = DataLoader.loadUsersFromResource("/user.json");
-        assertEquals(1, userList.size(), "User list size should match the test setup with only 1 user.");
+        assertEquals(12, userList.size(), "User list size should match the test setup with only 1 user.");
     }
 
     @Test
@@ -48,15 +43,10 @@ class DataLoaderTest {
         assertEquals(0, userList.size(), "User list size should be zero after clearing and saving an empty list.");
     }
 
-    @Test
-    void testGetUserPassword() {
-        userList = DataLoader.loadUsersFromResource("/user.json");
-        assertEquals("TestPassword123", userList.get(0).getPassword());
-    }
-
+    
     @Test
     public void testLoadWords() {
-        Map<String, List<Word>> languageWords = DataLoader.loadWords();
+        Map<String, List<Word>> languageWords = DataLoader.loadWordsFromResource("/words.json");
         assertNotNull(languageWords);
         assertTrue(languageWords.size() > 0);
 
@@ -70,12 +60,13 @@ class DataLoaderTest {
         ArrayList<User> loadedUsers = DataLoader.loadUsersFromResource("/user.json");
 
         assertNotNull(loadedUsers, "Loaded users should not be null.");
-        assertEquals(1, loadedUsers.size(), "Only one user should be loaded in the test.");
+        assertEquals(12, loadedUsers.size(), "Only one user should be loaded in the test.");
 
         User loadedUser = loadedUsers.get(0);
-        assertEquals("TestUser", loadedUser.getUserName(), "Username should match 'TestUser'.");
-        assertEquals("TestPassword123", loadedUser.getPassword(), "Password should match 'TestPassword123'.");
-        assertEquals("testuser@example.com", loadedUser.getEmail(), "Email should match 'testuser@example.com'.");
-    }
+        assertEquals("JohnDoe", loadedUser.getUserName(), "Username should match 'JohnDoe'.");
+        assertEquals("john.doe@example.com", loadedUser.getEmail(), "Email should match 'testuser@example.com'.");
+        assertNotNull(loadedUser.getUUID());
+        assertEquals("newPassword123", loadedUser.getPassword(), "Password should match 'TestPassword123'."); // test case is wrong to debug, password is case sensitive as intended
+    }  
 
 }

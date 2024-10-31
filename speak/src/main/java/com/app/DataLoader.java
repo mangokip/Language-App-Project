@@ -68,7 +68,9 @@ public class DataLoader extends DataConstants {
                 content.append(line).append("\n");
             }
 
+            System.out.println("File content loaded: " + content.toString());  // Confirm file content here
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
+            System.out.println("Parsed JSON array: " + usersJSON.toString());  // Confirm JSON parsing here
 
             for (int i = 0; i < usersJSON.size(); i++) {
                 JSONObject userJSON = (JSONObject) usersJSON.get(i);
@@ -102,27 +104,37 @@ public class DataLoader extends DataConstants {
      */
     public static ArrayList<User> loadUsersFromResource(String filePath) {
         ArrayList<User> users = new ArrayList<>();
+        System.out.println("Attempting to load users from resource: " + filePath);
         try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath);
              InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
              BufferedReader reader = new BufferedReader(inputStreamReader)) {
+            if (inputStream == null) {
+                System.err.println("Resource file not found: " + filePath);
+                return users;
+            }
             StringBuilder content = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
+            System.out.println("File content loaded: " + content.toString());  // Confirm file content here
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
+            System.out.println("Parsed JSON array: " + usersJSON.toString());  // Confirm JSON parsing here
             for (Object obj : usersJSON) {
                 JSONObject userJSON = (JSONObject) obj;
                 String username = (String) userJSON.get(USER_NAME);
                 String password = (String) userJSON.get(PASSWORD);
                 String email = (String) userJSON.get(EMAIL);
                 users.add(new User(username, password, email));
+                System.out.println("Successfully loaded user: " + username);
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+        System.out.println("Total users loaded in method: " + users.size());  // Verify loaded users count
         return users;
     }
+    
 
     /**
      * Loads words from the JSON file and returns them as a list of Word
