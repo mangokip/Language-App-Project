@@ -3,6 +3,9 @@ package com.app;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +22,10 @@ import org.json.simple.parser.ParseException;
  * but it does not yet parse the JSON into objects.
  */
 public class DataLoader extends DataConstants {
+
+    InputStream inputStream = DataLoader.class.getResourceAsStream(DataConstants.USER_FILE);
+    InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+    BufferedReader reader = new BufferedReader(inputStreamReader);
 
     /**
      * Loads lessons from a JSON file and returns them as a list of Lesson
@@ -49,6 +56,7 @@ public class DataLoader extends DataConstants {
 
     /**
      * Loads users from file
+     *
      * @return ArrayList<User> of users
      */
     public static ArrayList<User> loadUsers() {
@@ -92,8 +100,10 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Loads words from the JSON file and returns them as a list of Word objects.
-     * @return  List of Word objects
+     * Loads words from the JSON file and returns them as a list of Word
+     * objects.
+     *
+     * @return List of Word objects
      */
     public static List<Word> loadWordsToList() {
         List<Word> words = new ArrayList<>();
@@ -138,7 +148,9 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Loads words from the JSON file and returns them as a map of language code to list of Word objects.
+     * Loads words from the JSON file and returns them as a map of language code
+     * to list of Word objects.
+     *
      * @return Map of language code to list of Word objects
      */
     public static Map<String, List<Word>> loadWords() {
@@ -182,7 +194,9 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Loads phrases from the JSON file and returns them as a list of Phrase objects.
+     * Loads phrases from the JSON file and returns them as a list of Phrase
+     * objects.
+     *
      * @return List of Phrase objects
      */
     public static List<Phrase> loadPhrases() {
@@ -221,7 +235,9 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Loads phrases from the JSON file and returns them as a list of Flashcard objects.
+     * Loads phrases from the JSON file and returns them as a list of Flashcard
+     * objects.
+     *
      * @return List of Flashcard objects
      */
     public static List<Flashcard> loadPhraseCards() {
