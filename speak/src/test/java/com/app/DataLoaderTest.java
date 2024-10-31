@@ -22,7 +22,7 @@ class DataLoaderTest {
         userList.clear();
         testUser = new User("TestUser", "TestPassword123", "testuser@example.com");
         userList.add(testUser);
-        DataWriter.saveUsers(userList, "user.json");
+        DataWriter.saveUsers(userList, "/user.json");
         System.out.println("UserList in setup: " + userList);
 
     }
@@ -33,13 +33,23 @@ class DataLoaderTest {
         DataWriter.saveUsers(userList, "/user.json");
     }
 
+    @Test
+    void testSaveAndLoadSingleUser() {
+        userList.clear();
+        userList.add(new User("TestUser", "TestPassword123", "testuser@example.com"));
+        DataWriter.saveUsers(userList, "/user.json");
+
+        ArrayList<User> loadedUsers = DataLoader.loadUsers("/user.json");
+        assertEquals(1, loadedUsers.size());
+        assertEquals("TestUser", loadedUsers.get(0).getUserName());
+    }
 
     @Test
     void testGetUsersSize() {
         userList = DataLoader.loadUsers("/user.json");
         assertEquals(1, userList.size(), "User list size should match the test setup with only 1 user.");
     }
-    
+
     @Test
     void testGetUsersSizeZero() {
         userList.clear();
@@ -47,7 +57,6 @@ class DataLoaderTest {
         userList = DataLoader.loadUsers("/user.json");
         assertEquals(0, userList.size(), "User list size should be zero after clearing and saving an empty list.");
     }
-    
 
     @Test
     void testGetUserPassword() {
@@ -70,7 +79,6 @@ class DataLoaderTest {
     public void testLoadUsers() {
         ArrayList<User> loadedUsers = DataLoader.loadUsers("/user.json");
 
-   
         assertNotNull(loadedUsers, "Loaded users should not be null.");
         assertEquals(1, loadedUsers.size(), "Only one user should be loaded in the test.");
 
