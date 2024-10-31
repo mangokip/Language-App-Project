@@ -1,0 +1,35 @@
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+class FillBlankTest {
+
+    private FillBlank fillBlank;
+
+    @BeforeEach
+    void setUp() {
+        fillBlank = new FillBlank("El perro ____ rápido.");
+        fillBlank.setCorrectAnswer("corre");
+    }
+
+    @AfterEach
+    void tearDown() {
+        fillBlank = null;
+    }
+
+    @Test
+    void testBlankCreatedCorrectly() {
+        assertTrue(fillBlank.getSentence().contains("____"), "Sentence should contain a blank");
+    }
+
+    @Test
+    void testAnswerValidationCorrect() {
+        assertTrue(fillBlank.validateAnswer("corre"), "Correct answer should return true");
+    }
+
+    @Test
+    void testAnswerValidationIncorrect() {
+        assertFalse(fillBlank.validateAnswer("camina"), "Incorrect answer should return false");
+    }
+}

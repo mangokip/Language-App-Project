@@ -1,0 +1,46 @@
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import java.util.List;
+
+class GenreTest {
+
+    private Genre genre;
+
+    @BeforeEach
+    void setUp() throws Exception {
+        genre = new Genre();
+        genre.loadWordsByGenre("json\words.json");
+    }
+
+    @AfterEach
+    void tearDown() {
+        genre = null;
+    }
+
+    @Test
+    void testGenreNotEmpty() {
+        assertFalse(genre.getWordsByGenre("noun").isEmpty(), "Noun genre list should not be empty");
+    }
+
+    @Test
+    void testRetrieveNouns() {
+        List<Word> nouns = genre.getWordsByGenre("noun");
+        assertTrue(nouns.stream().allMatch(word -> word.getGenre().equalsIgnoreCase("noun")),
+                "All retrieved words should be nouns");
+    }
+
+    @Test
+    void testRetrieveVerbs() {
+        List<Word> verbs = genre.getWordsByGenre("verb");
+        assertTrue(verbs.stream().allMatch(word -> word.getGenre().equalsIgnoreCase("verb")),
+                "All retrieved words should be verbs");
+    }
+
+    @Test
+    void testInvalidGenreReturnsEmpty() {
+        List<Word> invalidGenre = genre.getWordsByGenre("unknown");
+        assertTrue(invalidGenre.isEmpty(), "Unknown genre should return an empty list");
+    }
+}
