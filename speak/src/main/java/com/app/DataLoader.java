@@ -175,6 +175,49 @@ public class DataLoader extends DataConstants {
         return languageWords;
     }
 
+    public static Map<String, List<Word>> loadWords(String filePath) {
+        Map<String, List<Word>> languageWords = new HashMap<>();
+
+        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath);
+             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+             BufferedReader reader = new BufferedReader(inputStreamReader)) {
+
+            StringBuilder content = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+
+            JSONObject wordsJSON = (JSONObject) new JSONParser().parse(content.toString());
+
+            for (Object key : wordsJSON.keySet()) {
+                String languageCode = (String) key;
+                JSONArray wordsArray = (JSONArray) wordsJSON.get(languageCode);
+
+                List<Word> wordList = new ArrayList<>();
+                for (Object obj : wordsArray) {
+                    JSONObject wordJSON = (JSONObject) obj;
+
+                    String text = (String) wordJSON.get("text");
+                    String translation = (String) wordJSON.get("foreign");
+                    String pronunciation = (String) wordJSON.get("pronounce");
+                    String genre = (String) wordJSON.get("genre");
+                    int difficulty = ((Long) wordJSON.get("difficulty")).intValue();
+
+                    wordList.add(new Word(text, translation, pronunciation, Genre.valueOf(genre), difficulty));
+                }
+
+                languageWords.put(languageCode, wordList);
+            }
+
+        } catch (IOException | ParseException e) {
+            System.err.println("Error loading words: " + e.getMessage());
+        }
+
+        return languageWords;
+    }
+
     public static List<Phrase> loadPhrases() {
         List<Phrase> phrases = new ArrayList<>();
 
