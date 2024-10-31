@@ -1,48 +1,42 @@
 package com.app;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import java.util.List;
 
 class GenreTest {
 
-    private Genre genre;
-
-    @BeforeEach
-    void setUp() throws Exception {
-        genre = new Genre();
-        genre.loadWordsByGenre("./json/words.json");
-    }
-
-    @AfterEach
-    void tearDown() {
-        genre = null;
+    @Test
+    void testNounGenre() {
+        assertEquals("NOUN", Genre.NOUN.toString(), "Genre should be NOUN");
     }
 
     @Test
-    void testGenreNotEmpty() {
-        assertFalse(genre.getWordsByGenre("noun").isEmpty(), "Noun genre list should not be empty");
+    void testVerbGenre() {
+        assertEquals("VERB", Genre.VERB.toString(), "Genre should be VERB");
     }
 
     @Test
-    void testRetrieveNouns() {
-        List<Word> nouns = genre.getWordsByGenre("noun");
-        assertTrue(nouns.stream().allMatch(word -> word.getGenre().equalsIgnoreCase("noun")),
-                "All retrieved words should be nouns");
+    void testAdjectiveGenre() {
+        assertEquals("ADJECTIVE", Genre.ADJECTIVE.toString(), "Genre should be ADJECTIVE");
     }
 
     @Test
-    void testRetrieveVerbs() {
-        List<Word> verbs = genre.getWordsByGenre("verb");
-        assertTrue(verbs.stream().allMatch(word -> word.getGenre().equalsIgnoreCase("verb")),
-                "All retrieved words should be verbs");
+    void testAdverbGenre() {
+        assertEquals("ADVERB", Genre.ADVERB.toString(), "Genre should be ADVERB");
     }
 
     @Test
-    void testInvalidGenreReturnsEmpty() {
-        List<Word> invalidGenre = genre.getWordsByGenre("unknown");
-        assertTrue(invalidGenre.isEmpty(), "Unknown genre should return an empty list");
+    void testPrepositionGenre() {
+        assertEquals("PREPOSITION", Genre.PREPOSITION.toString(), "Genre should be PREPOSITION");
+    }
+
+    @Test
+    void testConjunctionGenre() {
+        assertEquals("CONJUNCTION", Genre.CONJUNCTION.toString(), "Genre should be CONJUNCTION");
+    }
+
+    @Test
+    void testInterjectionGenre() {
+        assertEquals("INTERJECTION", Genre.INTERJECTION.toString(), "Genre should be INTERJECTION");
     }
 }

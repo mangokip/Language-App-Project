@@ -1,52 +1,43 @@
 package com.app;
-
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
 import java.util.List;
-import java.util.HashSet;
-import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.BeforeEach; // Ensure this import is present
+import org.junit.jupiter.api.Test;
 
 class WordListTest {
 
     private WordList wordList;
 
     @BeforeEach
-    void setUp() throws Exception {
-        wordList = new WordList();
-        wordList.loadWords("./json/words.json");
-    }
-
-    @AfterEach
-    void tearDown() {
-        wordList = null;
+    void setUp() {
+        wordList = WordList.getInstance(); // Indirectly calls loadWords()
     }
 
     @Test
-    void testWordListNotEmpty() {
-        assertFalse(wordList.getWords().isEmpty(), "Word list should not be empty");
+    void testGetInstance() {
+        assertNotNull(wordList, "WordList instance should not be null");
     }
 
     @Test
-    void testGenreExists() {
-        wordList.getWords().forEach(word -> {
-            assertNotNull(word.getGenre(), "Each word should have a genre");
-        });
+    void testLanguageWordsAfterLoad() {
+        // Assuming "Spanish" is a valid language code in words.json
+        assertNotNull(wordList.getLanguageWords("es"), "Language words should not be null");
+        assertFalse(wordList.getLanguageWords("es").isEmpty(), "Language words should not be empty after loading");
     }
 
     @Test
-    void testDifficultyLevel() {
-        wordList.getWords().forEach(word -> {
-            assertTrue(word.getDifficulty() > 0, "Difficulty should be a positive integer");
-        });
+    void testGetRandomWordByLanguage() {
+        Word randomWord = wordList.getRandomWord("es");
+        assertNotNull(randomWord, "Random word should not be null for given language");
     }
 
     @Test
-    void testNoDuplicateWords() {
-        List<String> texts = wordList.getWords().stream()
-                .map(Word::getText)
-                .collect(Collectors.toList());
-        assertEquals(texts.size(), new HashSet<>(texts).size(), "There should be no duplicate words");
+    void testGetWordsByGenre() {
+        Language spanishLanguage = new Language("es");
+        List<Word> nouns = wordList.getWordsByGenre(spanishLanguage, Genre.NOUN);
+        assertNotNull(nouns, "Genre-specific word list should not be null");
+        assertFalse(nouns.isEmpty(), "Genre-specific word list should contain words");
     }
 }

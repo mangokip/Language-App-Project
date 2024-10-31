@@ -1,8 +1,10 @@
 package com.app;
+import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class FillBlankTest {
@@ -11,27 +13,26 @@ class FillBlankTest {
 
     @BeforeEach
     void setUp() {
-        fillBlank = new FillBlank("El perro ____ rápido.");
-        fillBlank.setCorrectAnswer("corre");
-    }
+        Word correctAnswer = new Word("run", "correr", "verb", Genre.VERB, 1);
+        Phrase phrase = new Phrase("El perro ____ rápido.", "The dog ____ fast.", "el perro rápido");
+        Language spanishLanguage = new Language("es"); // Language code for Spanish
 
-    @AfterEach
-    void tearDown() {
-        fillBlank = null;
-    }
-
-    @Test
-    void testBlankCreatedCorrectly() {
-        assertTrue(fillBlank.getSentence().contains("____"), "Sentence should contain a blank");
+        fillBlank = new FillBlank(1, correctAnswer, spanishLanguage, phrase);
     }
 
     @Test
-    void testAnswerValidationCorrect() {
-        assertTrue(fillBlank.validateAnswer("corre"), "Correct answer should return true");
+    void testAskQuestion() {
+        // Indirectly testing answer options by checking askQuestion's behavior
+        assertDoesNotThrow(() -> fillBlank.askQuestion(new Scanner(System.in)), "Asking question should not throw exception");
     }
 
     @Test
-    void testAnswerValidationIncorrect() {
-        assertFalse(fillBlank.validateAnswer("camina"), "Incorrect answer should return false");
+    void testValidateAnswerCorrect() {
+        assertTrue(fillBlank.validateAnswer("1"), "Correct answer should return true");
+    }
+
+    @Test
+    void testValidateAnswerIncorrect() {
+        assertFalse(fillBlank.validateAnswer("2"), "Incorrect answer should return false");
     }
 }
