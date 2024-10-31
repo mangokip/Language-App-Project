@@ -1,10 +1,7 @@
 {
     "java.project.sourcePaths": [
         "app"
-<<<<<<< HEAD
-    ]
-=======
     ],
-    "java.debug.settings.onBuildFailureProceed": true
->>>>>>> origin/main
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
