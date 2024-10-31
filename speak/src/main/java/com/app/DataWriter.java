@@ -36,6 +36,7 @@ public class DataWriter extends DataConstants {
             e.printStackTrace();
         }
     }
+    
 
     /**
      * Loads existing users from the JSON file.
