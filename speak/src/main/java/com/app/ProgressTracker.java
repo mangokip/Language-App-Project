@@ -81,7 +81,6 @@ public class ProgressTracker {
         this.completedLessons = completedLessons;
         this.totalLessons = totalLessons;
         this.progressPercentage = progressPercentage;
-        updateProgressPercentage();
         this.currentState = currentState;
     }
 
