@@ -1,3 +1,5 @@
+package com.app;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
@@ -11,7 +13,7 @@ class GenreTest {
     @BeforeEach
     void setUp() throws Exception {
         genre = new Genre();
-        genre.loadWordsByGenre("json\words.json");
+        genre.loadWordsByGenre("./json/words.json");
     }
 
     @AfterEach
