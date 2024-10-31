@@ -3,51 +3,52 @@ package com.app;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * The ProgressTracker class tracks the user's progress through lessons and questions.
+ * It maintains various fields like questions completed, lessons completed, experience points (XP), streak,
+ * completed lessons, total lessons, progress percentage, and the current state. The class also offers methods
+ * to update and save progress to a file, as well as manage different states (beginner, intermediate, expert).
+ */
 public class ProgressTracker {
 
-    private int questionsCompleted;
-    private int lessonsCompleted;
-    private int xp;
-    private int streak;
-    private int completedLessons;
-    private int totalLessons;
-    private int progressPercentage;
-    private State currentState;
-    private State beginnerState;
-    private State intermediateState;
-    private State expertState;
-
+    private int questionsCompleted; // Total questions completed by the user
+    private int lessonsCompleted; // Total lessons completed by the user
+    private int xp; // Total XP earned by the user
+    private int streak; // Current streak of consecutive progress
+    private int completedLessons; // Lessons completed in the current session
+    private int totalLessons; // Total number of lessons available
+    private int progressPercentage; // Percentage of total lessons completed
+    private State currentState; // Current state of user (e.g., beginner, intermediate, expert)
+    private State beginnerState; // Beginner state instance
+    private State intermediateState; // Intermediate state instance
+    private State expertState; // Expert state instance
 
     /**
-     * Basic constructor
+     * Basic constructor that initializes the tracker with default values.
      */
     public ProgressTracker() {
-        // questionsCompleted = 0;
-        // lessonsCompleted = 0;
-        // xp = 0;
-        // streak = 0;
-        // currentState = null;
-        // //Edit later
-        // beginnerState = null;
-        // intermediateState = null;
-        // expertState = null;
-
-        this.questionsCompleted = 0;
-        this.lessonsCompleted = 0;
-        this.xp = 0;
-        this.streak = 0;
-        this.completedLessons = 0; // how many question they have done and how much they have gotten right 
-        this.totalLessons = 30; //this changes depending on how many lessons we have 
-        this.progressPercentage = 0;
-
-        //I am intilizing the states here
-        this.beginnerState = new BeginnerState();
-        this.intermediateState = new IntermediateState();
-        this.expertState = new ExpertState();
-
-        this.currentState = beginnerState; //Sets intial state 
+        questionsCompleted = 0;
+        lessonsCompleted = 0;
+        xp = 0;
+        streak = 0;
+        currentState = null;
+        beginnerState = null;
+        intermediateState = null;
+        expertState = null;
     }
 
+    /**
+     * Constructor with parameters to set the initial values of the tracker.
+     * 
+     * @param questionsCompleted Number of questions completed
+     * @param lessonsCompleted Number of lessons completed
+     * @param xp Total experience points
+     * @param streak Current streak count
+     * @param completedLessons Completed lessons in the current session
+     * @param totalLessons Total lessons available
+     * @param progressPercentage Completion percentage of total lessons
+     * @param currentState Current state of the user
+     */
     public ProgressTracker(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState) {
         this(); // calls default constructor to intialize states 
         this.questionsCompleted = questionsCompleted;
@@ -58,16 +59,20 @@ public class ProgressTracker {
         this.totalLessons = totalLessons;
         this.progressPercentage = progressPercentage;
         this.currentState = currentState;
-        updateProgressPercentage();
-        // Edit later
     }
 
-    private void updateProgressPercentage() {
-        this.progressPercentage = (this.completedLessons / this.totalLessons) * 100;
-    }
-
-
-    /*test line */
+    /**
+     * Updates the progress tracker with new values.
+     * 
+     * @param questionsCompleted Number of questions completed
+     * @param lessonsCompleted Number of lessons completed
+     * @param xp Total experience points
+     * @param streak Current streak count
+     * @param completedLessons Completed lessons in the current session
+     * @param totalLessons Total lessons available
+     * @param progressPercentage Completion percentage of total lessons
+     * @param currentState Current state of the user
+     */
     public void updateProgress(int questionsCompleted, int lessonsCompleted, int xp, int streak, int completedLessons, int totalLessons, int progressPercentage, State currentState) {
         this.questionsCompleted = questionsCompleted;
         this.lessonsCompleted = lessonsCompleted;
@@ -78,22 +83,13 @@ public class ProgressTracker {
         this.progressPercentage = progressPercentage;
         updateProgressPercentage();
         this.currentState = currentState;
-        currentState.handleProgress(this); 
-
-        //For David or whoever is working in state. 
-        // This line calls handleProgress() on whatever state object is currently assigned
-        // Example: if currentState is BeginnerState, it calls BeginnerState.handleProgress()
-        // 'this' is the ProgressTracker instance, passed so the state can access user's stats
-        //currentState.handleProgress(this);
-        
-        /* What really happens:
-         * 1. currentState points to one of our state objects (e.g., BeginnerState)
-         * 2. handleProgress() is called on that state object
-         * 3. The state object can access user's XP via the tracker parameter
-         * 4. If XP threshold is met, state object calls setState() to change the state
-         */
     }
 
+    /**
+     * Displays the current progress as a formatted string.
+     * 
+     * @return A string representation of the user's progress.
+     */
     public String displayProgress() {
         return "Questions Completed: " + this.questionsCompleted + 
                "\nLessons Completed: " + this.lessonsCompleted + 
@@ -105,42 +101,32 @@ public class ProgressTracker {
                "\nCurrent Level: " + this.currentState;
     }
 
-    public State getBeginnerState() {
-        return beginnerState;
-    }
-
-    public State getIntermediateState() {
-        return intermediateState;
-    }
-
-    public State getExpertState() {
-        return expertState;
-    }
+    // Getters for each field, returning the current values.
 
     public int getQuestionsCompleted() {
         return this.questionsCompleted;
     }
-    
+
     public int getLessonsCompleted() {
         return this.lessonsCompleted;
     }
-    
+
     public int getXP() {
         return this.xp;
     }
-    
+
     public int getStreak() {
         return this.streak;
     }
-    
+
     public int getCompletedLessons() {
         return this.completedLessons;
     }
-    
+
     public int getTotalLessons() {
         return this.totalLessons;
     }
-    
+
     public int getProgressPercentage() {
         return this.progressPercentage;
     }
@@ -148,79 +134,37 @@ public class ProgressTracker {
     public State getState() {
         return this.currentState;
     }
+
+    /**
+     * Sets the current state of the user.
+     * 
+     * @param state New state to be set.
+     */
     public void setState(State state) {
         this.currentState = state;
     }
 
-    public State getCurrentState(){
-        return this.currentState;
+    /**
+     * Increases the user's XP by a specified amount.
+     * 
+     * @param xp Amount of XP to add.
+     */
+    public void increaseXP(int xp) {
+        this.xp += xp;
     }
-    
+
+    /**
+     * Increases the user's streak by one.
+     */
     public void increaseStreak() {
         this.streak++;
     }
 
-    public void setStreak(int streak){
-        this.streak = streak;
-    }
-
-    public void increaseXP(int amount) {
-        this.xp += amount;
-        currentState.handleProgress(this);
-    }
-
-    public void completeLesson() {
-        this.completedLessons++;
-        updateProgressPercentage();
-        increaseXP(50); // Award XP for completing a lesson
-    }
-
-    public void completeQuestion() {
-        this.questionsCompleted++;
-        increaseXP(10); // Award XP for completing a question
-    }
-
-
     /**
-     * Converts the ProgressTracker's current state into a formatted string representation.
-     * This method creates a human-readable summary of all progress metrics.
+     * Changes the user's state to a specified state.
      * 
-     * Format specifiers used:
-     * %d - for integer values (questions, lessons, XP, etc.)
-     * %s - for string values (state name)
-     * %n - for platform-independent newline
-     * %% - to print a literal % symbol
-     * 
-     * @return A formatted string containing:
-     *         - Number of questions completed
-     *         - Number of lessons completed
-     *         - Total XP earned
-     *         - Current streak
-     *         - Progress ratio (completed/total lessons)
-     *         - Progress percentage
-     *         - Current level (state name)
+     * @param state The state to change to (beginner, intermediate, expert).
      */
-
-     //This method I am not to sure about so it can be change if needed be. 
-
-    public String toString(){
-        return String.format(
-            "Progress Status:%n" +
-            "Questions Completed: %d%n" +
-            "Lessons Completed: %d%n" +
-            "Total XP: %d%n" +
-            "Current Streak: %d%n" +
-            "Progress: %d/%d lessons (%d%%)%n" +
-            "Current Level: %s",
-            questionsCompleted, lessonsCompleted, xp, streak,
-            completedLessons, totalLessons, progressPercentage,
-            currentState.getStateName() //red becuase it is suppoed to call it from the state 
-            //example public String getStateName() {
-        //return "Expert";
-        //}
-        //);
-    }
-
     public void changeState(State state) {
         if(state == this.beginnerState) {
             this.currentState = beginnerState;
@@ -233,7 +177,12 @@ public class ProgressTracker {
         }
     }
 
-        public void saveProgressToFile(String filename) {
+    /**
+     * Saves the current progress details to a specified file.
+     * 
+     * @param filename Name of the file where progress is saved.
+     */
+    public void saveProgressToFile(String filename) {
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write("Questions Completed: " + this.questionsCompleted + "\n");
             writer.write("Lessons Completed: " + this.lessonsCompleted + "\n");
@@ -248,11 +197,14 @@ public class ProgressTracker {
         }
     }
 
+    /**
+     * Marks a lesson as completed, updating related fields and optionally
+     * calculating progress percentage.
+     */
     public void completeLesson() {
         this.completedLessons++;  // Increment the completed lessons
         this.lessonsCompleted++;  // Increment the total lessons completed count
         
-        // Optionally update progress percentage
         if (totalLessons > 0) {
             this.progressPercentage = (completedLessons * 100) / totalLessons;
         }
@@ -261,4 +213,3 @@ public class ProgressTracker {
     }
     
 }
-
