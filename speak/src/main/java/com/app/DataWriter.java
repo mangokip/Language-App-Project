@@ -36,6 +36,22 @@ public class DataWriter extends DataConstants {
             e.printStackTrace();
         }
     }
+
+    public static void saveUsers(ArrayList<User> users, String filePath) {
+        JSONArray jsonUsers = new JSONArray();
+
+        for (int i = 0; i < users.size(); i++) {
+            jsonUsers.add(getUserDetails(users.get(i)));
+        }
+
+        try (FileWriter file = new FileWriter(filePath)) {
+            file.write(jsonUsers.toJSONString());
+            file.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     
 
     /**
