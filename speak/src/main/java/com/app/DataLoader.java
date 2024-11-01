@@ -23,8 +23,6 @@ import org.json.simple.parser.ParseException;
  */
 public class DataLoader extends DataConstants {
 
-
-
     /**
      * Loads lessons from a JSON file and returns them as a list of Lesson
      * objects. This version simply reads the file and returns an empty list,
@@ -99,15 +97,14 @@ public class DataLoader extends DataConstants {
         return users;
     }
 
-    /**TESTER
-     * 
+    /**
+     * TESTER
+     *
      */
     public static ArrayList<User> loadUsersFromResource(String filePath) {
         ArrayList<User> users = new ArrayList<>();
         System.out.println("Attempting to load users from resource: " + filePath);
-        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath);
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-             BufferedReader reader = new BufferedReader(inputStreamReader)) {
+        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath); InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader)) {
             if (inputStream == null) {
                 System.err.println("Resource file not found: " + filePath);
                 return users;
@@ -134,7 +131,6 @@ public class DataLoader extends DataConstants {
         System.out.println("Total users loaded in method: " + users.size());  // Verify loaded users count
         return users;
     }
-    
 
     /**
      * Loads words from the JSON file and returns them as a list of Word
@@ -181,6 +177,48 @@ public class DataLoader extends DataConstants {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return words;
+    }
+
+    public static List<Word> loadWordsToListFromResource(String filePath) {
+        List<Word> words = new ArrayList<>();
+
+        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath); InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader)) {
+
+            StringBuilder content = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+
+            JSONObject wordsJSON = (JSONObject) new JSONParser().parse(content.toString());
+            JSONArray wordsArray = (JSONArray) wordsJSON.get("Spanish");
+
+            for (Object obj : wordsArray) {
+                JSONObject wordJSON = (JSONObject) obj;
+
+                String text = (String) wordJSON.get("text");
+                String translation = (String) wordJSON.get("foreign");
+                String pronounce = (String) wordJSON.get("pronounce");
+                String genreStr = (String) wordJSON.get("genre");
+                Long difficultyLong = (Long) wordJSON.get("difficulty");
+
+                if (text != null && translation != null && pronounce != null && genreStr != null && difficultyLong != null) {
+                    int difficulty = difficultyLong.intValue();
+
+                    try {
+                        Genre tempGenre = Genre.valueOf(genreStr.toUpperCase());
+                        words.add(new Word(text, translation, pronounce, tempGenre, difficulty));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Error: Invalid genre '" + genreStr + "' for word: " + text);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return words;
     }
 
@@ -232,9 +270,7 @@ public class DataLoader extends DataConstants {
 
     public static Map<String, List<Word>> loadWordsFromResource(String filePath) {
         Map<String, List<Word>> languageWords = new HashMap<>();
-        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath);
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-             BufferedReader reader = new BufferedReader(inputStreamReader)) {
+        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath); InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader)) {
             StringBuilder content = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -261,7 +297,6 @@ public class DataLoader extends DataConstants {
         }
         return languageWords;
     }
-
 
     /**
      * Loads phrases from the JSON file and returns them as a list of Phrase
@@ -304,6 +339,38 @@ public class DataLoader extends DataConstants {
         return phrases;
     }
 
+    public static List<Phrase> loadPhrasesFromResource(String filePath) {
+        List<Phrase> phrases = new ArrayList<>();
+
+        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath); InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader)) {
+
+            StringBuilder content = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+
+            JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
+            JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
+
+            for (Object obj : phrasesArray) {
+                JSONObject phraseJSON = (JSONObject) obj;
+
+                String text = (String) phraseJSON.get("text");
+                String translation = (String) phraseJSON.get("translation");
+                String pronounce = (String) phraseJSON.get("pronounce");
+
+                if (text != null && translation != null && pronounce != null) {
+                    phrases.add(new Phrase(text, translation, pronounce));
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        return phrases;
+    }
+
     /**
      * Loads phrases from the JSON file and returns them as a list of Flashcard
      * objects.
@@ -340,6 +407,39 @@ public class DataLoader extends DataConstants {
             }
         } catch (IOException | ParseException e) {
             System.err.println("Error loading phrases: " + e.getMessage());
+        }
+
+        return flashcards;
+    }
+
+    public static List<Flashcard> loadPhraseCardsFromResource(String filePath) {
+        List<Flashcard> flashcards = new ArrayList<>();
+
+        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath); InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader)) {
+
+            StringBuilder content = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+
+            JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
+            JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
+
+            if (phrasesArray != null) {
+                for (Object obj : phrasesArray) {
+                    JSONObject phraseObject = (JSONObject) obj;
+
+                    String text = (String) phraseObject.get("text");
+                    String translation = (String) phraseObject.get("translation");
+                    String pronunciation = (String) phraseObject.get("pronounce");
+
+                    Flashcard phraseFlashcard = new Flashcard(text, translation, pronunciation);
+                    flashcards.add(phraseFlashcard);
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
         }
 
         return flashcards;

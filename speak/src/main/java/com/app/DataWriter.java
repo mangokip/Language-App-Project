@@ -1,5 +1,6 @@
 package com.app;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,19 +40,22 @@ public class DataWriter extends DataConstants {
 
     public static void saveUsers(ArrayList<User> users, String filePath) {
         JSONArray jsonUsers = new JSONArray();
-
-        for (int i = 0; i < users.size(); i++) {
-            jsonUsers.add(getUserDetails(users.get(i)));
+        
+        // Add user details if any exist in the list
+        if (users != null) {
+            for (User user : users) {
+                jsonUsers.add(getUserDetails(user));
+            }
         }
-
+    
         try (FileWriter file = new FileWriter(filePath)) {
-            file.write(jsonUsers.toJSONString());
+            file.write(jsonUsers.toJSONString()); // Writes [] if jsonUsers is empty
             file.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     
 
     /**
@@ -76,30 +80,14 @@ public class DataWriter extends DataConstants {
      * @param existingUser JSONObject of the existing user
      * @param user User object with updated details
      */
-    private void updateUserDetails(JSONObject existingUser, User user) {
-        existingUser.put(USER_NAME, user.getUserName());
-        existingUser.put(PASSWORD, user.getPassword());
-        existingUser.put(EMAIL, user.getEmail());
+    protected void updateUserDetails(JSONObject existingUser, User user) {
+        
+        JSONObject updatedUserDetails = getUserDetails(user);
 
-        JSONObject languageProgress = new JSONObject();
-        for (Map.Entry<Language, ProgressTracker> entry : user.getProgressTracker().entrySet()) {
-            Language language = entry.getKey();
-            ProgressTracker progress = entry.getValue();
-
-            JSONObject progressDetails = new JSONObject();
-            progressDetails.put(QUESTIONS_COMPLETED, progress.getQuestionsCompleted());
-            progressDetails.put(LESSONS_COMPLETED, progress.getLessonsCompleted());
-            progressDetails.put(XP, progress.getXP());
-            progressDetails.put(STREAK, progress.getStreak());
-            progressDetails.put(COMPLETED_LESSONS, progress.getCompletedLessons());
-            progressDetails.put(TOTAL_LESSONS, progress.getTotalLessons());
-            progressDetails.put(PROGRESS_PERCENTAGE, progress.getProgressPercentage());
-            progressDetails.put(CURRENT_STATE, progress.getState() == null ? null : progress.getState().toString());
-
-            languageProgress.put(language.getLanguageCode(), progressDetails);
+        
+        for (Object key : updatedUserDetails.keySet()) {
+            existingUser.put(key, updatedUserDetails.get(key));
         }
-
-        existingUser.put(PROGRESS_TRACKERS, languageProgress); // match the JSON structure
     }
 
     /**
@@ -108,7 +96,7 @@ public class DataWriter extends DataConstants {
      * @param user User object to be converted
      * @return JSONObject representing the user
      */
-    private static JSONObject getUserDetails(User user) {
+    protected static JSONObject getUserDetails(User user) {
         JSONObject userDetails = new JSONObject();
         userDetails.put(USER_ID, user.getUUID().toString());
         userDetails.put(USER_NAME, user.getUserName());
@@ -137,4 +125,24 @@ public class DataWriter extends DataConstants {
 
         return userDetails;
     }
+
+    public static void clearUserFile(String filePath) {
+    File file = new File(filePath);
+    if (file.exists()) {
+        if (file.delete()) {
+            System.out.println("File deleted successfully.");
+        } else {
+            System.out.println("Failed to delete the file.");
+        }
+    }
+    try (FileWriter newFile = new FileWriter(filePath)) {
+        newFile.write("[]"); // Write an empty JSON array
+        newFile.flush();
+        System.out.println("File recreated and cleared successfully.");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+    
 }

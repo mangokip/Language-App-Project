@@ -15,7 +15,6 @@ class DataLoaderTest {
 
     private UserList users = UserList.getInstance();
     private ArrayList<User> userList = users.getUsers();
-    private User user;
 
     @BeforeEach
     public void setup() {
@@ -28,22 +27,20 @@ class DataLoaderTest {
         DataWriter.saveUsers(userList, "/user.json");
     }
 
-  
     @Test
-    void testGetUsersSize() {
+    public void testGetUsersSize() {
         userList = DataLoader.loadUsersFromResource("/user.json");
         assertEquals(12, userList.size(), "User list size should match the test setup with only 1 user.");
     }
 
     @Test
-    void testGetUsersSizeZero() {
+    public void testGetUsersSizeZero() {
         userList.clear();
         DataWriter.saveUsers(userList, "/user.json");
         userList = DataLoader.loadUsersFromResource("/user.json");
         assertEquals(0, userList.size(), "User list size should be zero after clearing and saving an empty list.");
     }
 
-    
     @Test
     public void testLoadWords() {
         Map<String, List<Word>> languageWords = DataLoader.loadWordsFromResource("/words.json");
@@ -53,6 +50,24 @@ class DataLoaderTest {
         List<Word> spanishWords = languageWords.get("Spanish");
         assertNotNull(spanishWords);
         assertTrue(spanishWords.size() > 0);
+    }
+
+    @Test
+    public void testPhrases() {
+
+        List<Phrase> languagePhrases = DataLoader.loadPhrasesFromResource("/phrases.json");
+        assertNotNull(languagePhrases);
+        assertTrue(languagePhrases.size() > 0);
+    }
+
+    @Test
+    public void testFlashCards() {
+
+        List<Flashcard> languagePhraseCards = DataLoader.loadPhraseCardsFromResource("/phrases.json");
+        assertNotNull(languagePhraseCards);
+        assertTrue(languagePhraseCards.size() > 0);
+
+        
     }
 
     @Test
@@ -67,6 +82,6 @@ class DataLoaderTest {
         assertEquals("john.doe@example.com", loadedUser.getEmail(), "Email should match 'testuser@example.com'.");
         assertNotNull(loadedUser.getUUID());
         assertEquals("newPassword123", loadedUser.getPassword(), "Password should match 'TestPassword123'."); // test case is wrong to debug, password is case sensitive as intended
-    }  
+    }
 
 }
