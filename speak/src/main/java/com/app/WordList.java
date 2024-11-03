@@ -103,5 +103,10 @@ public class WordList {
         }
         return genreWords;
     }
+    //for testing
+
+    public static void resetInstance() {
+        instance = null;
+    }
 
 }

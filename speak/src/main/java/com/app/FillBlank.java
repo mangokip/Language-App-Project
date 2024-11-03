@@ -2,9 +2,11 @@ package com.app;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 /*
  * Class for a fill-in-the-blank question.
@@ -32,24 +34,35 @@ public class FillBlank extends Question {
         this.answerOptions = new ArrayList<>();
         populateAnswerOptions(language);
     }
-
+    
     //Populates the answer options list with random words from the passed language with the same genre. then shuffles th the list
     //@param language - The language to be used for the fill-in-the-blank question
+    
     private void populateAnswerOptions(Language language) {
         WordList wordList = WordList.getInstance();
         List<Word> genreWords = wordList.getWordsByGenre(language, correctAnswer.getGenre());
-
+    
+        // Ensure answerOptions has exactly 4 choices by adding correctAnswer and 3 random unique words
         answerOptions.add(correctAnswer);
         Random rand = new Random();
-        while (answerOptions.size() < 4) {
-            Word randomWord = genreWords.get(rand.nextInt(genreWords.size()));
-            if (!answerOptions.contains(randomWord)) {
-                answerOptions.add(randomWord);
-            }
+    
+        Set<Word> uniqueWords = new HashSet<>(genreWords);
+        uniqueWords.remove(correctAnswer); // Remove the correct answer if it exists in genreWords
+    
+        List<Word> additionalWords = new ArrayList<>(uniqueWords);
+        while (answerOptions.size() < 4 && !additionalWords.isEmpty()) {
+            Word randomWord = additionalWords.remove(rand.nextInt(additionalWords.size()));
+            answerOptions.add(randomWord);
         }
-        Collections.shuffle(answerOptions);
+    
+        // If still less than 4 choices, add dummy words until the list has exactly 4 options
+        while (answerOptions.size() < 4) {
+            answerOptions.add(new Word("placeholder", "placeholder", "placeholder", Genre.NOUN, 1));
+        }
+    
+        Collections.shuffle(answerOptions); // Shuffle to mix up the position of the correct answer
     }
-
+    
     //function to ask the question and validate the user's answer
     @Override
     public boolean askQuestion(Scanner scanner) {
@@ -90,5 +103,9 @@ public class FillBlank extends Question {
             System.out.println("Invalid input. Please enter a number between 1 and 4.");
             return false;
         }
+    }
+    // for testing
+    public List<Word> getAnswerOptions() {
+        return answerOptions;
     }
 }
