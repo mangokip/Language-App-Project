@@ -33,6 +33,6 @@ class FillBlankTest {
 
     @Test
     void testValidateAnswerIncorrect() {
-        assertFalse(fillBlank.validateAnswer("2"), "Incorrect answer should return false");
+        assertFalse(fillBlank.validateAnswer("q"), "Incorrect answer should return false");
     }
 }

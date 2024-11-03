@@ -88,4 +88,8 @@ public class MultipleChoice extends Question {
             return false;
         }
     }
+
+    public List<Word> getAnswerOptions() {
+        return answerOptions;
+    }
 }
