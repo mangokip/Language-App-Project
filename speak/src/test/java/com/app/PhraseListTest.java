@@ -2,8 +2,13 @@ package com.app;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+/**
+ * Phrase List Testing 
+ * @author  David Dinh
+ */
 
 class PhraseListTest {
 
@@ -11,7 +16,7 @@ class PhraseListTest {
 
     @BeforeEach
     void setUp() {
-        phraseList = PhraseList.getInstance(); // This should internally call loadPhrases
+        phraseList = PhraseList.getInstance(); // `loadPhrases` will be called automatically
     }
 
     @Test
@@ -20,8 +25,14 @@ class PhraseListTest {
     }
 
     @Test
-    void testGetPhrasesAfterLoad() {
+    void testLoadPhrases() {
+        // Indirectly testing loadPhrases by verifying phrases list is populated
+        assertFalse(phraseList.getPhrases().isEmpty(), "Phrase list should not be empty after loading");
+    }
+
+    @Test
+    void testGetPhrases() {
         assertNotNull(phraseList.getPhrases(), "Phrases list should not be null");
-        assertFalse(phraseList.getPhrases().isEmpty(), "Phrases list should not be empty after loading");
+        assertTrue(phraseList.getPhrases().size() > 0, "Phrase list should contain phrases");
     }
 }
