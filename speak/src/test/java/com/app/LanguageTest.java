@@ -51,7 +51,7 @@ public class LanguageTest {
     }
 
     @Test
-    public void testDisplayContent() {
+     public void testDisplayContent() {
         // Capture output for validation if needed, or just ensure no exceptions are thrown
         assertDoesNotThrow(() -> language.displayContent(), "Display content should execute without throwing exceptions");
     }

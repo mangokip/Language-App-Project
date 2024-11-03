@@ -86,11 +86,4 @@ class FillBlankTest {
     assertEquals(4, fillBlank.getAnswerOptions().size(), "There should be exactly 4 answer options.");
 }
 
-<<<<<<< HEAD
-    @Test
-    void testValidateAnswerIncorrect() {
-        assertFalse(fillBlank.validateAnswer("q"), "Incorrect answer should return false");
-    }
-=======
->>>>>>> david-branch
 }
