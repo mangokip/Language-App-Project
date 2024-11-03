@@ -19,6 +19,11 @@ public class WordList {
         loadWords();
     }
 
+    private WordList(String filePath){
+        languageWords = new HashMap<>();
+        loadWords(filePath);
+    }
+
     /**
      * Singleton pattern - getInstance method
      * @return  The instance of the WordList
@@ -29,13 +34,27 @@ public class WordList {
         }
         return instance;
     }
+    public static WordList getInstance(String filePath) {
+        if (instance == null) {
+            instance = new WordList(filePath);
+        }
+        return instance;
+    }
 
     /**
      * Loads words from the DataLoader
      */
     private void loadWords() {
-
         Map<String, List<Word>> loadedWords = DataLoader.loadWords();
+        if (loadedWords != null && !loadedWords.isEmpty()) {
+            languageWords.putAll(loadedWords);
+        } else {
+            System.err.println("DataLoader returned no words.");
+        }
+    }
+
+    private void loadWords(String filepath) {
+        Map<String, List<Word>> loadedWords = DataLoader.loadWordsFromResource(filepath);
         if (loadedWords != null && !loadedWords.isEmpty()) {
             languageWords.putAll(loadedWords);
         } else {

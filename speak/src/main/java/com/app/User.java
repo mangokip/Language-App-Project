@@ -202,4 +202,9 @@ public class User {
             System.out.println("No progress tracker found for language: " + language.getLanguageCode());
         }
     }
+
+    public void updateLanguageProgress(Language language, ProgressTracker newProgress) {
+        this.progressTrackers.put(language, newProgress);
+    }
+    
 }
