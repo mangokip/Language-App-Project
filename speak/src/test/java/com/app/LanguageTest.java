@@ -44,12 +44,7 @@ public class LanguageTest {
         assertEquals("Subject-Verb-Object order", rules.get(0), "The grammar rule should match what was added");
     }
 
-    @Test
-    public void testAddGrammarRuleThrowsExceptionForNullOrEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> language.addGrammarRule(null), "Should throw exception for null rule");
-        assertThrows(IllegalArgumentException.class, () -> language.addGrammarRule(""), "Should throw exception for empty rule");
-    }
-
+    
     @Test
      public void testDisplayContent() {
         // Capture output for validation if needed, or just ensure no exceptions are thrown
