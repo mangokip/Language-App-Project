@@ -3,6 +3,11 @@ package com.app;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Genre Testing
+ * @author David Dinh
+ */
+
 class GenreTest {
 
     @Test

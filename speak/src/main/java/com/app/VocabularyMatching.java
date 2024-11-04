@@ -103,4 +103,12 @@ public class VocabularyMatching extends Question {
         }
         return allCorrect;
     }
+
+    public Map<String, String> getUserPairs() {
+        return userPairs;
+    }
+
+    public Map<String, String> getWordPairs() {
+        return wordPairs;
+    }
 }
