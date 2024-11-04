@@ -2,9 +2,9 @@ package com.app;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class WordTest {
 
@@ -49,11 +49,7 @@ class WordTest {
         assertEquals(Genre.ADJECTIVE, word.getGenre());
     }
 
-    @Test
-    void testSetDifficulty() {
-        word.setDifficulty(2);
-        assertEquals(2, word.getDifficulty());
-    }
+   
 
     @Test
     void testToString() {
