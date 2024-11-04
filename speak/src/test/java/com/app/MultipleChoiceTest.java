@@ -1,4 +1,4 @@
-package com;
+package com.app;
 
 import static org.junit.jupiter.api.Assertions.*;
 
