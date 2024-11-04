@@ -129,4 +129,8 @@ public class Lesson {
 
         return score;
     }
+
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
 }
