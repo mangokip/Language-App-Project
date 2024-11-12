@@ -160,6 +160,8 @@ footer {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+
 /* Image Container Styling */
 .image-container {
     display: flex;
@@ -168,7 +170,7 @@ footer {
 }
 
 .image-container img {
-    max-width: 400px; /* Set the maximum width of the image */
+    max-width: 600px; /* Set the maximum width of the image */
     width: 100%; /* Ensure responsiveness */
     height: auto;
     border-radius: 10px;
