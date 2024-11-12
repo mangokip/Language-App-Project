@@ -71,7 +71,7 @@ main p {
     margin-bottom: 25px;
 }
 
-/* Iframe Container */
+/* Iframe Container Styling */
 .iframe-container {
     position: relative;
     width: 100%;
@@ -89,6 +89,34 @@ main p {
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* Project Section Styling */
+.project {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.project h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.project p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* Video Container Styling */
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer Styling */
@@ -117,6 +145,6 @@ footer {
     }
 
     .iframe-container {
-        padding-bottom: 75%; /* Increased height for smaller screens */
+        padding-bottom: 75%; /* Adjusted height for smaller screens */
     }
 }
