@@ -7,7 +7,7 @@
 
 /* Body Styling */
 body {
-    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-family: Helvetica;
     background-color: #f0f2f5;
     color: #333;
     display: flex;
@@ -28,7 +28,7 @@ header {
 }
 
 .logo h1 {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: bold;
 }
 
@@ -38,13 +38,14 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 1.1rem;
     transition: color 0.3s;
 }
 
@@ -54,31 +55,31 @@ nav ul li a:hover {
 
 /* Main Content Styling */
 main {
-    max-width: 900px;
+    max-width: 1200px;
     width: 100%;
-    padding: 20px;
+    padding: 30px;
     text-align: center;
 }
 
 main h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
 }
 
 main p {
-    font-size: 1rem;
-    margin-bottom: 20px;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
 }
 
 /* Iframe Container */
 .iframe-container {
     position: relative;
     width: 100%;
-    padding-bottom: 75%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     height: 0;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .iframe-container iframe {
@@ -93,12 +94,11 @@ main p {
 /* Footer Styling */
 footer {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     background-color: #007bff;
     color: #fff;
     text-align: center;
     margin-top: auto;
-    font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 /* Responsive Design */
@@ -113,6 +113,10 @@ footer {
     }
 
     nav ul li {
-        margin: 5px 0;
+        margin: 10px 0;
+    }
+
+    .iframe-container {
+        padding-bottom: 75%; /* Increased height for smaller screens */
     }
 }
