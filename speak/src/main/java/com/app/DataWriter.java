@@ -23,7 +23,7 @@ public class DataWriter extends DataConstants {
      *
      * @param users the ArrayList of User objects to be saved
      */
-    public static void saveUsers(ArrayList<User> users) {
+    public void saveUsers(ArrayList<User> users) {
         JSONArray jsonUsers = new JSONArray();
 
         for (int i = 0; i < users.size(); i++) {
